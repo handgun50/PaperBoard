@@ -42,8 +42,7 @@ Give a look at the screenshots [here](https://github.com/jahirfiquitiva/PaperBoa
 
 
 #Want to donate?
-Follow me on Google+ and send me a Hangout.
-Thanks in advance. Every help is really appreciated.
+Donations will help me improve the app, add more features and motivates me to continue with development as I can see if people is really thankful with this. <b> If you want to donate, follow me on Google+ and send me a Hangout. Thanks in advance.</b> Every help is really appreciated.
 
 
 #Updating Guide
