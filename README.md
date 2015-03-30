@@ -41,6 +41,10 @@ Sample applications can be easily found [here](https://github.com/jahirfiquitiva
 Give a look at the screenshots [here](https://github.com/jahirfiquitiva/PaperBoard/tree/master/screenshots).
 
 
+#Want to donate?
+Follow me on Google+ and send me a Hangout.
+Thanks in advance. Every help is really appreciated.
+
 
 #Updating Guide
 ##How to update if you had the previous version?
