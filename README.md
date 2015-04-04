@@ -73,7 +73,7 @@ There you can find all the info about implementing and using this dashboard temp
 * OkHttp: https://github.com/square/okhttp
 * Muzei: https://github.com/romannurik/muzei/
 * FAB 1: https://github.com/futuresimple/android-floating-action-button/
-* FAB 2: https://github.com/makovkastar/FloatingActionButton
+* FAB 2: https://github.com/clans/floatingactionbutton
 * PkRequestManager: https://github.com/pkmmte/PkRequestManager
     
     
