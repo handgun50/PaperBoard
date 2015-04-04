@@ -54,7 +54,7 @@ Donations will help me improve the app, add more features and motivates me to co
 I will try to make this easier in future updates. Sorry.
 
 Btw, you can try to replace or add the files by your own and under your own responsibility.
-List of modified files [here](https://github.com/jahirfiquitiva/PaperBoard/blob/master/fmilu.txt).
+You can find the list of changes [here](https://github.com/jahirfiquitiva/PaperBoard/commit/adc9f2d5021d4fd2afbc5fb49395fc51476f503b).
 
 ##Changelog
 Latest version changelog can be easily found [here](https://github.com/jahirfiquitiva/PaperBoard/releases/latest).
