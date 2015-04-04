@@ -18,7 +18,8 @@
         android:divider="@color/transparent"
         android:fitsSystemWindows="true" />
 
-    <com.melnykov.fab.FloatingActionButton
+
+    <com.github.clans.fab.FloatingActionButton
         android:id="@+id/send_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,8 +30,10 @@
         android:layout_marginEnd="@dimen/cards_padding"
         android:layout_marginRight="@dimen/cards_padding"
         android:src="@drawable/ic_send"
+        fab:fab_shadowXOffset="0dp"
+        fab:fab_size="normal"
         fab:fab_colorNormal="@color/accent"
         fab:fab_colorPressed="@color/accent_pressed"
-        fab:fab_colorRipple="@color/accent" />
+        fab:fab_colorRipple="@color/semitransparent_white" />
 
 </RelativeLayout>

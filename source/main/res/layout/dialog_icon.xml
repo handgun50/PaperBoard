@@ -3,10 +3,12 @@
     android:id="@+id/icon_prev_dialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="false"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/dialogicon"
+        android:clickable="false"
         android:layout_width="@dimen/dialog_icon_size"
         android:layout_height="@dimen/dialog_icon_size"
         android:layout_gravity="center"

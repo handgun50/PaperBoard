@@ -14,8 +14,10 @@
     <string-array name="system">
 		<item>fimbo</item>
         <item>andy</item>
-        <item>andy</item>
-        <item>andy</item>
+        <item>andy_alt</item>
+        <item>andy_two</item>
+        <item>an_icon_with_long_name</item>
+        <item>icon_with_short_name</item>
         <item>andy</item>
         <item>andy</item>
         <item>andy</item>
@@ -26,8 +28,10 @@
     <string-array name="google">
 		<item>fimbo</item>
         <item>andy</item>
-        <item>andy</item>
-        <item>andy</item>
+        <item>andy_alt</item>
+        <item>andy_two</item>
+        <item>an_icon_with_long_name</item>
+        <item>icon_with_short_name</item>
         <item>andy</item>
         <item>andy</item>
         <item>andy</item>
@@ -43,8 +47,10 @@
     <string-array name="games">
 		<item>fimbo</item>
         <item>andy</item>
-        <item>andy</item>
-        <item>andy</item>
+        <item>andy_alt</item>
+        <item>andy_two</item>
+        <item>an_icon_with_long_name</item>
+        <item>icon_with_short_name</item>
         <item>andy</item>
         <item>andy</item>
         <item>andy</item>
@@ -63,8 +69,10 @@
     <string-array name="icon_pack" translatable="false">
 		<item>fimbo</item>
         <item>andy</item>
-        <item>andy</item>
-        <item>andy</item>
+        <item>andy_alt</item>
+        <item>andy_two</item>
+        <item>an_icon_with_long_name</item>
+        <item>icon_with_short_name</item>
         <item>andy</item>
         <item>andy</item>
         <item>andy</item>

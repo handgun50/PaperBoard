@@ -12,6 +12,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
@@ -23,13 +25,14 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.jahirfiquitiva.dashboardsample.R;
-import com.melnykov.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionButton;
 import com.pkmmte.requestmanager.AppInfo;
 import com.pkmmte.requestmanager.PkRequestManager;
 import com.pkmmte.requestmanager.RequestSettings;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Handler;
 
 /**
  * Created by Jahir on 28/02/2015.
@@ -47,6 +50,10 @@ public class Request extends Fragment {
     private ListAdapter mAdapter;
     private ProgressBar mProgress;
     private View mButton;
+
+    private int mPreviousVisibleItem;
+
+    private FloatingActionButton fab;
 
     private Context context;
 
@@ -77,12 +84,10 @@ public class Request extends Fragment {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.send_btn);
-        fab.attachToListView(mList);
+        fab = (FloatingActionButton) root.findViewById(R.id.send_btn);
+        fab.hide(false);
 
-        mButton = root.findViewById(R.id.send_btn);
-        mButton.setVisibility(View.GONE);
-        mButton.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mRequestManager.setActivity(getActivity());
@@ -94,6 +99,22 @@ public class Request extends Fragment {
                 }
 
                 Toast.makeText(getActivity(), getString(R.string.building_request), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        mList.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem > mPreviousVisibleItem) {
+                    fab.hide(true);
+                } else if (firstVisibleItem < mPreviousVisibleItem) {
+                    fab.show(true);
+                }
+                mPreviousVisibleItem = firstVisibleItem;
             }
         });
 
@@ -162,6 +183,9 @@ public class Request extends Fragment {
             }
             if (mProgress != null) {
                 mProgress.setVisibility(View.GONE);
+            }
+            if (fab != null){
+                fab.show(true);
             }
         }
     }

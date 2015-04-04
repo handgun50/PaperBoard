@@ -20,6 +20,7 @@
     <color name="white">#ffffff</color>
     <color name="transparent">#00ffffff</color>
     <color name="semitransparent_white">#b3ffffff</color>
+    <color name="gray_trans">#55d3d3d3</color>
     <color name="dark_grey">#ff4d4d4d</color>
     <color name="window_bg">@color/primary_dark</color>
     <color name="black_semi_transparent">#b2000000</color>

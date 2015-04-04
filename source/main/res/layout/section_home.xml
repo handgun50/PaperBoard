@@ -86,7 +86,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="?selectableItemBackground"
-                            android:padding="@dimen/cards_padding"
+                            android:padding="@dimen/finalcard_margin"
                             android:text="@string/ratebtn"
                             android:textColor="@color/accent"
                             android:textSize="@dimen/text_ultrasmall"
@@ -163,10 +163,15 @@
                         <LinearLayout
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="right"
+                            android:gravity="right"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/play_button"
+                                android:layout_gravity="right"
+                                android:gravity="right"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="?selectableItemBackground"
@@ -242,10 +247,15 @@
                         <LinearLayout
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="right"
+                            android:gravity="right"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/appone_button"
+                                android:layout_gravity="right"
+                                android:gravity="right"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="?selectableItemBackground"
@@ -321,10 +331,15 @@
                         <LinearLayout
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="right"
+                            android:gravity="right"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/apptwo_button"
+                                android:layout_gravity="right"
+                                android:gravity="right"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="?selectableItemBackground"
@@ -400,10 +415,15 @@
                         <LinearLayout
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="right"
+                            android:gravity="right"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/appthree_button"
+                                android:layout_gravity="right"
+                                android:gravity="right"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="?selectableItemBackground"
@@ -424,6 +444,3 @@
     </ScrollView>
 
 </RelativeLayout>
-
-
-    <!--                android:padding="@dimen/cards_padding" -->
