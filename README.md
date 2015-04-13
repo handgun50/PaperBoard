@@ -21,40 +21,37 @@ Try out the sample app [here](https://play.google.com/store/apps/details?id=com.
 - Muzei Support
 - In-App Icon Request tool.
 - Credits section.
+- Docks support.
 - Requires API15+ or Android 4.0.3+
 
 <b>Future features (No ETA):</b>
 - Replace GridView and ListView with RecyclerView to improve performance.
-- Docks support.
 - Themeable UI.
 - Option to delete cache directly inside the app.
 - Option to choose downloads folder (for wallpapers).
 - In-App-Purchases for Premium Icon Requests.
-
+- Searchable icons and launchers to apply pack.
 
 
 #Preview
 ##Demos
-Sample applications can be easily found [here](https://github.com/jahirfiquitiva/PaperBoard/tree/master/samples).
+Sample application can be easily downloaded [here](https://play.google.com/store/apps/details?id=com.jahirfiquitiva.dashboardsample).
 
 ##Screenshots
 Give a look at the screenshots [here](https://github.com/jahirfiquitiva/PaperBoard/tree/master/screenshots).
 
 
-#Want to donate?
-Donations will help me improve the app, add more features and motivates me to continue with development as I can see if people is really thankful with this. <b> If you want to donate, follow me on Google+ and send me a Hangout. Thanks in advance.</b> Every help is really appreciated.
-
 
 #Updating Guide
 ##How to update if you had the previous version?
-- Make a backup of the files you have edited.
-- Delete them all in the project folder.
-- Add the new ones in Repository.
+- Make a backup of the files you have edited or what you think necessary.
+- Delete everything in the project folder.
+- Add the new ones from Repository.
 - Make the changes again.
 I will try to make this easier in future updates. Sorry.
 
-Btw, you can try to replace or add the files by your own and under your own responsibility.
-You can find the list of changes [here](https://github.com/jahirfiquitiva/PaperBoard/commit/adc9f2d5021d4fd2afbc5fb49395fc51476f503b).
+This time is needed because of the many changes and new things added.
+
 
 ##Changelog
 Latest version changelog can be easily found [here](https://github.com/jahirfiquitiva/PaperBoard/releases/latest).
@@ -65,6 +62,9 @@ The full changelog can be found [here](https://github.com/jahirfiquitiva/PaperBo
 There you can find a tutorial in PDF format.
 There you can find all the info about implementing and using this dashboard template.
 
+Now source folder includes only the necessary files to be able to use the dashboard.
+While sample folder includes all the project files from the sample app.
+
       
 <b>Links to the implemented libraries:</b>
 * Material Dialogs: https://github.com/afollestad/material-dialogs
@@ -72,8 +72,7 @@ There you can find all the info about implementing and using this dashboard temp
 * Picasso: https://github.com/square/picasso
 * OkHttp: https://github.com/square/okhttp
 * Muzei: https://github.com/romannurik/muzei/
-* FAB 1: https://github.com/futuresimple/android-floating-action-button/
-* FAB 2: https://github.com/clans/floatingactionbutton
+* FAB: https://github.com/makovkastar/floatingactionbutton/
 * PkRequestManager: https://github.com/pkmmte/PkRequestManager
     
     
