@@ -88,8 +88,6 @@ public class Apply extends Fragment {
                 + name.substring(1).toLowerCase().replace(" ", "").replace("launcher","")
                 + "Launcher";
 
-        Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
-
         Class<?> cl = null;
         try {
             cl = Class.forName(className);
