@@ -123,7 +123,7 @@ public class Apply extends Fragment {
 
         if (LauncherName.equals(cmName)){
             dialogContent = launcher.name + getResources().getString(R.string.cm_dialog_content);
-            intentString = "http://cyanogenmod.org/downloads";
+            intentString = "http://download.cyanogenmod.org/";
         } else {
             dialogContent = launcher.name + getResources().getString(R.string.lni_content);
             intentString = MARKET_URL + launcher.packageName;
