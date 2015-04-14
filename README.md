@@ -83,6 +83,14 @@ While sample folder includes all the project files from the sample app.
 * Mail: jahir.fiquitiva@gmail.com
 * Google+: https://plus.google.com/+JahirFiquitivaJDev/posts
     
+<b>Special Thanks</b>
+- Joaquin Cuitiño
+- Dani Mahardhika
+- Mike Penz
+- Aidan Follestad
+- Danish Shah
+- Allan W.
+- Tim Bremer
     
 #License
 
