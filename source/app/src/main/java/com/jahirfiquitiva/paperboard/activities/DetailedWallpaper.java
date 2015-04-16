@@ -113,7 +113,7 @@ public class DetailedWallpaper extends ActionBarActivity {
                 showSetWallDialog();
                 break;
 
-            case R.id.homeAsUp:
+            case android.R.id.home:
                 finish();
 
         }
