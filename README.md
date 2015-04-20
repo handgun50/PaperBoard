@@ -6,7 +6,7 @@ This dashboard works only on API 15+ and has set API 22 as Target SDK.
 <size="2><b>So Material. Such Design. Much wow.</b></size>
 
 
-Try out the sample app [here](https://play.google.com/store/apps/details?id=com.jahirfiquitiva.dashboardsample).
+Try out the sample app [here](https://play.google.com/store/apps/details?id=jahirfiquitiva.paperboard.sample).
 
 
 #Features:
@@ -35,7 +35,7 @@ Try out the sample app [here](https://play.google.com/store/apps/details?id=com.
 
 #Preview
 ##Demos
-Sample application can be easily downloaded [here](https://play.google.com/store/apps/details?id=com.jahirfiquitiva.dashboardsample).
+Sample application can be easily downloaded [here](https://play.google.com/store/apps/details?id=jahirfiquitiva.paperboard.sample).
 
 ##Screenshots
 Give a look at the screenshots [here](https://github.com/jahirfiquitiva/PaperBoard/tree/master/screenshots).
