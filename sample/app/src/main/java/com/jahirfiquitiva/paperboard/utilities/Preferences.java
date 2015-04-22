@@ -18,7 +18,6 @@ public class Preferences {
 
     public Preferences(Context context) {
         this.context = context;
-
     }
 
     public SharedPreferences getSharedPreferences() {
@@ -49,12 +48,11 @@ public class Preferences {
         getSharedPreferences().edit().putBoolean(FIRSTRUN, false).apply();
     }
 
-    public void setRotateTime (int time) {
+    public void setRotateTime(int time) {
         getSharedPreferences().edit().putInt(ROTATE_TIME, time).apply();
     }
 
-    public void setRotateMinute (boolean bool) {
+    public void setRotateMinute(boolean bool) {
         getSharedPreferences().edit().putBoolean(ROTATE_MINUTE, bool).apply();
     }
-
 }
