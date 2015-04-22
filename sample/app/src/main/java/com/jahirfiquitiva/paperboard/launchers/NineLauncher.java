@@ -21,8 +21,7 @@ public class NineLauncher {
                 Toast.makeText(context, R.string.updateninelauncher, Toast.LENGTH_SHORT).show();
             }
             context.startActivity(nineApply);
-        }
-        catch(PackageManager.NameNotFoundException e){
+        } catch (PackageManager.NameNotFoundException e) {
         }
     }
 
