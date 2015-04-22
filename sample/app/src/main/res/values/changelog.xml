@@ -9,7 +9,7 @@
 
     <string-array name="newstuff">
         <item>New</item>
-        <item>"Updated to Support Library 22.1."</item>
+        <item>Updated to Support Library 22.1.</item>
         <item>ActionBarActivity replaced with AppCompatActivity.</item>
     </string-array>
 
