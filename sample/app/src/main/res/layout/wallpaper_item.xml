@@ -6,25 +6,23 @@
     android:layout_height="match_parent"
     android:padding="4dp">
 
-
     <ProgressBar
         android:id="@+id/progress"
         style="?android:progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true" />
-
+        android:layout_gravity="center" />
 
     <com.balysv.materialripple.MaterialRippleLayout
         android:id="@+id/walls_ripple"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:mrl_rippleDuration="250"
-        app:mrl_rippleInAdapter="true"
         app:mrl_rippleAlpha="0.4"
         app:mrl_rippleColor="@color/semitransparent_white"
         app:mrl_rippleDelayClick="false"
+        app:mrl_rippleDuration="250"
         app:mrl_rippleHover="true"
+        app:mrl_rippleInAdapter="true"
         app:mrl_rippleOverlay="true">
 
         <ImageView
@@ -40,7 +38,6 @@
         android:id="@+id/titlebg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/wall"
         android:layout_gravity="bottom"
         android:alpha="0.7"
         android:background="#000">

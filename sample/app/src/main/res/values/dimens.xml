@@ -8,7 +8,7 @@
     <dimen name="toolbar_elevation">6dp</dimen>
 
     <!-- 0 values -->
-    <dimen name="no_width">0.0dip</dimen>
+    <dimen name="no_width">0dp</dimen>
     <dimen name="no_height">0dp</dimen>
 
     <!-- Some Margins -->

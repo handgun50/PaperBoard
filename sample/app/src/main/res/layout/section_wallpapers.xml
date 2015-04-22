@@ -14,11 +14,11 @@
 
     <GridView
         android:id="@+id/gridView"
-        android:padding="@dimen/walls_margin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:numColumns="auto_fit" />
+        android:numColumns="auto_fit"
+        android:padding="@dimen/walls_margin" />
 
 </RelativeLayout>
