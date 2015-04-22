@@ -14,7 +14,7 @@ import com.jahirfiquitiva.paperboard.views.SlidingTabLayout;
 
 import jahirfiquitiva.paperboard.sample.R;
 
-public class Previews extends Fragment {
+public class PreviewsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

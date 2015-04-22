@@ -16,7 +16,7 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.jahirfiquitiva.paperboard.activities.DetailedWallpaper;
+import com.jahirfiquitiva.paperboard.activities.DetailedWallpaperActivity;
 import com.jahirfiquitiva.paperboard.adapters.WallsGridAdapter;
 import com.jahirfiquitiva.paperboard.utilities.JSONParser;
 
@@ -29,7 +29,7 @@ import java.util.HashMap;
 
 import jahirfiquitiva.paperboard.sample.R;
 
-public class Wallpapers extends Fragment {
+public class WallpapersFragment extends Fragment {
 
     private static final int DEFAULT_COLUMNS_PORTRAIT = 2;
     private static final int DEFAULT_COLUMNS_LANDSCAPE = 3;
@@ -119,8 +119,8 @@ public class Wallpapers extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     HashMap<String, String> data = arraylist.get(position);
-                    String wallurl = data.get((Wallpapers.WALL));
-                    Intent intent = new Intent(getActivity(), DetailedWallpaper.class);
+                    String wallurl = data.get((WallpapersFragment.WALL));
+                    Intent intent = new Intent(getActivity(), DetailedWallpaperActivity.class);
                     intent.putExtra("wall", wallurl);
                     startActivity(intent);
                 }

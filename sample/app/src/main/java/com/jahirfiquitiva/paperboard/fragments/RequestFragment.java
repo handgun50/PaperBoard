@@ -29,7 +29,7 @@ import java.util.List;
 
 import jahirfiquitiva.paperboard.sample.R;
 
-public class Request extends Fragment {
+public class RequestFragment extends Fragment {
 
     // Request Manager
     private PkRequestManager mRequestManager;

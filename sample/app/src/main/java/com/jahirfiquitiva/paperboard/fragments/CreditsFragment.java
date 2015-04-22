@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import jahirfiquitiva.paperboard.sample.R;
 
-public class Credits extends Fragment {
+public class CreditsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

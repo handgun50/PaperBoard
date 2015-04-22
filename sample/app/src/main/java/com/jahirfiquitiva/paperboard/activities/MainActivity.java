@@ -37,7 +37,7 @@ import com.pkmmte.requestmanager.RequestSettings;
 import jahirfiquitiva.paperboard.sample.R;
 
 
-public class Main extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private static final boolean WITH_LICENSE_CHECKER = false;
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
@@ -66,7 +66,7 @@ public class Main extends AppCompatActivity {
                 .saveLocation(Environment.getExternalStorageDirectory().getAbsolutePath() + getResources().getString(R.string.request_save_location))
                 .build());
 
-        mPrefs = new Preferences(Main.this);
+        mPrefs = new Preferences(MainActivity.this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -160,7 +160,7 @@ public class Main extends AppCompatActivity {
             getSupportActionBar().setTitle(title);
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        tx.replace(R.id.main, Fragment.instantiate(Main.this, "com.jahirfiquitiva.paperboard.fragments." + fragment));
+        tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, "com.jahirfiquitiva.paperboard.fragments." + fragment));
         tx.commit();
     }
 

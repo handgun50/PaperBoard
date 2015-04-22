@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.balysv.materialripple.MaterialRippleLayout;
-import com.jahirfiquitiva.paperboard.fragments.Wallpapers;
+import com.jahirfiquitiva.paperboard.fragments.WallpapersFragment;
 import com.jahirfiquitiva.paperboard.utilities.PaletteTransformation;
 import com.squareup.picasso.Picasso;
 
@@ -80,8 +80,8 @@ public class WallsGridAdapter extends BaseAdapter {
 
         }
 
-        holder.name.setText(jsondata.get(Wallpapers.NAME));
-        final String wallurl = jsondata.get(Wallpapers.WALL);
+        holder.name.setText(jsondata.get(WallpapersFragment.NAME));
+        final String wallurl = jsondata.get(WallpapersFragment.WALL);
         holder.wall.startAnimation(anim);
 
         //noinspection SuspiciousNameCombination

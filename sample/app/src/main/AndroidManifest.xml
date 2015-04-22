@@ -50,7 +50,7 @@
             android:name="com.lge.support.SPLIT_WINDOW"
             android:value="true" />
 
-        <!-- Main Activity -->
+        <!-- MainActivity Activity -->
         <activity
             android:name=".Home"
             android:label="@string/app_name"
@@ -64,7 +64,7 @@
 
         <!-- Icons -->
         <activity
-            android:name="com.jahirfiquitiva.paperboard.activities.Main"
+            android:name="com.jahirfiquitiva.paperboard.activities.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.PICK" />
@@ -205,12 +205,12 @@
 
         <!-- Wallpapers Activity -->
         <activity
-            android:name="com.jahirfiquitiva.paperboard.activities.DetailedWallpaper"
+            android:name="com.jahirfiquitiva.paperboard.activities.DetailedWallpaperActivity"
             android:label="@string/title_activity_detailed_wallpaper"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jahirfiquitiva.paperboard.activities.DetailedWallpaper" />
+                android:value="com.jahirfiquitiva.paperboard.activities.DetailedWallpaperActivity" />
         </activity>
 
         <service

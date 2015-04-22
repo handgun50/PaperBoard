@@ -13,13 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.jahirfiquitiva.paperboard.activities.Main;
+import com.jahirfiquitiva.paperboard.activities.MainActivity;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ObservableScrollView;
 
 import jahirfiquitiva.paperboard.sample.R;
 
-public class Home extends Fragment {
+public class HomeFragment extends Fragment {
 
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
 
@@ -111,8 +111,8 @@ public class Home extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((Main) getActivity()).result.setSelectionByIdentifier(3);
-                ((Main) getActivity()).switchFragment(3, getResources().getString(R.string.section_three), "Apply");
+                ((MainActivity) getActivity()).result.setSelectionByIdentifier(3);
+                ((MainActivity) getActivity()).switchFragment(3, getResources().getString(R.string.section_three), "Apply");
             }
         });
 

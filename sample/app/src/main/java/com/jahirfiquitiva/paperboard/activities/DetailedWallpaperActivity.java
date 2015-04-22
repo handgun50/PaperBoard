@@ -27,7 +27,7 @@ import java.io.IOException;
 import jahirfiquitiva.paperboard.sample.R;
 
 
-public class DetailedWallpaper extends AppCompatActivity {
+public class DetailedWallpaperActivity extends AppCompatActivity {
 
     public String wall;
     private String saveWallLocation, picName, dialogContent;
@@ -140,7 +140,7 @@ public class DetailedWallpaper extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        WallpaperManager wm = WallpaperManager.getInstance(DetailedWallpaper.this);
+                        WallpaperManager wm = WallpaperManager.getInstance(DetailedWallpaperActivity.this);
                         wm.setBitmap(bitmap);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -268,7 +268,7 @@ public class DetailedWallpaper extends AppCompatActivity {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                         showSettingWallDialog(false);
-                        Picasso.with(DetailedWallpaper.this)
+                        Picasso.with(DetailedWallpaperActivity.this)
                                 .load(wall)
                                 .into(wallTarget);
 
@@ -276,7 +276,7 @@ public class DetailedWallpaper extends AppCompatActivity {
 
                     @Override
                     public void onNeutral(MaterialDialog dialog) {
-                        Picasso.with(DetailedWallpaper.this)
+                        Picasso.with(DetailedWallpaperActivity.this)
                                 .load(wall)
                                 .into(wallCropTarget);
                     }

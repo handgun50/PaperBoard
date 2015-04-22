@@ -26,7 +26,7 @@ import java.util.List;
 
 import jahirfiquitiva.paperboard.sample.R;
 
-public class Apply extends Fragment {
+public class ApplyFragment extends Fragment {
 
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
 
