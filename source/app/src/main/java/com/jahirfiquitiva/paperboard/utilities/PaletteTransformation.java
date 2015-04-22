@@ -7,55 +7,37 @@ import android.support.v7.graphics.Palette;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 import com.squareup.picasso.Transformation;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-/**
- * Created by Jahir on 25/03/2015.
- */
 public final class PaletteTransformation implements Transformation {
 
     private static final PaletteTransformation INSTANCE = new PaletteTransformation();
-    private static final Map<Bitmap, Palette> CACHE = new WeakHashMap<Bitmap, Palette>();
+    private static final Map<Bitmap, Palette> CACHE = new WeakHashMap<>();
 
-    public static abstract class PaletteTarget implements Target {
-        protected abstract void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from, Palette palette);
-
-        @Override
-        public final void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-            final Palette palette = getPalette(bitmap);
-            onBitmapLoaded(bitmap, from, palette);
-        }
-
-    }
-
-    public static Palette getPalette(Bitmap bitmap) {
+    private static Palette getPalette(Bitmap bitmap) {
         return CACHE.get(bitmap);
     }
 
     public static abstract class PaletteCallback implements Callback {
-        private WeakReference<ImageView> mImageView;
+
+        private final WeakReference<ImageView> mImageView;
 
         public PaletteCallback(@NonNull ImageView imageView) {
-            mImageView = new WeakReference<ImageView>(imageView);
+            mImageView = new WeakReference<>(imageView);
         }
 
         protected abstract void onSuccess(Palette palette);
 
         @Override
         public final void onSuccess() {
-            if (getImageView() == null) {
+            if (getImageView() == null)
                 return;
-            }
-
             final Bitmap bitmap = ((BitmapDrawable) getImageView().getDrawable()).getBitmap();
             final Palette palette = getPalette(bitmap);
-
             onSuccess(palette);
 
         }
@@ -72,12 +54,9 @@ public final class PaletteTransformation implements Transformation {
 
     @Override
     public final Bitmap transform(Bitmap source) {
-        final Palette palette = Palette.generate(source);
-
+        final Palette palette = new Palette.Builder(source).generate();
         CACHE.put(source, palette);
-
         return source;
-
     }
 
     @Override
@@ -87,6 +66,4 @@ public final class PaletteTransformation implements Transformation {
 
     private PaletteTransformation() {
     }
-
-
 }

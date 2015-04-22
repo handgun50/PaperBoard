@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_bg">
@@ -7,16 +8,17 @@
     <ScrollView
         android:id="@+id/libraries_scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:fillViewport="true"
         android:overScrollMode="ifContentScrolls"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
@@ -25,8 +27,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/cards_margin"
                 android:padding="@dimen/cards_padding"
-                card_view:cardElevation="@dimen/cards_elevation"
-                card_view:cardBackgroundColor="@color/cardsbg">
+                card_view:cardBackgroundColor="@color/cardsbg"
+                card_view:cardElevation="@dimen/cards_elevation">
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -38,6 +40,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:layout_margin="@dimen/cards_text_margin"
                         android:text="@string/dashboard_author"
@@ -49,6 +52,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@id/dashauthor"
+                        android:layout_alignStart="@+id/dashauthor"
                         android:layout_below="@id/dashauthor"
                         android:lineSpacingMultiplier="1.2"
                         android:textColor="@color/dark_grey"
@@ -59,6 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_below="@id/dashauthor_info"
                         android:layout_margin="@dimen/cards_text_margin"
                         android:lineSpacingMultiplier="1.2"
@@ -67,8 +72,9 @@
                         android:textSize="@dimen/text_small" />
 
                     <LinearLayout
-                        android:layout_height="fill_parent"
                         android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_below="@id/dashauthor_copyright"
                         android:orientation="horizontal">
@@ -107,8 +113,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/cards_margin"
                 android:padding="@dimen/cards_padding"
-                card_view:cardElevation="@dimen/cards_elevation"
-                card_view:cardBackgroundColor="@color/cardsbg">
+                card_view:cardBackgroundColor="@color/cardsbg"
+                card_view:cardElevation="@dimen/cards_elevation">
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -120,6 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:layout_margin="@dimen/cards_text_margin"
                         android:text="@string/iconpack_designer"
@@ -131,6 +138,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@id/dev_card_title"
+                        android:layout_alignStart="@+id/dev_card_title"
                         android:layout_below="@id/dev_card_title"
                         android:layout_marginBottom="@dimen/cards_text_margin"
                         android:lineSpacingMultiplier="1.2"
@@ -138,8 +146,9 @@
                         android:textSize="@dimen/text_small" />
 
                     <LinearLayout
-                        android:layout_height="fill_parent"
                         android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_below="@id/dev_card_content"
                         android:orientation="horizontal">
@@ -176,7 +185,6 @@
                 android:id="@+id/section_div"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/list_item_height_mini"
-                android:layout_below="@id/dev_card"
                 android:layout_marginTop="@dimen/list_margin"
                 android:background="@color/transparent"
                 android:orientation="horizontal">
@@ -186,12 +194,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="@dimen/list_margin"
-                    android:src="@drawable/ic_libraries" />
+                    android:layout_marginStart="@dimen/list_margin"
+                    android:src="@drawable/ic_libraries"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="@dimen/list_margin"
+                    android:layout_marginStart="@dimen/list_margin"
                     android:layout_toEndOf="@+id/imageView2"
                     android:layout_toRightOf="@+id/imageView2"
                     android:gravity="center_vertical"
@@ -206,12 +217,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/cards_margin"
                 android:clickable="true"
-
                 android:foreground="?android:attr/selectableItemBackground"
                 android:padding="@dimen/cards_padding"
-
-                card_view:cardElevation="@dimen/cards_elevation"
-                card_view:cardBackgroundColor="@color/cardsbg">
+                card_view:cardBackgroundColor="@color/cardsbg"
+                card_view:cardElevation="@dimen/cards_elevation">
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -244,7 +253,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"
-                            android:gravity="right"
+                            android:gravity="end"
                             android:maxLines="2"
                             android:text="@string/fab_author"
                             android:textColor="@color/dark_grey"
@@ -258,6 +267,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@id/libtwo_titles"
+                        android:layout_alignStart="@+id/libtwo_titles"
                         android:layout_below="@id/libtwo_titles"
                         android:lineSpacingMultiplier="1.2"
                         android:textColor="@color/dark_grey"
@@ -268,6 +278,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_below="@id/libtwo_content"
                         android:layout_margin="@dimen/cards_text_margin"
                         android:text="@string/apache_license"
@@ -284,12 +295,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/cards_margin"
                 android:clickable="true"
-
                 android:foreground="?android:attr/selectableItemBackground"
                 android:padding="@dimen/cards_padding"
-
-                card_view:cardElevation="@dimen/cards_elevation"
-                card_view:cardBackgroundColor="@color/cardsbg">
+                card_view:cardBackgroundColor="@color/cardsbg"
+                card_view:cardElevation="@dimen/cards_elevation">
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -322,7 +331,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"
-                            android:gravity="right"
+                            android:gravity="end"
                             android:maxLines="2"
                             android:text="@string/materialdialogs_author"
                             android:textColor="@color/dark_grey"
@@ -336,6 +345,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@id/libthree_titles"
+                        android:layout_alignStart="@+id/libthree_titles"
                         android:layout_below="@id/libthree_titles"
                         android:lineSpacingMultiplier="1.2"
                         android:textColor="@color/dark_grey"
@@ -346,6 +356,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_below="@id/libthree_content"
                         android:layout_margin="@dimen/cards_text_margin"
                         android:text="@string/mit_license"
@@ -362,12 +373,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/cards_margin"
                 android:clickable="true"
-
                 android:foreground="?android:attr/selectableItemBackground"
                 android:padding="@dimen/cards_padding"
-
-                card_view:cardElevation="@dimen/cards_elevation"
-                card_view:cardBackgroundColor="@color/cardsbg">
+                card_view:cardBackgroundColor="@color/cardsbg"
+                card_view:cardElevation="@dimen/cards_elevation">
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -400,7 +409,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"
-                            android:gravity="right"
+                            android:gravity="end"
                             android:maxLines="2"
                             android:text="@string/materialdrawer_author"
                             android:textColor="@color/dark_grey"
@@ -414,6 +423,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@id/libfour_titles"
+                        android:layout_alignStart="@+id/libfour_titles"
                         android:layout_below="@id/libfour_titles"
                         android:lineSpacingMultiplier="1.2"
                         android:textColor="@color/dark_grey"
@@ -424,6 +434,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_below="@id/libfour_content"
                         android:layout_margin="@dimen/cards_text_margin"
                         android:text="@string/apache_license"
@@ -440,12 +451,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/cards_margin"
                 android:clickable="true"
-
                 android:foreground="?android:attr/selectableItemBackground"
                 android:padding="@dimen/cards_padding"
-
-                card_view:cardElevation="@dimen/cards_elevation"
-                card_view:cardBackgroundColor="@color/cardsbg">
+                card_view:cardBackgroundColor="@color/cardsbg"
+                card_view:cardElevation="@dimen/cards_elevation">
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -478,7 +487,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"
-                            android:gravity="right"
+                            android:gravity="end"
                             android:maxLines="2"
                             android:text="@string/materialripples_author"
                             android:textColor="@color/dark_grey"
@@ -492,6 +501,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@id/libnine_titles"
+                        android:layout_alignStart="@+id/libnine_titles"
                         android:layout_below="@id/libnine_titles"
                         android:lineSpacingMultiplier="1.2"
                         android:textColor="@color/dark_grey"
@@ -502,6 +512,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_below="@id/libnine_content"
                         android:layout_margin="@dimen/cards_text_margin"
                         android:text="@string/apache_license"
@@ -518,12 +529,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/cards_margin"
                 android:clickable="true"
-
                 android:foreground="?android:attr/selectableItemBackground"
                 android:padding="@dimen/cards_padding"
-
-                card_view:cardElevation="@dimen/cards_elevation"
-                card_view:cardBackgroundColor="@color/cardsbg">
+                card_view:cardBackgroundColor="@color/cardsbg"
+                card_view:cardElevation="@dimen/cards_elevation">
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -556,7 +565,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"
-                            android:gravity="right"
+                            android:gravity="end"
                             android:maxLines="2"
                             android:text="@string/picasso_author"
                             android:textColor="@color/dark_grey"
@@ -570,6 +579,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@id/libfive_titles"
+                        android:layout_alignStart="@+id/libfive_titles"
                         android:layout_below="@id/libfive_titles"
                         android:lineSpacingMultiplier="1.2"
                         android:textColor="@color/dark_grey"
@@ -580,6 +590,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_below="@id/libfive_content"
                         android:layout_margin="@dimen/cards_text_margin"
                         android:text="@string/apache_license"
@@ -596,12 +607,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/cards_margin"
                 android:clickable="true"
-
                 android:foreground="?android:attr/selectableItemBackground"
                 android:padding="@dimen/cards_padding"
-
-                card_view:cardElevation="@dimen/cards_elevation"
-                card_view:cardBackgroundColor="@color/cardsbg">
+                card_view:cardBackgroundColor="@color/cardsbg"
+                card_view:cardElevation="@dimen/cards_elevation">
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -634,7 +643,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"
-                            android:gravity="right"
+                            android:gravity="end"
                             android:maxLines="2"
                             android:text="@string/pkrequestmanager_author"
                             android:textColor="@color/dark_grey"
@@ -648,6 +657,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@id/libseven_titles"
+                        android:layout_alignStart="@+id/libseven_titles"
                         android:layout_below="@id/libseven_titles"
                         android:lineSpacingMultiplier="1.2"
                         android:textColor="@color/dark_grey"
@@ -658,6 +668,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_below="@id/libseven_content"
                         android:layout_margin="@dimen/cards_text_margin"
                         android:text="@string/mit_license"
@@ -676,8 +687,8 @@
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:padding="@dimen/cards_padding"
-                card_view:cardElevation="@dimen/cards_elevation"
-                card_view:cardBackgroundColor="@color/cardsbg">
+                card_view:cardBackgroundColor="@color/cardsbg"
+                card_view:cardElevation="@dimen/cards_elevation">
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -710,7 +721,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"
-                            android:gravity="right"
+                            android:gravity="end"
                             android:maxLines="2"
                             android:text="@string/okhttp_author"
                             android:textColor="@color/dark_grey"
@@ -724,6 +735,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@id/libeight_titles"
+                        android:layout_alignStart="@+id/libeight_titles"
                         android:layout_below="@id/libeight_titles"
                         android:lineSpacingMultiplier="1.2"
                         android:textColor="@color/dark_grey"
@@ -734,6 +746,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_below="@id/libeight_content"
                         android:layout_margin="@dimen/cards_text_margin"
                         android:text="@string/apache_license"
@@ -745,6 +758,7 @@
             </android.support.v7.widget.CardView>
 
         </LinearLayout>
+
     </ScrollView>
 
 </RelativeLayout>

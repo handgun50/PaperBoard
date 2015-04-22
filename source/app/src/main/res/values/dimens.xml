@@ -8,7 +8,7 @@
     <dimen name="toolbar_elevation">6dp</dimen>
 
     <!-- 0 values -->
-    <dimen name="no_width">0.0dip</dimen>
+    <dimen name="no_width">0dp</dimen>
     <dimen name="no_height">0dp</dimen>
 
     <!-- Some Margins -->
@@ -46,5 +46,6 @@
     <dimen name="text_med">18sp</dimen>
     <dimen name="text_small">16sp</dimen>
     <dimen name="text_ultrasmall">14sp</dimen>
+    <dimen name="grid_padding_vertical">16dp</dimen>
 
 </resources>

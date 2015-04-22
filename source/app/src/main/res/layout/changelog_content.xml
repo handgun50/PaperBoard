@@ -18,7 +18,7 @@
         android:textStyle="bold"
         android:textColor="@color/dialogcontent"
         android:textSize="@dimen/text_med"
-        android:lineSpacingMultiplier="1.6"/>
+        android:lineSpacingMultiplier="1.6" />
 
     <TextView
         android:id="@+id/changelog_versioncontent"
@@ -28,6 +28,6 @@
         android:paddingTop="@dimen/cards_padding"
         android:textColor="@color/dialogcontent"
         android:textSize="@dimen/text_med"
-        android:lineSpacingMultiplier="1.6"/>
+        android:lineSpacingMultiplier="1.6" />
 
 </LinearLayout>

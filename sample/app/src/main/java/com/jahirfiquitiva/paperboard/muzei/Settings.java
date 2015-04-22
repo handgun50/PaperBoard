@@ -2,7 +2,6 @@ package com.jahirfiquitiva.paperboard.muzei;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 import com.jahirfiquitiva.paperboard.utilities.Preferences;
 
 import jahirfiquitiva.paperboard.sample.R;
-
 
 public class Settings extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,10 +35,6 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
-        }
-
         numberpicker = (NumberPicker) findViewById(R.id.number_picker);
         numberpicker.setMaxValue(100);
         numberpicker.setMinValue(1);
@@ -51,14 +45,14 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         minute.setOnClickListener(this);
         hour.setOnClickListener(this);
 
-        if(mPrefs.isRotateMinute()) {
+        if (mPrefs.isRotateMinute()) {
             hour.setChecked(false);
             minute.setChecked(true);
             numberpicker.setValue(ConvertMiliToMinute(mPrefs.getRotateTime()));
         } else {
             hour.setChecked(true);
             minute.setChecked(false);
-            numberpicker.setValue(ConvertMiliToMinute(mPrefs.getRotateTime())/60);
+            numberpicker.setValue(ConvertMiliToMinute(mPrefs.getRotateTime()) / 60);
         }
     }
 
@@ -72,7 +66,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.save :
+            case R.id.save:
 
                 int rotate_time;
                 if (minute.isChecked()) {
@@ -80,7 +74,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                     mPrefs.setRotateMinute(true);
                     mPrefs.setRotateTime(rotate_time);
                 } else {
-                    rotate_time = ConvertMinuteToMili(numberpicker.getValue())*60;
+                    rotate_time = ConvertMinuteToMili(numberpicker.getValue()) * 60;
                     mPrefs.setRotateMinute(false);
                     mPrefs.setRotateTime(rotate_time);
                 }
@@ -100,13 +94,13 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.minute :
+            case R.id.minute:
                 if (minute.isChecked()) {
                     hour.setChecked(false);
                     minute.setChecked(true);
                 }
                 break;
-            case R.id.hour :
+            case R.id.hour:
                 if (hour.isChecked()) {
                     minute.setChecked(false);
                     hour.setChecked(true);
@@ -115,15 +109,15 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
-    private int ConvertMinuteToMili (int minute) {
+    private int ConvertMinuteToMili(int minute) {
         return minute * 60 * 1000;
     }
 
-    private int ConvertMiliToMinute (int mili) {
+    private int ConvertMiliToMinute(int mili) {
         return mili / 60 / 1000;
     }
 
-    private void setDividerColor (NumberPicker picker) {
+    private void setDividerColor(NumberPicker picker) {
         java.lang.reflect.Field[] pickerFields = NumberPicker.class.getDeclaredFields();
         for (java.lang.reflect.Field pf : pickerFields) {
             if (pf.getName().equals("mSelectionDivider")) {
@@ -137,5 +131,4 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
             }
         }
     }
-
 }

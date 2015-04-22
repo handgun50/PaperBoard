@@ -10,9 +10,10 @@
         android:id="@+id/imgIcon"
         android:layout_width="@dimen/app_icon_size"
         android:layout_height="@dimen/app_icon_size"
-        android:layout_marginLeft="@dimen/request_item_padding_left"
-        android:layout_marginTop="@dimen/list_margin"
         android:layout_marginBottom="@dimen/list_margin"
+        android:layout_marginLeft="@dimen/request_item_padding_left"
+        android:layout_marginStart="@dimen/request_item_padding_left"
+        android:layout_marginTop="@dimen/list_margin"
         android:contentDescription="@null"
         android:src="@drawable/ic_launcher" />
 
@@ -20,8 +21,9 @@
         android:id="@+id/txtName"
         android:layout_width="@dimen/no_width"
         android:layout_height="wrap_content"
-        android:layout_weight="1.0"
         android:layout_marginLeft="@dimen/request_item_padding_left"
+        android:layout_marginStart="@dimen/request_item_padding_left"
+        android:layout_weight="1.0"
         android:textColor="@color/dark_grey"
         android:textSize="@dimen/text_med" />
 

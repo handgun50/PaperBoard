@@ -12,7 +12,7 @@
     <!-- SYSTEM ICONS -->
     <!-- System icons listed here -->
     <string-array name="system">
-		<item>fimbo</item>
+        <item>fimbo</item>
         <item>andy</item>
         <item>andy_alt</item>
         <item>andy_two</item>
@@ -26,7 +26,7 @@
     <!-- GOOGLE APPS ICONS -->
     <!-- Google Apps icons are listed here -->
     <string-array name="google">
-		<item>fimbo</item>
+        <item>fimbo</item>
         <item>andy</item>
         <item>andy_alt</item>
         <item>andy_two</item>
@@ -45,7 +45,7 @@
     <!-- GAMES ICONS -->
     <!-- Game icons are listed here -->
     <string-array name="games">
-		<item>fimbo</item>
+        <item>fimbo</item>
         <item>andy</item>
         <item>andy_alt</item>
         <item>andy_two</item>
@@ -67,7 +67,7 @@
     <!-- ALL ICONS -->
     <!-- All of your icons listed here -->
     <string-array name="icon_pack" translatable="false">
-		<item>fimbo</item>
+        <item>fimbo</item>
         <item>andy</item>
         <item>andy_alt</item>
         <item>andy_two</item>
@@ -96,12 +96,12 @@
         <item>andy</item>
         <item>andy</item>
     </string-array>
-	
-	<string-array name="drawer" >	
-		<item>drawer</item>
+
+    <string-array name="drawer">
+        <item>drawer</item>
         <item>drawer_a</item>
-		<item>drawer_b</item>
-		<item>drawer_c</item>
-	</string-array>
-	
+        <item>drawer_b</item>
+        <item>drawer_c</item>
+    </string-array>
+
 </resources>
