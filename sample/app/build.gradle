@@ -1,5 +1,10 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    jcenter()
+    maven { url 'https://dl.bintray.com/drummer-aidan/maven' }
+}
+
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -12,16 +17,17 @@ android {
         versionName "7.0"
     }
     buildTypes {
+        debug {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
-
-repositories {
-    jcenter()
-    maven { url 'https://dl.bintray.com/drummer-aidan/maven' }
 }
 
 dependencies {
