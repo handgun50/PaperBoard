@@ -14,14 +14,13 @@ public class Preferences {
             ROTATE_MINUTE = "rotate_time_minute",
             ROTATE_TIME = "muzei_rotate_time";
 
-    private Context context;
+    private final Context context;
 
     public Preferences(Context context) {
         this.context = context;
-
     }
 
-    public SharedPreferences getSharedPreferences() {
+    private SharedPreferences getSharedPreferences() {
         return context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
@@ -49,12 +48,11 @@ public class Preferences {
         getSharedPreferences().edit().putBoolean(FIRSTRUN, false).apply();
     }
 
-    public void setRotateTime (int time) {
+    public void setRotateTime(int time) {
         getSharedPreferences().edit().putInt(ROTATE_TIME, time).apply();
     }
 
-    public void setRotateMinute (boolean bool) {
+    public void setRotateMinute(boolean bool) {
         getSharedPreferences().edit().putBoolean(ROTATE_MINUTE, bool).apply();
     }
-
 }

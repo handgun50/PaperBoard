@@ -2,12 +2,9 @@ package com.jahirfiquitiva.paperboard.launchers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
-public class GoLauncher
-{
-    public GoLauncher(Context context)
-    {
+public class GoLauncher {
+    public GoLauncher(Context context) {
         Intent intent = context.getPackageManager().getLaunchIntentForPackage("com.gau.go.launcherex");
         Intent go = new Intent("com.gau.go.launcherex.MyThemes.mythemeaction");
         go.putExtra("type", 1);

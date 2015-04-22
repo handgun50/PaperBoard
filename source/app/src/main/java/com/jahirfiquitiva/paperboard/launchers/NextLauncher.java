@@ -3,10 +3,8 @@ package com.jahirfiquitiva.paperboard.launchers;
 import android.content.Context;
 import android.content.Intent;
 
-public class NextLauncher
-{
-    public NextLauncher(Context context)
-    {
+public class NextLauncher {
+    public NextLauncher(Context context) {
         Intent nextApply = context.getPackageManager().getLaunchIntentForPackage("com.gtp.nextlauncher");
         if (nextApply == null) {
             nextApply = context.getPackageManager().getLaunchIntentForPackage("com.gtp.nextlauncher.trial");

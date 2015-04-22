@@ -1,33 +1,27 @@
 package com.jahirfiquitiva.paperboard.activities;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import jahirfiquitiva.paperboard.sample.R;
 import com.jahirfiquitiva.paperboard.adapters.ChangelogAdapter;
 import com.jahirfiquitiva.paperboard.utilities.Preferences;
+import com.jahirfiquitiva.paperboard.utilities.Util;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
@@ -35,29 +29,28 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.pkmmte.requestmanager.AppInfo;
 import com.pkmmte.requestmanager.PkRequestManager;
 import com.pkmmte.requestmanager.RequestSettings;
 
-import java.util.LinkedList;
-import java.util.List;
+import jahirfiquitiva.paperboard.sample.R;
 
 
-public class Main extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
-    public Drawer.Result result = null;
-    public AccountHeader.Result headerResult = null;
-    public String thaApp, thaHome, thaPreviews, thaApply, thaWalls, thaRequest, thaCredits;
-    public String version, drawerVersion;
-    public int currentItem;
-    private boolean firstrun, enable_features;
-    private Preferences mPrefs;
-    private boolean withLicenseChecker = false;
-    private Context context;
+    private static final boolean WITH_LICENSE_CHECKER = false;
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
 
-    private PkRequestManager mRequestManager;
-    private List<AppInfo> mApps = new LinkedList<AppInfo>();
+    public Drawer.Result result = null;
+    private String thaApp;
+    private String thaPreviews;
+    private String thaApply;
+    private String thaWalls;
+    private String thaRequest;
+    private String thaCredits;
+    public String version;
+    private int currentItem = -1;
+    private boolean firstrun, enable_features;
+    private Preferences mPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +58,7 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Grab a reference to the manager and store it in a variable. This helps make code shorter.
-        mRequestManager = PkRequestManager.getInstance(this);
+        PkRequestManager mRequestManager = PkRequestManager.getInstance(this);
         mRequestManager.setDebugging(false);
         // Set your custom settings. Email address is required! Everything else is set to default.
         mRequestManager.setSettings(new RequestSettings.Builder()
@@ -75,30 +68,26 @@ public class Main extends AppCompatActivity {
                 .saveLocation(Environment.getExternalStorageDirectory().getAbsolutePath() + getResources().getString(R.string.request_save_location))
                 .build());
 
-        context = this;
-        mPrefs = new Preferences(Main.this);
+        mPrefs = new Preferences(MainActivity.this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         thaApp = getResources().getString(R.string.app_name);
-        thaHome = getResources().getString(R.string.section_one);
+        String thaHome = getResources().getString(R.string.section_one);
         thaPreviews = getResources().getString(R.string.section_two);
         thaApply = getResources().getString(R.string.section_three);
         thaWalls = getResources().getString(R.string.section_four);
         thaRequest = getResources().getString(R.string.section_five);
         thaCredits = getResources().getString(R.string.section_six);
 
-        drawerVersion = "v " + getResources().getString(R.string.current_version);
-
-        currentItem = 1;
-
-        headerResult = new AccountHeader()
+        AccountHeader.Result headerResult = new AccountHeader()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
                 .withSelectionFirstLine(getResources().getString(R.string.app_long_name))
-                .withSelectionSecondLine(drawerVersion)
+                .withSelectionSecondLine("v" + Util.getAppVersion(this))
                 .withSavedInstance(savedInstanceState)
                 .build();
 
@@ -119,26 +108,30 @@ public class Main extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
-
                         if (drawerItem != null) {
-
                             switch (drawerItem.getIdentifier()) {
-                                case 1: switchFragment(1, thaApp, "Home"); break;
-                                case 2: switchFragment(2, thaPreviews, "Previews"); break;
-                                case 3: switchFragment(3, thaApply, "Apply"); break;
+                                case 1:
+                                    switchFragment(1, thaApp, "Home");
+                                    break;
+                                case 2:
+                                    switchFragment(2, thaPreviews, "Previews");
+                                    break;
+                                case 3:
+                                    switchFragment(3, thaApply, "Apply");
+                                    break;
                                 case 4:
-                                    ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                                    NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-                                    boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-
-                                    if (isConnected) {
+                                    if (Util.hasNetwork(MainActivity.this)) {
                                         switchFragment(4, thaWalls, "Wallpapers");
                                     } else {
                                         showNotConnectedDialog();
                                     }
                                     break;
-                                case 5: switchFragment(5, thaRequest, "Request"); break;
-                                case 6: switchFragment(6, thaCredits, "Credits"); break;
+                                case 5:
+                                    switchFragment(5, thaRequest, "Request");
+                                    break;
+                                case 6:
+                                    switchFragment(6, thaCredits, "Credits");
+                                    break;
                             }
                         }
                     }
@@ -147,22 +140,27 @@ public class Main extends AppCompatActivity {
                 .build();
 
         result.getListView().setVerticalScrollBarEnabled(false);
-
         runLicenseChecker();
 
         if (savedInstanceState == null) {
-            result.setSelectionByIdentifier(currentItem);
+            currentItem = -1;
+            result.setSelectionByIdentifier(1);
         }
-
     }
 
     public void switchFragment(int itemId, String title, String fragment) {
+        if (currentItem == itemId) {
+            // Don't allow re-selection of the currently active item
+            return;
+        }
         currentItem = itemId;
-        getSupportActionBar().setTitle(title);
-        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        tx.replace(R.id.main, Fragment.instantiate(Main.this, "com.jahirfiquitiva.paperboard.fragments." + fragment));
-        tx.commit();
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setTitle(title);
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .replace(R.id.main, Fragment.instantiate(MainActivity.this,
+                        "com.jahirfiquitiva.paperboard.fragments." + fragment + "Fragment"))
+                .commit();
     }
 
     @Override
@@ -200,9 +198,9 @@ public class Main extends AppCompatActivity {
                 sharingIntent.setType("text/plain");
                 String shareBody =
                         getResources().getString(R.string.share_one) +
-                        getResources().getString(R.string.iconpack_designer) +
-                        getResources().getString(R.string.share_two) +
-                        MARKET_URL + getPackageName();
+                                getResources().getString(R.string.iconpack_designer) +
+                                getResources().getString(R.string.share_two) +
+                                MARKET_URL + getPackageName();
                 sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(sharingIntent, (getResources().getString(R.string.share_title))));
                 break;
@@ -213,32 +211,33 @@ public class Main extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + getResources().getString(R.string.email_id)));
                 intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.email_subject));
 
-                emailBuilder.append("\n \n \nOS Version: " + System.getProperty("os.version") + "(" + Build.VERSION.INCREMENTAL + ")");
-                emailBuilder.append("\nOS API Level: " + Build.VERSION.SDK_INT);
-                emailBuilder.append("\nDevice: " + Build.DEVICE);
-                emailBuilder.append("\nManufacturer: " + Build.MANUFACTURER);
-                emailBuilder.append("\nModel (and Product): " + Build.MODEL + " (" + Build.PRODUCT + ")");
+                emailBuilder.append("\n \n \nOS Version: ").append(System.getProperty("os.version")).append("(").append(Build.VERSION.INCREMENTAL).append(")");
+                emailBuilder.append("\nOS API Level: ").append(Build.VERSION.SDK_INT);
+                emailBuilder.append("\nDevice: ").append(Build.DEVICE);
+                emailBuilder.append("\nManufacturer: ").append(Build.MANUFACTURER);
+                emailBuilder.append("\nModel (and Product): ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(")");
                 PackageInfo appInfo = null;
                 try {
                     appInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
                 } catch (PackageManager.NameNotFoundException e) {
                     e.printStackTrace();
                 }
-                emailBuilder.append("\nApp Version Name: " + appInfo.versionName);
-                emailBuilder.append("\nApp Version Code: " + appInfo.versionCode);
+                assert appInfo != null;
+                emailBuilder.append("\nApp Version Name: ").append(appInfo.versionName);
+                emailBuilder.append("\nApp Version Code: ").append(appInfo.versionCode);
 
                 intent.putExtra(Intent.EXTRA_TEXT, emailBuilder.toString());
                 startActivity(Intent.createChooser(intent, (getResources().getString(R.string.send_title))));
                 break;
 
             case R.id.changelog:
-                changelog();
+                showChangelog();
                 break;
         }
         return true;
     }
 
-    public void addItemsToDrawer() {
+    private void addItemsToDrawer() {
         IDrawerItem walls = new PrimaryDrawerItem().withName(thaWalls).withIcon(GoogleMaterial.Icon.gmd_landscape).withIdentifier(4);
         IDrawerItem request = new PrimaryDrawerItem().withName(thaRequest).withIcon(GoogleMaterial.Icon.gmd_forum).withIdentifier(5);
         if (enable_features) {
@@ -249,7 +248,7 @@ public class Main extends AppCompatActivity {
 
     private void runLicenseChecker() {
         if (firstrun) {
-            if (withLicenseChecker) {
+            if (WITH_LICENSE_CHECKER) {
                 checkLicense();
             } else {
                 mPrefs.setFeaturesEnabled(true);
@@ -257,7 +256,7 @@ public class Main extends AppCompatActivity {
                 showChangelogDialog();
             }
         } else {
-            if (withLicenseChecker) {
+            if (WITH_LICENSE_CHECKER) {
                 if (!enable_features) {
                     showNotLicensedDialog();
                 } else {
@@ -271,8 +270,7 @@ public class Main extends AppCompatActivity {
         }
     }
 
-    private void changelog() {
-
+    private void showChangelog() {
         new MaterialDialog.Builder(this)
                 .title(R.string.changelog_dialog_title)
                 .adapter(new ChangelogAdapter(this, R.array.fullchangelog), null)
@@ -282,46 +280,38 @@ public class Main extends AppCompatActivity {
                     public void onPositive(MaterialDialog dialog) {
                         mPrefs.setNotFirstrun();
                     }
-                })
-                .show();
+                }).show();
     }
 
     private void showChangelogDialog() {
-
         String launchinfo = getSharedPreferences("PrefsFile", MODE_PRIVATE).getString("version", "0");
-        if (!launchinfo.equals(getResources().getString(R.string.current_version))) {
-            changelog();
-        }
+        if (launchinfo != null && !launchinfo.equals(Util.getAppVersion(this)))
+            showChangelog();
         storeSharedPrefs();
     }
 
-    protected void storeSharedPrefs() {
+    @SuppressLint("CommitPrefEdits")
+    private void storeSharedPrefs() {
         SharedPreferences sharedPreferences = getSharedPreferences("PrefsFile", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("version", getResources().getString(R.string.current_version));
-        editor.commit();
+        sharedPreferences.edit().putString("version", Util.getAppVersion(this)).commit();
     }
 
     private void showNotConnectedDialog() {
         new MaterialDialog.Builder(this)
                 .title(R.string.no_conn_title)
                 .content(R.string.no_conn_content)
-                .positiveText(R.string.ok)
+                .positiveText(android.R.string.ok)
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
-
                         int nSelection = currentItem - 1;
-                        if (result != null) {
+                        if (result != null)
                             result.setSelection(nSelection);
-                        }
-
                     }
-                })
-                .show();
+                }).show();
     }
 
-    public void checkLicense() {
+    private void checkLicense() {
         String installer = getPackageManager().getInstallerPackageName(getPackageName());
         try {
             if (installer.equals("com.google.android.feedback") ||
@@ -338,8 +328,7 @@ public class Main extends AppCompatActivity {
                                 addItemsToDrawer();
                                 showChangelogDialog();
                             }
-                        })
-                        .show();
+                        }).show();
             } else {
                 showNotLicensedDialog();
             }
@@ -351,7 +340,7 @@ public class Main extends AppCompatActivity {
     private void showNotLicensedDialog() {
         enable_features = false;
         mPrefs.setFeaturesEnabled(false);
-        MaterialDialog dialog = new MaterialDialog.Builder(this)
+        new MaterialDialog.Builder(this)
                 .title(R.string.license_failed_title)
                 .content(R.string.license_failed)
                 .positiveText(R.string.download)
@@ -368,19 +357,18 @@ public class Main extends AppCompatActivity {
                         finish();
                     }
                 })
-                .show();
-        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                finish();
-            }
-        });
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                finish();
-            }
-        });
+                .cancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        finish();
+                    }
+                })
+                .dismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        finish();
+                    }
+                }).show();
     }
 
 }

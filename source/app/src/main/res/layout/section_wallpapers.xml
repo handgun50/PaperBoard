@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_bg"
-    tools:context="com.jahirfiquitiva.paperboard.activities.Main">
+    tools:context="com.jahirfiquitiva.paperboard.activities.MainActivity">
 
     <ProgressBar
         android:id="@+id/progress"
@@ -14,11 +14,11 @@
 
     <GridView
         android:id="@+id/gridView"
-        android:padding="@dimen/walls_margin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:numColumns="auto_fit" />
+        android:numColumns="auto_fit"
+        android:padding="@dimen/walls_margin" />
 
 </RelativeLayout>

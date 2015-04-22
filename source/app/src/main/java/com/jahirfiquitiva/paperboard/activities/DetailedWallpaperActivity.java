@@ -1,7 +1,6 @@
 package com.jahirfiquitiva.paperboard.activities;
 
 import android.app.WallpaperManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,14 +10,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -32,31 +28,27 @@ import java.io.IOException;
 import jahirfiquitiva.paperboard.sample.R;
 
 
-public class DetailedWallpaper extends AppCompatActivity {
+public class DetailedWallpaperActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     public String wall;
     private String saveWallLocation, picName, dialogContent;
-    private View fabBg;
-    private ProgressBar mProgress;
-
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            postponeEnterTransition();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_wallpaper);
 
-        context = this;
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //noinspection ConstantConditions
         getSupportActionBar().setTitle(R.string.title_ab_detailed_wallpaper);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        saveWallLocation = Environment.getExternalStorageDirectory().getAbsolutePath() + context.getResources().getString(R.string.walls_save_location);
-        picName = context.getResources().getString(R.string.walls_prefix_name);
+        saveWallLocation = Environment.getExternalStorageDirectory().getAbsolutePath() + getResources().getString(R.string.walls_save_location);
+        picName = getResources().getString(R.string.walls_prefix_name);
 
         dialogContent = getResources().getString(R.string.download_done) + saveWallLocation;
 
@@ -64,12 +56,9 @@ public class DetailedWallpaper extends AppCompatActivity {
                 .getBoolean("isfirstrun", true);
 
         if (isFirstRun) {
-
             File folder = new File(saveWallLocation);
-            if (!folder.exists()) {
+            if (!folder.exists())
                 folder.mkdirs();
-            }
-
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                     .putBoolean("isfirstrun", false).commit();
 
@@ -82,13 +71,11 @@ public class DetailedWallpaper extends AppCompatActivity {
                 .into(image, new Callback.EmptyCallback() {
                             @Override
                             public void onSuccess() {
-                                if (mProgress != null) {
-                                    mProgress.setVisibility(View.GONE);
-                                }
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                                    startPostponedEnterTransition();
                             }
                         }
                 );
-
     }
 
     @Override
@@ -103,7 +90,7 @@ public class DetailedWallpaper extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.download:
-                Picasso.with(context)
+                Picasso.with(this)
                         .load(wall)
                         .into(target);
 
@@ -121,18 +108,14 @@ public class DetailedWallpaper extends AppCompatActivity {
         return true;
     }
 
-    private com.squareup.picasso.Target target = new com.squareup.picasso.Target() {
+    private final com.squareup.picasso.Target target = new com.squareup.picasso.Target() {
         @Override
         public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-
                     File file = new File(saveWallLocation, picName + convertWallName(wall) + ".png");
-                    if (file.exists()) {
-                        file.delete();
-                    }
-
+                    file.delete();
                     try {
                         file.createNewFile();
                         FileOutputStream ostream = new FileOutputStream(file);
@@ -142,8 +125,7 @@ public class DetailedWallpaper extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-            })
-                    .start();
+            }).start();
         }
 
         @Override
@@ -153,28 +135,23 @@ public class DetailedWallpaper extends AppCompatActivity {
 
         @Override
         public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            if (placeHolderDrawable != null) {
-
-            }
-
         }
     };
-    private com.squareup.picasso.Target wallTarget = new com.squareup.picasso.Target() {
+
+    private final com.squareup.picasso.Target wallTarget = new com.squareup.picasso.Target() {
         @Override
         public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        WallpaperManager wm = WallpaperManager.getInstance(context);
+                        WallpaperManager wm = WallpaperManager.getInstance(DetailedWallpaperActivity.this);
                         wm.setBitmap(bitmap);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
-            })
-                    .start();
+            }).start();
         }
 
         @Override
@@ -184,21 +161,16 @@ public class DetailedWallpaper extends AppCompatActivity {
 
         @Override
         public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            if (placeHolderDrawable != null) {
-
-            }
-
         }
     };
-    private com.squareup.picasso.Target wallCropTarget = new com.squareup.picasso.Target() {
+
+    private final com.squareup.picasso.Target wallCropTarget = new com.squareup.picasso.Target() {
         @Override
         public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
-
                         ImageView wall = (ImageView) findViewById(R.id.bigwall);
                         Uri wallUri = getLocalBitmapUri(wall);
                         if (wallUri != null) {
@@ -206,16 +178,12 @@ public class DetailedWallpaper extends AppCompatActivity {
                             setWall.setDataAndType(wallUri, "image/*");
                             setWall.putExtra("png", "image/*");
                             startActivityForResult(Intent.createChooser(setWall, getString(R.string.set_as)), 1);
-                        } else {
-
                         }
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
-            })
-                    .start();
+            }).start();
         }
 
         @Override
@@ -225,11 +193,6 @@ public class DetailedWallpaper extends AppCompatActivity {
 
         @Override
         public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            if (placeHolderDrawable != null) {
-
-            }
-
         }
     };
 
@@ -310,10 +273,8 @@ public class DetailedWallpaper extends AppCompatActivity {
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
-
                         showSettingWallDialog(false);
-
-                        Picasso.with(context)
+                        Picasso.with(DetailedWallpaperActivity.this)
                                 .load(wall)
                                 .into(wallTarget);
 
@@ -321,14 +282,11 @@ public class DetailedWallpaper extends AppCompatActivity {
 
                     @Override
                     public void onNeutral(MaterialDialog dialog) {
-
-                        Picasso.with(context)
+                        Picasso.with(DetailedWallpaperActivity.this)
                                 .load(wall)
                                 .into(wallCropTarget);
-
                     }
-                })
-                .show();
+                }).show();
     }
 
     public void showSettingWallDialog(boolean indeterminate) {
@@ -384,36 +342,29 @@ public class DetailedWallpaper extends AppCompatActivity {
         new MaterialDialog.Builder(this)
                 .title(R.string.error)
                 .content(R.string.wall_error)
-                .positiveText(R.string.ok)
+                .positiveText(android.R.string.ok)
                 .show();
     }
 
     public Uri getLocalBitmapUri(ImageView imageView) {
         Drawable drawable = imageView.getDrawable();
-        Bitmap bmp = null;
-
-        if (drawable instanceof BitmapDrawable) {
+        Bitmap bmp;
+        if (drawable instanceof BitmapDrawable)
             bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-        } else {
+        else
             return null;
-        }
-
         Uri bmpUri = null;
         try {
             File file = new File(saveWallLocation, picName + convertWallName(wall) + ".png");
             file.getParentFile().mkdirs();
-            if (file.exists()) {
-                file.delete();
-            }
+            file.delete();
             FileOutputStream out = new FileOutputStream(file);
             bmp.compress(Bitmap.CompressFormat.PNG, 100, out);
             out.close();
             bmpUri = Uri.fromFile(file);
         } catch (IOException e) {
             e.printStackTrace();
-            ;
         }
         return bmpUri;
     }
-
 }
