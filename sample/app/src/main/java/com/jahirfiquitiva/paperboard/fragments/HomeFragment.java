@@ -27,7 +27,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.section_home, null);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.section_home, container, false);
 
         PlayStoreDevAccount = getResources().getString(R.string.play_store_dev_link);
         PlayStoreListing = getActivity().getPackageName();

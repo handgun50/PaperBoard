@@ -1,5 +1,6 @@
 package com.jahirfiquitiva.paperboard.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -160,7 +161,8 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(title);
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, "com.jahirfiquitiva.paperboard.fragments." + fragment));
+        tx.replace(R.id.main, Fragment.instantiate(MainActivity.this,
+                "com.jahirfiquitiva.paperboard.fragments." + fragment + "Fragment"));
         tx.commit();
     }
 
@@ -231,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.changelog:
-                changelog();
+                showChangelog();
                 break;
         }
         return true;
@@ -270,8 +272,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void changelog() {
-
+    private void showChangelog() {
         new MaterialDialog.Builder(this)
                 .title(R.string.changelog_dialog_title)
                 .adapter(new ChangelogAdapter(this, R.array.fullchangelog), null)
@@ -281,17 +282,17 @@ public class MainActivity extends AppCompatActivity {
                     public void onPositive(MaterialDialog dialog) {
                         mPrefs.setNotFirstrun();
                     }
-                })
-                .show();
+                }).show();
     }
 
     private void showChangelogDialog() {
         String launchinfo = getSharedPreferences("PrefsFile", MODE_PRIVATE).getString("version", "0");
         if (launchinfo != null && !launchinfo.equals(getResources().getString(R.string.current_version)))
-            changelog();
+            showChangelog();
         storeSharedPrefs();
     }
 
+    @SuppressLint("CommitPrefEdits")
     protected void storeSharedPrefs() {
         SharedPreferences sharedPreferences = getSharedPreferences("PrefsFile", MODE_PRIVATE);
         sharedPreferences.edit().putString("version", getResources().getString(R.string.current_version)).commit();
@@ -306,9 +307,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                         int nSelection = currentItem - 1;
-                        if (result != null) {
+                        if (result != null)
                             result.setSelection(nSelection);
-                        }
                     }
                 }).show();
     }
@@ -342,7 +342,7 @@ public class MainActivity extends AppCompatActivity {
     private void showNotLicensedDialog() {
         enable_features = false;
         mPrefs.setFeaturesEnabled(false);
-        MaterialDialog dialog = new MaterialDialog.Builder(this)
+        new MaterialDialog.Builder(this)
                 .title(R.string.license_failed_title)
                 .content(R.string.license_failed)
                 .positiveText(R.string.download)

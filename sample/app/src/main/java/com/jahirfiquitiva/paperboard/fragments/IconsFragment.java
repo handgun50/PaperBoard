@@ -25,6 +25,7 @@ public class IconsFragment extends Fragment {
 
     private String[] iconsnames;
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.icons_grid, container, false);
         GridView gridview = (GridView) view.findViewById(R.id.icons_grid);
@@ -32,7 +33,6 @@ public class IconsFragment extends Fragment {
         final IconAdapter icAdapter = new IconAdapter();
         gridview.setAdapter(icAdapter);
         return view;
-
     }
 
     public static IconsFragment newInstance(int iconsArray) {

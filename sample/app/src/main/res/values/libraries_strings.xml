@@ -29,7 +29,7 @@
     <string name="materialdialogs_name">Material Dialogs</string>
     <string name="materialdialogs_desc">
 		<![CDATA[
-        <b>Material Dialogs</b> is a beautiful, "easy-to-use", and customizable dialogs API, enabling you  to use Material design themed dialogs across all versions of Android.
+        <b>Material Dialogs</b> is a beautiful, easy-to-use, and customizable dialogs API, enabling you to use Material designed dialogs down to API 8.
         ]]></string>
 
     <string name="pkrequestmanager_author">Pkmmte Xeleon</string>

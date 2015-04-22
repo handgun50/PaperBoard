@@ -1,31 +1,25 @@
 package com.jahirfiquitiva.paperboard.utilities;
 
-import android.util.Log;
-
-import org.apache.http.client.fluent.Request;
-import org.json.JSONException;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
-
-import java.io.IOException;
 
 public class JSONParser {
 
     public static JSONObject getJSONfromURL(String url) {
-        final String result;
         try {
-            result = Request.Get(url).execute().returnContent().asString();
-        } catch (IOException e) {
-            Log.e("JSONParser", "Error making request to " + url + ": " + e.toString());
-            return null;
+            HttpClient cl = new DefaultHttpClient();
+            HttpResponse response = cl.execute(new HttpGet(url));
+            if (response.getStatusLine().getStatusCode() == 200) {
+                final String data = EntityUtils.toString(response.getEntity());
+                return new JSONObject(data);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        JSONObject json = null;
-        try {
-            json = new JSONObject(result);
-        } catch (JSONException e) {
-            Log.e("JSONParser", "Error parsing data " + e.toString());
-        }
-
-        return json;
+        return null;
     }
 }

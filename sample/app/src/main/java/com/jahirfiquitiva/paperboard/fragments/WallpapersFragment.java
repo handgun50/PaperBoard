@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,27 +80,29 @@ public class WallpapersFragment extends Fragment {
             // Create an array
             arraylist = new ArrayList<>();
             // Retrieve JSON Objects from the given URL address
-            JSONObject jsonobject = JSONParser
+            JSONObject json = JSONParser
                     .getJSONfromURL(getResources().getString(R.string.json_file_url));
+            if (json != null) {
+                try {
+                    // Locate the array name in JSON
+                    JSONArray jsonarray = json.getJSONArray("wallpapers");
 
-            try {
-                // Locate the array name in JSON
-                JSONArray jsonarray = jsonobject.getJSONArray("wallpapers");
-
-                for (int i = 0; i < jsonarray.length(); i++) {
-                    HashMap<String, String> map = new HashMap<String, String>();
-                    jsonobject = jsonarray.getJSONObject(i);
-                    // Retrive JSON Objects
-                    map.put("name", jsonobject.getString("name"));
-                    map.put("author", jsonobject.getString("author"));
-                    map.put("wall", jsonobject.getString("url"));
-                    // Set the JSON Objects into the array
-                    arraylist.add(map);
+                    for (int i = 0; i < jsonarray.length(); i++) {
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        json = jsonarray.getJSONObject(i);
+                        // Retrive JSON Objects
+                        map.put("name", json.getString("name"));
+                        map.put("author", json.getString("author"));
+                        map.put("wall", json.getString("url"));
+                        // Set the JSON Objects into the array
+                        arraylist.add(map);
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(getActivity(), getString(R.string.json_error_toast), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
+            } else {
                 Toast.makeText(getActivity(), getString(R.string.json_error_toast), Toast.LENGTH_LONG).show();
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
             }
             return null;
         }

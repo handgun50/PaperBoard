@@ -9,7 +9,11 @@ import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
 import com.google.android.apps.muzei.api.UserCommand;
 import com.jahirfiquitiva.paperboard.utilities.Preferences;
 
-import org.apache.http.client.fluent.Request;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -92,7 +96,7 @@ public class ArtSource extends RemoteMuzeiArtSource {
     protected void onTryUpdate(int reason) throws RetryException {
         if (mPrefs.isFeaturesEnabled()) {
             if (wallslist.size() == 0)
-                getWallpaperURL(JSON_URL);
+                getWallpapersFromUrl(JSON_URL);
             int i = getRandomInt();
             String token = wallslist.get(i).getWallURL();
             publishArtwork(new Artwork.Builder()
@@ -110,20 +114,18 @@ public class ArtSource extends RemoteMuzeiArtSource {
         return new Random().nextInt(wallslist.size());
     }
 
-    private void getWallpaperURL(String url) {
+    private void getWallpapersFromUrl(String url) {
         wallslist.clear();
         wallslist = wdb.getAllWalls();
 
         if (wallslist.size() == 0) {
             try {
-                final String data = Request.Get(url)
-                        .execute()
-                        .returnContent()
-                        .asString();
-
-                if (data != null) {
+                HttpClient cl = new DefaultHttpClient();
+                HttpResponse response = cl.execute(new HttpGet(url));
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    final String data = EntityUtils.toString(response.getEntity());
                     JSONObject jsonobject = new JSONObject(data);
-                    JSONArray jsonarray = jsonobject.getJSONArray("wallpapers");
+                    final JSONArray jsonarray = jsonobject.getJSONArray("wallpapers");
                     wallslist.clear();
                     wdb.deleteAllWallpapers();
                     for (int i = 0; i < jsonarray.length(); i++) {
