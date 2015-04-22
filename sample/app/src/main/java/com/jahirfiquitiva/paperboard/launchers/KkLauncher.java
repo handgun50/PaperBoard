@@ -3,7 +3,7 @@ package com.jahirfiquitiva.paperboard.launchers;
 import android.content.Context;
 import android.content.Intent;
 
-import com.jahirfiquitiva.dashboardsample.R;
+import jahirfiquitiva.paperboard.sample.R;
 
 public class KkLauncher
 {

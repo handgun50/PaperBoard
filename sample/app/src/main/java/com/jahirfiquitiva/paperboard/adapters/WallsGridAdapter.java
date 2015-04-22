@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.jahirfiquitiva.dashboardsample.R;
+import jahirfiquitiva.paperboard.sample.R;
 
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.jahirfiquitiva.paperboard.activities.DetailedWallpaper;

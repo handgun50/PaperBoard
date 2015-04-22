@@ -7,7 +7,7 @@ import android.util.Log;
 import com.google.android.apps.muzei.api.Artwork;
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
 import com.google.android.apps.muzei.api.UserCommand;
-import com.jahirfiquitiva.dashboardsample.R;
+import jahirfiquitiva.paperboard.sample.R;
 import com.jahirfiquitiva.paperboard.utilities.JSONParser;
 import com.jahirfiquitiva.paperboard.utilities.Preferences;
 

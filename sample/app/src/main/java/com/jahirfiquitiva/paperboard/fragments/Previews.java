@@ -1,17 +1,20 @@
 package com.jahirfiquitiva.paperboard.fragments;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
-import com.jahirfiquitiva.dashboardsample.R;
+import jahirfiquitiva.paperboard.sample.R;
 
 import com.jahirfiquitiva.paperboard.views.SlidingTabLayout;
 
@@ -30,9 +33,8 @@ public class Previews extends Fragment {
 
         context = getActivity();
 
-        ActionBar toolbar = ((ActionBarActivity)context).getSupportActionBar();
+        ActionBar toolbar = ((AppCompatActivity)context).getSupportActionBar();
         toolbar.setTitle(R.string.section_two);
-        toolbar.setElevation(0);
 
         mPager = (ViewPager) root.findViewById(R.id.pager);
         mPager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager()));
@@ -44,6 +46,10 @@ public class Previews extends Fragment {
                 return getResources().getColor(R.color.accent);
             }
         });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setElevation(0);
+            mTabs.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
+        }
 
         return root;
     }

@@ -15,6 +15,7 @@ import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +25,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.jahirfiquitiva.dashboardsample.R;
+import jahirfiquitiva.paperboard.sample.R;
 import com.jahirfiquitiva.paperboard.adapters.ChangelogAdapter;
 import com.jahirfiquitiva.paperboard.utilities.Preferences;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
@@ -42,7 +43,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class Main extends ActionBarActivity {
+public class Main extends AppCompatActivity {
 
     public Drawer.Result result = null;
     public AccountHeader.Result headerResult = null;

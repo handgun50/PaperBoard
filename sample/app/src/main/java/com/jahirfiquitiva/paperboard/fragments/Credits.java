@@ -3,10 +3,12 @@ package com.jahirfiquitiva.paperboard.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -14,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.jahirfiquitiva.dashboardsample.R;
+import jahirfiquitiva.paperboard.sample.R;
 
 /**
  * Created by Jahir on 08/03/2015.
@@ -29,9 +31,11 @@ public class Credits extends Fragment {
 
         context = getActivity();
 
-        ActionBar toolbar = ((ActionBarActivity)context).getSupportActionBar();
+        ActionBar toolbar = ((AppCompatActivity)context).getSupportActionBar();
         toolbar.setTitle(R.string.section_six);
-        toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
+        }
 
         TextView authordesc = (TextView) root.findViewById(R.id.dashauthor_info);
         authordesc.setText(Html.fromHtml(getString(R.string.dashboard_author_desc)));
