@@ -3,11 +3,13 @@ package com.jahirfiquitiva.paperboard.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +30,7 @@ import com.pkmmte.requestmanager.PkRequestManager;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.jahirfiquitiva.dashboardsample.R;
+import jahirfiquitiva.paperboard.sample.R;
 
 /**
  * Created by Jahir on 28/02/2015.
@@ -57,9 +59,11 @@ public class Request extends Fragment {
 
         showNewAdviceDialog();
 
-        ActionBar toolbar = ((ActionBarActivity) context).getSupportActionBar();
+        ActionBar toolbar = ((AppCompatActivity) context).getSupportActionBar();
         toolbar.setTitle(R.string.section_five);
-        toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
+        }
 
         // Populate your ListView with your apps
         mList = (ListView) root.findViewById(R.id.appList);

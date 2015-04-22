@@ -2,8 +2,9 @@ package com.jahirfiquitiva.paperboard.muzei;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -15,10 +16,10 @@ import android.widget.Toast;
 
 import com.jahirfiquitiva.paperboard.utilities.Preferences;
 
-import com.jahirfiquitiva.dashboardsample.R;
+import jahirfiquitiva.paperboard.sample.R;
 
 
-public class Settings extends ActionBarActivity implements View.OnClickListener {
+public class Settings extends AppCompatActivity implements View.OnClickListener {
 
     private RadioButton minute, hour;
     private NumberPicker numberpicker;
@@ -35,6 +36,10 @@ public class Settings extends ActionBarActivity implements View.OnClickListener 
         toolbar.setTitle(getResources().getString(R.string.muzei_settings));
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
+        }
 
         numberpicker = (NumberPicker) findViewById(R.id.number_picker);
         numberpicker.setMaxValue(100);

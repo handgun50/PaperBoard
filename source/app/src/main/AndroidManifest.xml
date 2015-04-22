@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.jahirfiquitiva.dashboardsample">
+    package="jahirfiquitiva.paperboard.sample">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -207,7 +207,7 @@
         <activity
             android:name="com.jahirfiquitiva.paperboard.activities.DetailedWallpaper"
             android:label="@string/title_activity_detailed_wallpaper"
-            android:theme="@style/Default">
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jahirfiquitiva.paperboard.activities.DetailedWallpaper" />
@@ -234,7 +234,7 @@
             android:name="com.jahirfiquitiva.paperboard.muzei.Settings"
             android:exported="true"
             android:label="@string/muzei_settings"
-            android:theme="@style/Default"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
 
     </application>

@@ -8,9 +8,11 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,10 +29,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.jahirfiquitiva.dashboardsample.R;
+import jahirfiquitiva.paperboard.sample.R;
 
 
-public class DetailedWallpaper extends ActionBarActivity {
+public class DetailedWallpaper extends AppCompatActivity {
 
     private Toolbar toolbar;
     public String wall;
@@ -52,7 +54,6 @@ public class DetailedWallpaper extends ActionBarActivity {
         getSupportActionBar().setTitle(R.string.title_ab_detailed_wallpaper);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
 
         saveWallLocation = Environment.getExternalStorageDirectory().getAbsolutePath() + context.getResources().getString(R.string.walls_save_location);
         picName = context.getResources().getString(R.string.walls_prefix_name);

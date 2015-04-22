@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +28,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jahirfiquitiva.dashboardsample.R;
+import jahirfiquitiva.paperboard.sample.R;
 
 public class Apply extends Fragment {
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
@@ -46,9 +48,11 @@ public class Apply extends Fragment {
             launchers.add(new Launcher(launcher.split("\\|")));
         }
 
-        ActionBar toolbar = ((ActionBarActivity) getActivity()).getSupportActionBar();
+        ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         toolbar.setTitle(R.string.section_three);
-        toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
+        }
 
         ListView launcherslist = (ListView) root.findViewById(R.id.launcherslist);
 
@@ -57,10 +61,14 @@ public class Apply extends Fragment {
         launcherslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (LauncherIsInstalled(launchers.get(position).packageName)) {
-                    openLauncher(launchers.get(position).name);
+                if (launchers.get(position).name.equals("Google Now Launcher")){
+                    gnlDialog();
                 } else {
-                    openInPlayStore(launchers.get(position));
+                    if (LauncherIsInstalled(launchers.get(position).packageName)) {
+                        openLauncher(launchers.get(position).name);
+                    } else {
+                        openInPlayStore(launchers.get(position));
+                    }
                 }
             }
         });
@@ -210,6 +218,25 @@ public class Apply extends Fragment {
             }
 
         }
+    }
+
+    private void gnlDialog(){
+        final String appLink = MARKET_URL + getResources().getString(R.string.extraapp);
+        new MaterialDialog.Builder(context)
+                .title(R.string.gnl_title)
+                .content(R.string.gnl_content)
+                .positiveText(R.string.lni_yes)
+                .negativeText(R.string.lni_no)
+                .callback(new MaterialDialog.ButtonCallback() {
+                              @Override
+                              public void onPositive(MaterialDialog dialog) {
+                                  super.onPositive(dialog);
+                                  Intent intent = new Intent(Intent.ACTION_VIEW);
+                                  intent.setData(Uri.parse(appLink));
+                                  startActivity(intent);
+                              }
+                          }
+                ).show();
     }
 
 }

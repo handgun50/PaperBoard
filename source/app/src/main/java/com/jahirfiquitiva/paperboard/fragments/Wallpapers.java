@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +20,7 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.jahirfiquitiva.dashboardsample.R;
+import jahirfiquitiva.paperboard.sample.R;
 
 import com.jahirfiquitiva.paperboard.activities.DetailedWallpaper;
 import com.jahirfiquitiva.paperboard.adapters.WallsGridAdapter;
@@ -58,9 +60,11 @@ public class Wallpapers extends Fragment
     {
         context = getActivity();
 
-        ActionBar toolbar = ((ActionBarActivity)context).getSupportActionBar();
+        ActionBar toolbar = ((AppCompatActivity)context).getSupportActionBar();
         toolbar.setTitle(R.string.section_four);
-        toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
+        }
 
         root = (ViewGroup) inflater.inflate(R.layout.section_wallpapers, null);
 

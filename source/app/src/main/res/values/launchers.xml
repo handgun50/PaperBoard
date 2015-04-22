@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <!--
-        Adding more launchers is simple: {Launcher Name}|{Package Name}
-        The launcher name can even contain spaces, they are replaced for underscores
-        when doing the icon lookup.
-        To assign icons for each launcher just put them in the drawables folder
-        following this naming convention (That's an L not a 1(one), just in case):
-
-        Launcher Name | Icon Name
-        ...........................
-        Nova          | l_nova
-        ...........................
-        ADW EX        | l_adw_ex
-
-        The app will work perfectly without icons, but they do make it look much better.
-        Finally, you need to create a class for the Launcher in the "ninja.vextil.iconexposer.Launchers"
-        package. Naming convention is as follows:
-
-        Launcher Name | Class Name
-        ...........................
-        Nova          | NovaLauncher
-        ...........................
-        ADW EX        | AdwexLauncher
-
-        The class only needs a constructor that receives a "Context" parameter, there is where
-        you put all the code that is needed in order to launch the Launcher (department of redundancy department)
-        and apply the theme.
-    -->
-
     <string-array name="launchers">
         <item>Action Launcher|com.actionlauncher.playstore</item>
         <item>ADW Launcher|org.adw.launcher</item>
@@ -39,6 +11,7 @@
         <item>CM Theme Engine|org.cyanogenmod.theme.chooser</item>
         <item>Epic Launcher|com.epic.launcher</item>
         <item>Go Launcher|com.gau.go.launcherex</item>
+        <item>Google Now Launcher|com.google.android.launcher</item>
         <item>Holo Launcher|com.mobint.hololauncher</item>
         <item>Holo Launcher HD|com.mobint.hololauncher.hd</item>
         <item>Inspire Launcher|com.bam.android.inspirelauncher</item>

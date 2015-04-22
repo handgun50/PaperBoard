@@ -9,32 +9,20 @@
 
     <string-array name="newstuff">
         <item>New</item>
-        <item>Ripples in tabs in Icons section.</item>
-        <item>Ripples when pressing icons and wallpapers.</item>
-        <item>FAB simplified to just one lib.</item>
-        <item>Requests FAB icon changed.</item>
-        <item>Added Nova Launcher Wallpapers support.</item>
-        <item>Added Docks support.</item>
-        <item>Cards in Home section will hide if app is installed.</item>
-        <item>Added FAB in Home section to Apply icons.</item>
-        <item>Added 8 new launchers to launchers list. Total: 26.</item>
-        <item>Added support for LG Home Launcher.</item>
-        <item>Added Drawers tab to Icons section.</item>
+        <item>"Updated to Support Library 22.1."</item>
+        <item>ActionBarActivity replaced with AppCompatActivity.</item>
     </string-array>
 	
 	<string-array name="improvements">
         <item>Improvements</item>
-        <item>Home section cards buttons alignments improved.</item>
-        <item>FAB deleted from viewing walls.</item>
-        <item>Some animations deleted for better performance.</item>
-        <item>Deleted many unnecessary stuff.</item>
-        <item>Added many code improvements and changes by Joaquin Cuitiño.</item>
+        <item>Some minor layout improvements.</item>
+        <item>Improved Tabs layout to follow Material Design Guidelines properly.</item>
     </string-array>
 	
 	<string-array name="fixes">
         <item>Fixes</item>
-        <item>Icon Requests issues fixed.</item>
-        <item>Fixed some things to provide proper support to more launchers. (Hope it works).</item>
+        <item>Fixed issue with Toolbar on pre-lollipop devices.</item>
+        <item>Fixed Styles problem after updating to the new Support Lib.</item>
     </string-array>
 
 </resources>
