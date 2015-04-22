@@ -46,11 +46,11 @@ public class WallpapersFragment extends Fragment {
         root = (ViewGroup) inflater.inflate(R.layout.section_wallpapers, container, false);
         mProgress = (ProgressBar) root.findViewById(R.id.progress);
 
-        ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        final ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (toolbar != null)
             toolbar.setTitle(R.string.section_four);
 
-        boolean isLandscape = isLandscape();
+        final boolean isLandscape = isLandscape();
         int mColumnCountPortrait = DEFAULT_COLUMNS_PORTRAIT;
         int mColumnCountLandscape = DEFAULT_COLUMNS_LANDSCAPE;
         int newColumnCount = isLandscape ? mColumnCountLandscape : mColumnCountPortrait;
@@ -90,7 +90,7 @@ public class WallpapersFragment extends Fragment {
                     for (int i = 0; i < jsonarray.length(); i++) {
                         HashMap<String, String> map = new HashMap<String, String>();
                         json = jsonarray.getJSONObject(i);
-                        // Retrive JSON Objects
+                        // Retrieve JSON Objects
                         map.put("name", json.getString("name"));
                         map.put("author", json.getString("author"));
                         map.put("wall", json.getString("url"));
@@ -109,20 +109,20 @@ public class WallpapersFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void args) {
-            GridView mGridView = (GridView) root.findViewById(R.id.gridView);
-            mGridView.setNumColumns(numColumns);
-            WallsGridAdapter mGridAdapter = new WallsGridAdapter(getActivity(), arraylist, numColumns);
-            mGridView.setAdapter(mGridAdapter);
+            final GridView gridView = (GridView) root.findViewById(R.id.gridView);
+            gridView.setNumColumns(numColumns);
+            final WallsGridAdapter mGridAdapter = new WallsGridAdapter(getActivity(), arraylist, numColumns);
+            gridView.setAdapter(mGridAdapter);
             if (mProgress != null)
                 mProgress.setVisibility(View.GONE);
 
-            mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    HashMap<String, String> data = arraylist.get(position);
-                    String wallurl = data.get((WallpapersFragment.WALL));
-                    Intent intent = new Intent(getActivity(), DetailedWallpaperActivity.class);
-                    intent.putExtra("wall", wallurl);
+                    final HashMap<String, String> data = arraylist.get(position);
+                    final String wallurl = data.get((WallpapersFragment.WALL));
+                    final Intent intent = new Intent(getActivity(), DetailedWallpaperActivity.class)
+                            .putExtra("wall", wallurl);
                     startActivity(intent);
                 }
             });

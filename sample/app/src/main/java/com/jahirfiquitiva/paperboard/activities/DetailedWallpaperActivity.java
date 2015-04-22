@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,8 @@ public class DetailedWallpaperActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            postponeEnterTransition();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_wallpaper);
 
@@ -68,7 +71,8 @@ public class DetailedWallpaperActivity extends AppCompatActivity {
                 .into(image, new Callback.EmptyCallback() {
                             @Override
                             public void onSuccess() {
-                                // TODO?
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                                    startPostponedEnterTransition();
                             }
                         }
                 );
@@ -133,6 +137,7 @@ public class DetailedWallpaperActivity extends AppCompatActivity {
         public void onPrepareLoad(Drawable placeHolderDrawable) {
         }
     };
+
     private com.squareup.picasso.Target wallTarget = new com.squareup.picasso.Target() {
         @Override
         public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -158,6 +163,7 @@ public class DetailedWallpaperActivity extends AppCompatActivity {
         public void onPrepareLoad(Drawable placeHolderDrawable) {
         }
     };
+
     private com.squareup.picasso.Target wallCropTarget = new com.squareup.picasso.Target() {
         @Override
         public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
