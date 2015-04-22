@@ -10,7 +10,7 @@
     <color name="accent_secondary">@color/accent</color>
     <color name="secondary">#009688</color>
     <color name="secondary_pressed">#26a69a</color>
-    <color name="navbar">#424242</color>
+    <!--<color name="navbar">#424242</color>-->
     <!-- Ctrl + H and search for color/cardsbg if you want to customize card colors individually-->
     <color name="cardsbg">#ffffff</color>
     <!-- Color for Backgrounds -->
