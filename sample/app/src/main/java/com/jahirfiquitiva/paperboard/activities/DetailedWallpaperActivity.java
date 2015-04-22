@@ -108,7 +108,7 @@ public class DetailedWallpaperActivity extends AppCompatActivity {
         return true;
     }
 
-    private com.squareup.picasso.Target target = new com.squareup.picasso.Target() {
+    private final com.squareup.picasso.Target target = new com.squareup.picasso.Target() {
         @Override
         public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
             new Thread(new Runnable() {
@@ -138,7 +138,7 @@ public class DetailedWallpaperActivity extends AppCompatActivity {
         }
     };
 
-    private com.squareup.picasso.Target wallTarget = new com.squareup.picasso.Target() {
+    private final com.squareup.picasso.Target wallTarget = new com.squareup.picasso.Target() {
         @Override
         public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
             new Thread(new Runnable() {
@@ -164,7 +164,7 @@ public class DetailedWallpaperActivity extends AppCompatActivity {
         }
     };
 
-    private com.squareup.picasso.Target wallCropTarget = new com.squareup.picasso.Target() {
+    private final com.squareup.picasso.Target wallCropTarget = new com.squareup.picasso.Target() {
         @Override
         public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
             new Thread(new Runnable() {
@@ -342,7 +342,7 @@ public class DetailedWallpaperActivity extends AppCompatActivity {
         new MaterialDialog.Builder(this)
                 .title(R.string.error)
                 .content(R.string.wall_error)
-                .positiveText(R.string.ok)
+                .positiveText(android.R.string.ok)
                 .show();
     }
 

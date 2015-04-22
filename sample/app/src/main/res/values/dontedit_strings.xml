@@ -10,7 +10,7 @@
 
     <!-- Wallpapers Activity -->
     <string name="title_activity_detailed_wallpaper">Detailed Wallpaper</string>
-    <string name="title_ab_detailed_wallpaper"></string>
+    <string name="title_ab_detailed_wallpaper" />
 
     <!-- Muzei Stuff -->
     <string name="muzeisets_title">Refresh Source every:</string>
@@ -36,7 +36,7 @@
     <string name="lni_content"> is currently not installed in your device.\nWould you like to install it from Google Play Store?</string>
     <string name="cm_dialog_content"> is part of CyanogenMod (based) roms.\nWould you like to install it in your device?</string>
     <string name="gnl_title">Google Now Launcher Not Compatible</string>
-    <string name="gnl_content">Google Now Launcher is NOT compatible with ANY Icon Packs. Please don't low rate the pack for this reason. There's a workaround that you can try by yourself, and it's the use of an external app that will help you apply the icons. Would you like to download it?</string>
+    <string name="gnl_content">Google Now Launcher is NOT compatible with ANY Icon Packs. Please don\'t low rate the pack for this reason. There\'s a workaround that you can try by yourself, and it\'s the use of an external app that will help you apply the icons. Would you like to download it?</string>
     <string name="extraapp">com.momocode.shortcuts</string>
     <string name="lni_yes">Yes</string>
     <string name="lni_no">No</string>
@@ -67,24 +67,18 @@
     <string name="please_wait">Please wait…</string>
     <string name="set_as_wall_done">Picture set as wallpaper successfully Go to Home screen and check it.</string>
     <string name="error">Error</string>
-    <string name="wall_error">Sorry, previous action wasn't actually applied, because it seems there's no picture. Check your Internet connection and try again.</string>
+    <string name="wall_error">Sorry, previous action wasn\'t actually applied, because it seems there\'s no picture. Check your Internet connection and try again.</string>
     <string name="json_error_toast">Error while downloading wallpapers info. Try again later.</string>
 
     <!-- License Check Dialog -->
-    <string name="license_check">License Check</string>
     <string name="license_failed_title">License Check Failed</string>
     <string name="license_success_title">License Check Success</string>
     <string name="exit">Exit App</string>
 
     <!-- Some texts for Dialogs and Cards -->
-    <string name="dismiss">Dismiss</string>
     <string name="close">Close</string>
-    <string name="submit">Submit</string>
-    <string name="googleplus">Google+</string>
-    <string name="instagram">Instagram</string>
-    <string name="twitter">Twitter</string>
     <string name="advice">Advice</string>
-    <string name="dontshow">Don't show again</string>
+    <string name="dontshow">Don\'t show again</string>
     <string name="play">PLAY STORE</string>
     <string name="web">WEBSITE</string>
     <string name="gplus">GOOGLE+</string>

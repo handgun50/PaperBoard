@@ -35,7 +35,7 @@ public class RequestFragment extends Fragment {
     private PkRequestManager mRequestManager;
 
     // App List
-    private List<AppInfo> mApps = new LinkedList<>();
+    private final List<AppInfo> mApps = new LinkedList<>();
 
     // List & Adapter
     private ListView mList;
@@ -133,7 +133,7 @@ public class RequestFragment extends Fragment {
     // You should probably put this in a separate .java file
     private class ListAdapter extends BaseAdapter {
 
-        private List<AppInfo> mApps;
+        private final List<AppInfo> mApps;
 
         public ListAdapter(List<AppInfo> apps) {
             this.mApps = apps;
@@ -161,7 +161,7 @@ public class RequestFragment extends Fragment {
 
             if (convertView == null) {
                 LayoutInflater inflater = LayoutInflater.from(getActivity());
-                convertView = inflater.inflate(R.layout.request_item, null);
+                convertView = inflater.inflate(R.layout.request_item, parent, false);
 
                 holder = new ViewHolder();
                 holder.imgIcon = (ImageView) convertView.findViewById(R.id.imgIcon);

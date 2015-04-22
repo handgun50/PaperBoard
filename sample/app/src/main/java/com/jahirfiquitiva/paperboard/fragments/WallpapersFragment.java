@@ -32,8 +32,8 @@ public class WallpapersFragment extends Fragment {
 
     private static final int DEFAULT_COLUMNS_PORTRAIT = 2;
     private static final int DEFAULT_COLUMNS_LANDSCAPE = 3;
-    public static String NAME = "name";
-    public static String WALL = "wall";
+    public static final String NAME = "name";
+    public static final String WALL = "wall";
 
     private ArrayList<HashMap<String, String>> arraylist;
     private ViewGroup root;
@@ -63,17 +63,12 @@ public class WallpapersFragment extends Fragment {
         return root;
     }
 
-    public boolean isLandscape() {
+    private boolean isLandscape() {
         return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
     // DownloadJSON AsyncTask
     private class DownloadJSON extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -88,7 +83,7 @@ public class WallpapersFragment extends Fragment {
                     JSONArray jsonarray = json.getJSONArray("wallpapers");
 
                     for (int i = 0; i < jsonarray.length(); i++) {
-                        HashMap<String, String> map = new HashMap<String, String>();
+                        HashMap<String, String> map = new HashMap<>();
                         json = jsonarray.getJSONObject(i);
                         // Retrieve JSON Objects
                         map.put("name", json.getString("name"));

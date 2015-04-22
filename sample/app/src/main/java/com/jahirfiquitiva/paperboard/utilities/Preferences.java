@@ -14,13 +14,13 @@ public class Preferences {
             ROTATE_MINUTE = "rotate_time_minute",
             ROTATE_TIME = "muzei_rotate_time";
 
-    private Context context;
+    private final Context context;
 
     public Preferences(Context context) {
         this.context = context;
     }
 
-    public SharedPreferences getSharedPreferences() {
+    private SharedPreferences getSharedPreferences() {
         return context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 

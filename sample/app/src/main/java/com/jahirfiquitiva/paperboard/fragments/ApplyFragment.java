@@ -31,7 +31,7 @@ public class ApplyFragment extends Fragment {
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
 
     private String intentString;
-    private List<Launcher> launchers = new ArrayList<>();
+    private final List<Launcher> launchers = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class ApplyFragment extends Fragment {
     }
 
     // Reflection is ugly, I know! Please don't kill me :(
-    public void openLauncher(String name) {
+    private void openLauncher(String name) {
         // Turns Launcher name "Something Pro" to "com.jahirfiquitiva.paperboard.launchers.SomethingproLauncher"
         final String className = "com.jahirfiquitiva.paperboard" + ".launchers."
                 + Character.toUpperCase(name.charAt(0))
@@ -108,7 +108,7 @@ public class ApplyFragment extends Fragment {
         }
     }
 
-    public void openInPlayStore(final Launcher launcher) {
+    private void openInPlayStore(final Launcher launcher) {
         intentString = MARKET_URL + launcher.packageName;
         final String LauncherName = launcher.name;
         final String cmName = "CM Theme Engine";

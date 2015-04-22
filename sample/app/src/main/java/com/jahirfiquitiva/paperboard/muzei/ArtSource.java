@@ -31,7 +31,7 @@ public class ArtSource extends RemoteMuzeiArtSource {
     private static final String ARTSOURCE_NAME = "Fimbo - Icon Pack";
     private static final String JSON_URL = "https://raw.githubusercontent.com/jahirfiquitiva/MinDesigns-Wallpapers/master/JSON-Files/walls_test.json";
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
-    public static final int COMMAND_ID_SHARE = 1337;
+    private static final int COMMAND_ID_SHARE = 1337;
 
     public ArtSource() {
         super(ARTSOURCE_NAME);
@@ -59,7 +59,7 @@ public class ArtSource extends RemoteMuzeiArtSource {
 
         mPrefs = new Preferences(ArtSource.this);
 
-        ArrayList<UserCommand> commands = new ArrayList<UserCommand>();
+        ArrayList<UserCommand> commands = new ArrayList<>();
         commands.add(new UserCommand(BUILTIN_COMMAND_ID_NEXT_ARTWORK));
         commands.add(new UserCommand(COMMAND_ID_SHARE, getString(R.string.justshare)));
 

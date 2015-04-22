@@ -16,15 +16,15 @@ import java.util.WeakHashMap;
 public final class PaletteTransformation implements Transformation {
 
     private static final PaletteTransformation INSTANCE = new PaletteTransformation();
-    private static final Map<Bitmap, Palette> CACHE = new WeakHashMap<Bitmap, Palette>();
+    private static final Map<Bitmap, Palette> CACHE = new WeakHashMap<>();
 
-    public static Palette getPalette(Bitmap bitmap) {
+    private static Palette getPalette(Bitmap bitmap) {
         return CACHE.get(bitmap);
     }
 
     public static abstract class PaletteCallback implements Callback {
 
-        private WeakReference<ImageView> mImageView;
+        private final WeakReference<ImageView> mImageView;
 
         public PaletteCallback(@NonNull ImageView imageView) {
             mImageView = new WeakReference<>(imageView);

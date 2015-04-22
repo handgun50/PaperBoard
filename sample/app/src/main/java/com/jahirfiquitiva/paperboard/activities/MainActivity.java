@@ -44,10 +44,17 @@ public class MainActivity extends AppCompatActivity {
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
 
     public Drawer.Result result = null;
-    public AccountHeader.Result headerResult = null;
-    public String thaApp, thaHome, thaPreviews, thaApply, thaWalls, thaRequest, thaCredits;
-    public String version, drawerVersion;
-    public int currentItem;
+    private AccountHeader.Result headerResult = null;
+    private String thaApp;
+    private String thaHome;
+    private String thaPreviews;
+    private String thaApply;
+    private String thaWalls;
+    private String thaRequest;
+    private String thaCredits;
+    public String version;
+    private String drawerVersion;
+    private int currentItem;
     private boolean firstrun, enable_features;
     private Preferences mPrefs;
 
@@ -225,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (PackageManager.NameNotFoundException e) {
                     e.printStackTrace();
                 }
+                assert appInfo != null;
                 emailBuilder.append("\nApp Version Name: ").append(appInfo.versionName);
                 emailBuilder.append("\nApp Version Code: ").append(appInfo.versionCode);
 
@@ -239,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void addItemsToDrawer() {
+    private void addItemsToDrawer() {
         IDrawerItem walls = new PrimaryDrawerItem().withName(thaWalls).withIcon(GoogleMaterial.Icon.gmd_landscape).withIdentifier(4);
         IDrawerItem request = new PrimaryDrawerItem().withName(thaRequest).withIcon(GoogleMaterial.Icon.gmd_forum).withIdentifier(5);
         if (enable_features) {
@@ -293,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("CommitPrefEdits")
-    protected void storeSharedPrefs() {
+    private void storeSharedPrefs() {
         SharedPreferences sharedPreferences = getSharedPreferences("PrefsFile", MODE_PRIVATE);
         sharedPreferences.edit().putString("version", getResources().getString(R.string.current_version)).commit();
     }
@@ -302,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
         new MaterialDialog.Builder(this)
                 .title(R.string.no_conn_title)
                 .content(R.string.no_conn_content)
-                .positiveText(R.string.ok)
+                .positiveText(android.R.string.ok)
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
@@ -313,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
                 }).show();
     }
 
-    public void checkLicense() {
+    private void checkLicense() {
         String installer = getPackageManager().getInstallerPackageName(getPackageName());
         try {
             if (installer.equals("com.google.android.feedback") ||

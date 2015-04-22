@@ -7,11 +7,11 @@
         android:orderInCategory="100"
         android:title="@string/download"
         android:icon="@drawable/ic_save"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/apply"
         android:orderInCategory="200"
         android:title="@string/apply"
         android:icon="@drawable/ic_check"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>
