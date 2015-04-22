@@ -120,7 +120,6 @@ public class IconsFragment extends Fragment {
                     final int thumbRes = getResources().getIdentifier(extra, "drawable", packageName);
                     if (thumbRes != 0)
                         mThumbs.add(thumbRes);
-                    Log.v("ICON", extra + " = " + thumbRes);
                 }
             }
         }
