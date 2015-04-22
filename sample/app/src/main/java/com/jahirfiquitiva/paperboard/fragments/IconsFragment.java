@@ -1,8 +1,8 @@
 package com.jahirfiquitiva.paperboard.fragments;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -112,23 +112,18 @@ public class IconsFragment extends Fragment {
 
         private void loadIcon() {
             mThumbs = new ArrayList<>();
-            final Resources resources = getResources();
             final String packageName = getActivity().getApplication().getPackageName();
-            addIcon(resources, packageName, getArguments().getInt("iconsArrayId", 0));
-        }
-
-        private void addIcon(Resources resources, String packageName, int list) {
-            iconsnames = resources.getStringArray(list);
+            iconsnames = getResources().getStringArray(getArguments().getInt("iconsArrayId", 0));
             for (String extra : iconsnames) {
-                int res = resources.getIdentifier(extra, "drawable", packageName);
+                int res = getResources().getIdentifier(extra, "drawable", packageName);
                 if (res != 0) {
-                    final int thumbRes = resources.getIdentifier(extra, "drawable", packageName);
+                    final int thumbRes = getResources().getIdentifier(extra, "drawable", packageName);
                     if (thumbRes != 0)
                         mThumbs.add(thumbRes);
+                    Log.v("ICON", extra + " = " + thumbRes);
                 }
             }
         }
-
     }
 
     private int convertToPixel(int dp) {
