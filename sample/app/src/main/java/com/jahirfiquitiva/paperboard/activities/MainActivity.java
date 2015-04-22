@@ -1,20 +1,16 @@
 package com.jahirfiquitiva.paperboard.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -25,6 +21,7 @@ import android.widget.AdapterView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.jahirfiquitiva.paperboard.adapters.ChangelogAdapter;
 import com.jahirfiquitiva.paperboard.utilities.Preferences;
+import com.jahirfiquitiva.paperboard.utilities.Util;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
@@ -44,17 +41,14 @@ public class MainActivity extends AppCompatActivity {
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
 
     public Drawer.Result result = null;
-    private AccountHeader.Result headerResult = null;
     private String thaApp;
-    private String thaHome;
     private String thaPreviews;
     private String thaApply;
     private String thaWalls;
     private String thaRequest;
     private String thaCredits;
     public String version;
-    private String drawerVersion;
-    private int currentItem;
+    private int currentItem = -1;
     private boolean firstrun, enable_features;
     private Preferences mPrefs;
 
@@ -82,22 +76,18 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         thaApp = getResources().getString(R.string.app_name);
-        thaHome = getResources().getString(R.string.section_one);
+        String thaHome = getResources().getString(R.string.section_one);
         thaPreviews = getResources().getString(R.string.section_two);
         thaApply = getResources().getString(R.string.section_three);
         thaWalls = getResources().getString(R.string.section_four);
         thaRequest = getResources().getString(R.string.section_five);
         thaCredits = getResources().getString(R.string.section_six);
 
-        drawerVersion = "v " + getResources().getString(R.string.current_version);
-
-        currentItem = 1;
-
-        headerResult = new AccountHeader()
+        AccountHeader.Result headerResult = new AccountHeader()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
                 .withSelectionFirstLine(getResources().getString(R.string.app_long_name))
-                .withSelectionSecondLine(drawerVersion)
+                .withSelectionSecondLine("v" + Util.getAppVersion(this))
                 .withSavedInstance(savedInstanceState)
                 .build();
 
@@ -118,9 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
-
                         if (drawerItem != null) {
-
                             switch (drawerItem.getIdentifier()) {
                                 case 1:
                                     switchFragment(1, thaApp, "Home");
@@ -132,11 +120,7 @@ public class MainActivity extends AppCompatActivity {
                                     switchFragment(3, thaApply, "Apply");
                                     break;
                                 case 4:
-                                    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                                    NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-                                    boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-
-                                    if (isConnected) {
+                                    if (Util.hasNetwork(MainActivity.this)) {
                                         switchFragment(4, thaWalls, "Wallpapers");
                                     } else {
                                         showNotConnectedDialog();
@@ -158,19 +142,25 @@ public class MainActivity extends AppCompatActivity {
         result.getListView().setVerticalScrollBarEnabled(false);
         runLicenseChecker();
 
-        if (savedInstanceState == null)
-            result.setSelectionByIdentifier(currentItem);
+        if (savedInstanceState == null) {
+            currentItem = -1;
+            result.setSelectionByIdentifier(1);
+        }
     }
 
     public void switchFragment(int itemId, String title, String fragment) {
+        if (currentItem == itemId) {
+            // Don't allow re-selection of the currently active item
+            return;
+        }
         currentItem = itemId;
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle(title);
-        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        tx.replace(R.id.main, Fragment.instantiate(MainActivity.this,
-                "com.jahirfiquitiva.paperboard.fragments." + fragment + "Fragment"));
-        tx.commit();
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .replace(R.id.main, Fragment.instantiate(MainActivity.this,
+                        "com.jahirfiquitiva.paperboard.fragments." + fragment + "Fragment"))
+                .commit();
     }
 
     @Override
@@ -295,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showChangelogDialog() {
         String launchinfo = getSharedPreferences("PrefsFile", MODE_PRIVATE).getString("version", "0");
-        if (launchinfo != null && !launchinfo.equals(getResources().getString(R.string.current_version)))
+        if (launchinfo != null && !launchinfo.equals(Util.getAppVersion(this)))
             showChangelog();
         storeSharedPrefs();
     }
@@ -303,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("CommitPrefEdits")
     private void storeSharedPrefs() {
         SharedPreferences sharedPreferences = getSharedPreferences("PrefsFile", MODE_PRIVATE);
-        sharedPreferences.edit().putString("version", getResources().getString(R.string.current_version)).commit();
+        sharedPreferences.edit().putString("version", Util.getAppVersion(this)).commit();
     }
 
     private void showNotConnectedDialog() {

@@ -4,7 +4,6 @@
     <!-- MainActivity Strings -->
     <string name="app_name">"PaperBoard"</string>
     <string name="app_long_name">"PaperBoard - Dashboard Sample"</string>
-    <string name="current_version">7.0</string>
     <string name="package_name">"jahirfiquitiva.paperboard.sample"</string>
     <string name="theme_description">PaperBoard is a Material Design based Icon Pack dashboard template. Free and Open-Sourced.</string>
 
