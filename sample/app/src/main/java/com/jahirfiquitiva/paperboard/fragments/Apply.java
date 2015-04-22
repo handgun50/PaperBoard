@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,57 +17,48 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 import jahirfiquitiva.paperboard.sample.R;
 
 public class Apply extends Fragment {
+
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
-    private Context context;
-    private String intentString, dialogTitle, dialogContent, cmName;
-    List<Launcher> launchers = new ArrayList<>();
+
+    private String intentString;
+    private List<Launcher> launchers = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.section_apply, null);
-
-        context = getActivity();
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.section_apply, container, false);
 
         // Splits all launcher arrays by the | delimiter {name}|{package}
         String[] launcherArray = getResources().getStringArray(R.array.launchers);
-        for (String launcher : launcherArray) {
+        for (String launcher : launcherArray)
             launchers.add(new Launcher(launcher.split("\\|")));
-        }
 
         ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        toolbar.setTitle(R.string.section_three);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
-        }
+        if (toolbar != null)
+            toolbar.setTitle(R.string.section_three);
 
         ListView launcherslist = (ListView) root.findViewById(R.id.launcherslist);
 
-        LaunchersAdapter adapter = new LaunchersAdapter(getActivity(), launchers);
+        LaunchersAdapter adapter = new LaunchersAdapter(launchers);
         launcherslist.setAdapter(adapter);
         launcherslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (launchers.get(position).name.equals("Google Now Launcher")){
+                if (launchers.get(position).name.equals("Google Now Launcher"))
                     gnlDialog();
-                } else {
-                    if (LauncherIsInstalled(launchers.get(position).packageName)) {
-                        openLauncher(launchers.get(position).name);
-                    } else {
-                        openInPlayStore(launchers.get(position));
-                    }
-                }
+                else if (LauncherIsInstalled(launchers.get(position).packageName))
+                    openLauncher(launchers.get(position).name);
+                else
+                    openInPlayStore(launchers.get(position));
             }
         });
 
@@ -77,7 +66,7 @@ public class Apply extends Fragment {
     }
 
     private boolean LauncherIsInstalled(String packageName) {
-        PackageManager pm = context.getPackageManager();
+        final PackageManager pm = getActivity().getPackageManager();
         boolean installed;
         try {
             pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
@@ -91,9 +80,9 @@ public class Apply extends Fragment {
     // Reflection is ugly, I know! Please don't kill me :(
     public void openLauncher(String name) {
         // Turns Launcher name "Something Pro" to "com.jahirfiquitiva.paperboard.launchers.SomethingproLauncher"
-        String className = "com.jahirfiquitiva.paperboard" + ".launchers."
+        final String className = "com.jahirfiquitiva.paperboard" + ".launchers."
                 + Character.toUpperCase(name.charAt(0))
-                + name.substring(1).toLowerCase().replace(" ", "").replace("launcher","")
+                + name.substring(1).toLowerCase().replace(" ", "").replace("launcher", "")
                 + "Launcher";
 
         Class<?> cl = null;
@@ -111,23 +100,21 @@ public class Apply extends Fragment {
                         "Launcher class for: '" + name + "' is missing a constructor!");
             }
             try {
-                if (constructor != null) {
+                if (constructor != null)
                     constructor.newInstance(getActivity());
-                }
-            } catch (java.lang.InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
     public void openInPlayStore(final Launcher launcher) {
-
         intentString = MARKET_URL + launcher.packageName;
+        final String LauncherName = launcher.name;
+        final String cmName = "CM Theme Engine";
+        String dialogContent;
 
-        String LauncherName = launcher.name;
-        cmName = "CM Theme Engine";
-
-        if (LauncherName.equals(cmName)){
+        if (LauncherName.equals(cmName)) {
             dialogContent = launcher.name + getResources().getString(R.string.cm_dialog_content);
             intentString = "http://download.cyanogenmod.org/";
         } else {
@@ -135,10 +122,8 @@ public class Apply extends Fragment {
             intentString = MARKET_URL + launcher.packageName;
         }
 
-        dialogTitle = launcher.name + getResources().getString(R.string.lni_title);
-
-        new MaterialDialog.Builder(context)
-                .title(dialogTitle)
+        new MaterialDialog.Builder(getActivity())
+                .title(launcher.name + getResources().getString(R.string.lni_title))
                 .content(dialogContent)
                 .positiveText(R.string.lni_yes)
                 .negativeText(R.string.lni_no)
@@ -153,8 +138,9 @@ public class Apply extends Fragment {
     }
 
     public class Launcher {
-        public String name;
-        public String packageName;
+
+        public final String name;
+        public final String packageName;
 
         public Launcher(String[] values) {
             name = values[0];
@@ -163,10 +149,11 @@ public class Apply extends Fragment {
     }
 
     class LaunchersAdapter extends ArrayAdapter<Launcher> {
-        List<Launcher> launchers;
 
-        LaunchersAdapter(Context context, List<Launcher> launchers) {
-            super(context, R.layout.launcher_item, R.id.launchername, launchers);
+        final List<Launcher> launchers;
+
+        LaunchersAdapter(List<Launcher> launchers) {
+            super(getActivity(), R.layout.launcher_item, R.id.launchername, launchers);
             this.launchers = launchers;
         }
 
@@ -177,7 +164,7 @@ public class Apply extends Fragment {
             LauncherHolder holder;
 
             if (item == null) {
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
                 item = inflater.inflate(R.layout.launcher_item, parent, false);
                 holder = new LauncherHolder(item);
                 item.setTag(holder);
@@ -186,10 +173,10 @@ public class Apply extends Fragment {
 
             }
             // Turns Launcher name "Something Pro" to "l_something_pro"
-            int iconResource = context.getResources().getIdentifier(
+            int iconResource = getActivity().getResources().getIdentifier(
                     "ic_" + launchers.get(position).name.toLowerCase().replace(" ", "_"),
                     "drawable",
-                    context.getPackageName()
+                    getActivity().getPackageName()
             );
 
             holder.icon.setImageResource(iconResource);
@@ -207,22 +194,22 @@ public class Apply extends Fragment {
         }
 
         class LauncherHolder {
-            ImageView icon;
-            TextView launchername;
-            TextView isInstalled;
+
+            final ImageView icon;
+            final TextView launchername;
+            final TextView isInstalled;
 
             LauncherHolder(View v) {
                 icon = (ImageView) v.findViewById(R.id.launchericon);
                 launchername = (TextView) v.findViewById(R.id.launchername);
                 isInstalled = (TextView) v.findViewById(R.id.launcherinstalled);
             }
-
         }
     }
 
-    private void gnlDialog(){
+    private void gnlDialog() {
         final String appLink = MARKET_URL + getResources().getString(R.string.extraapp);
-        new MaterialDialog.Builder(context)
+        new MaterialDialog.Builder(getActivity())
                 .title(R.string.gnl_title)
                 .content(R.string.gnl_content)
                 .positiveText(R.string.lni_yes)
@@ -238,5 +225,4 @@ public class Apply extends Fragment {
                           }
                 ).show();
     }
-
 }

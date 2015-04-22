@@ -49,14 +49,13 @@ public class ChangelogAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
-        if (view == null) {
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(mContext);
-            view = inflater.inflate(R.layout.changelog_content, parent, false);
+            convertView = inflater.inflate(R.layout.changelog_content, parent, false);
         }
 
-        TextView versionName = (TextView) view.findViewById(R.id.changelog_versionname);
-        TextView versionContent = (TextView) view.findViewById(R.id.changelog_versioncontent);
+        TextView versionName = (TextView) convertView.findViewById(R.id.changelog_versionname);
+        TextView versionContent = (TextView) convertView.findViewById(R.id.changelog_versioncontent);
 
         String nameStr = mChangelog[position][0];
         String contentStr = "";
@@ -73,7 +72,6 @@ public class ChangelogAdapter extends BaseAdapter {
         versionName.setText(nameStr);
         versionContent.setText(contentStr);
 
-        return view;
+        return convertView;
     }
-
 }

@@ -1,13 +1,10 @@
 package com.jahirfiquitiva.paperboard.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.text.Html;
@@ -18,24 +15,15 @@ import android.widget.TextView;
 
 import jahirfiquitiva.paperboard.sample.R;
 
-/**
- * Created by Jahir on 08/03/2015.
- */
 public class Credits extends Fragment {
-
-    private Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.section_credits, null);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.section_credits, container, false);
 
-        context = getActivity();
-
-        ActionBar toolbar = ((AppCompatActivity)context).getSupportActionBar();
-        toolbar.setTitle(R.string.section_six);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
-        }
+        ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (toolbar != null)
+            toolbar.setTitle(R.string.section_six);
 
         TextView authordesc = (TextView) root.findViewById(R.id.dashauthor_info);
         authordesc.setText(Html.fromHtml(getString(R.string.dashboard_author_desc)));

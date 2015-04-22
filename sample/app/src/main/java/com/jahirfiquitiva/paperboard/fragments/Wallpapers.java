@@ -1,15 +1,11 @@
 package com.jahirfiquitiva.paperboard.fragments;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,8 +15,6 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import jahirfiquitiva.paperboard.sample.R;
 
 import com.jahirfiquitiva.paperboard.activities.DetailedWallpaper;
 import com.jahirfiquitiva.paperboard.adapters.WallsGridAdapter;
@@ -33,44 +27,33 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Wallpapers extends Fragment
-{
+import jahirfiquitiva.paperboard.sample.R;
+
+public class Wallpapers extends Fragment {
 
     private static final int DEFAULT_COLUMNS_PORTRAIT = 2;
-    private int mColumnCountPortrait = DEFAULT_COLUMNS_PORTRAIT;
     private static final int DEFAULT_COLUMNS_LANDSCAPE = 3;
-    private int mColumnCountLandscape = DEFAULT_COLUMNS_LANDSCAPE;
     public static String NAME = "name";
-    static String AUTHOR = "author";
     public static String WALL = "wall";
-    JSONObject jsonobject;
-    JSONArray jsonarray;
-    GridView mGridView;
-    WallsGridAdapter mGridAdapter;
-    ProgressDialog mProgressDialog;
-    ArrayList<HashMap<String, String>> arraylist;
+
+    private ArrayList<HashMap<String, String>> arraylist;
     private ViewGroup root;
-    private Context context;
     private ProgressBar mProgress;
     private int mColumnCount;
     private int numColumns = 1;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
-        context = getActivity();
-
-        ActionBar toolbar = ((AppCompatActivity)context).getSupportActionBar();
-        toolbar.setTitle(R.string.section_four);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
-        }
-
-        root = (ViewGroup) inflater.inflate(R.layout.section_wallpapers, null);
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        root = (ViewGroup) inflater.inflate(R.layout.section_wallpapers, container, false);
         mProgress = (ProgressBar) root.findViewById(R.id.progress);
 
+        ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (toolbar != null)
+            toolbar.setTitle(R.string.section_four);
+
         boolean isLandscape = isLandscape();
+        int mColumnCountPortrait = DEFAULT_COLUMNS_PORTRAIT;
+        int mColumnCountLandscape = DEFAULT_COLUMNS_LANDSCAPE;
         int newColumnCount = isLandscape ? mColumnCountLandscape : mColumnCountPortrait;
         if (mColumnCount != newColumnCount) {
             mColumnCount = newColumnCount;
@@ -78,18 +61,16 @@ public class Wallpapers extends Fragment
         }
 
         new DownloadJSON().execute();
-
         return root;
     }
 
-    public boolean isLandscape()
-    {
-        return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    public boolean isLandscape() {
+        return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
     // DownloadJSON AsyncTask
-    private class DownloadJSON extends AsyncTask<Void, Void, Void>
-    {
+    private class DownloadJSON extends AsyncTask<Void, Void, Void> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -98,14 +79,14 @@ public class Wallpapers extends Fragment
         @Override
         protected Void doInBackground(Void... params) {
             // Create an array
-            arraylist = new ArrayList<HashMap<String, String>>();
+            arraylist = new ArrayList<>();
             // Retrieve JSON Objects from the given URL address
-            jsonobject = JSONParser
+            JSONObject jsonobject = JSONParser
                     .getJSONfromURL(getResources().getString(R.string.json_file_url));
 
             try {
                 // Locate the array name in JSON
-                jsonarray = jsonobject.getJSONArray("wallpapers");
+                JSONArray jsonarray = jsonobject.getJSONArray("wallpapers");
 
                 for (int i = 0; i < jsonarray.length(); i++) {
                     HashMap<String, String> map = new HashMap<String, String>();
@@ -118,7 +99,7 @@ public class Wallpapers extends Fragment
                     arraylist.add(map);
                 }
             } catch (JSONException e) {
-                Toast.makeText(context, getString(R.string.json_error_toast), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getString(R.string.json_error_toast), Toast.LENGTH_LONG).show();
                 Log.e("Error", e.getMessage());
                 e.printStackTrace();
             }
@@ -127,22 +108,21 @@ public class Wallpapers extends Fragment
 
         @Override
         protected void onPostExecute(Void args) {
-
-            mGridView = (GridView) root.findViewById(R.id.gridView);
+            GridView mGridView = (GridView) root.findViewById(R.id.gridView);
             mGridView.setNumColumns(numColumns);
-            mGridAdapter = new WallsGridAdapter(context, arraylist, numColumns);
+            WallsGridAdapter mGridAdapter = new WallsGridAdapter(getActivity(), arraylist, numColumns);
             mGridView.setAdapter(mGridAdapter);
-            if (mProgress != null) {
+            if (mProgress != null)
                 mProgress.setVisibility(View.GONE);
-            }
+
             mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     HashMap<String, String> data = arraylist.get(position);
                     String wallurl = data.get((Wallpapers.WALL));
-                    Intent intent = new Intent(context, DetailedWallpaper.class);
+                    Intent intent = new Intent(getActivity(), DetailedWallpaper.class);
                     intent.putExtra("wall", wallurl);
-                    context.startActivity(intent);
+                    startActivity(intent);
                 }
             });
         }

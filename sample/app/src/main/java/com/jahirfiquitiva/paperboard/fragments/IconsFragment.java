@@ -1,9 +1,6 @@
 package com.jahirfiquitiva.paperboard.fragments;
 
-import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
@@ -12,42 +9,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AbsListView;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.balysv.materialripple.MaterialRippleLayout;
 
-import jahirfiquitiva.paperboard.sample.R;
-
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class IconsFragment extends Fragment {
+import jahirfiquitiva.paperboard.sample.R;
 
-    private Context context;
+public class IconsFragment extends Fragment {
 
     private String[] iconsnames;
 
-    private View icono;
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.icons_grid, container, false);
-        context = getActivity();
-
         GridView gridview = (GridView) view.findViewById(R.id.icons_grid);
-        gridview.setColumnWidth(ConvertToPixel(72) + ConvertToPixel(4));
+        gridview.setColumnWidth(convertToPixel(72) + convertToPixel(4));
         final IconAdapter icAdapter = new IconAdapter();
         gridview.setAdapter(icAdapter);
-
         return view;
 
     }
@@ -84,18 +67,16 @@ public class IconsFragment extends Fragment {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-
-            icono = convertView;
             IconsHolder holder;
-            Animation anim = AnimationUtils.loadAnimation(context, R.anim.fade_in);
+            Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
 
-            if (icono == null) {
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                icono = inflater.inflate(R.layout.icon, parent, false);
-                holder = new IconsHolder(icono);
-                icono.setTag(holder);
+            if (convertView == null) {
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
+                convertView = inflater.inflate(R.layout.icon, parent, false);
+                holder = new IconsHolder(convertView);
+                convertView.setTag(holder);
             } else {
-                holder = (IconsHolder) icono.getTag();
+                holder = (IconsHolder) convertView.getTag();
             }
 
             holder.icon.startAnimation(anim);
@@ -108,34 +89,32 @@ public class IconsFragment extends Fragment {
                     dialogIcon.setImageResource(mThumbs.get(position));
                     String name = iconsnames[position].toLowerCase(Locale.getDefault());
                     new MaterialDialog.Builder(getActivity())
-                        .customView(dialogIconView, false)
-                        .title(convertText(name))
-                        .positiveText(R.string.close)
-                        .show();
+                            .customView(dialogIconView, false)
+                            .title(convertText(name))
+                            .positiveText(R.string.close)
+                            .show();
                 }
             });
 
-            return icono;
+            return convertView;
         }
 
         class IconsHolder {
-            ImageView icon;
-            MaterialRippleLayout content;
+
+            final ImageView icon;
+            final MaterialRippleLayout content;
 
             IconsHolder(View v) {
                 icon = (ImageView) v.findViewById(R.id.icon_img);
                 content = (MaterialRippleLayout) v.findViewById(R.id.icons_ripple);
             }
-
         }
 
         private void loadIcon() {
             mThumbs = new ArrayList<>();
-
             final Resources resources = getResources();
             final String packageName = getActivity().getApplication().getPackageName();
             addIcon(resources, packageName, getArguments().getInt("iconsArrayId", 0));
-
         }
 
         private void addIcon(Resources resources, String packageName, int list) {
@@ -144,44 +123,31 @@ public class IconsFragment extends Fragment {
                 int res = resources.getIdentifier(extra, "drawable", packageName);
                 if (res != 0) {
                     final int thumbRes = resources.getIdentifier(extra, "drawable", packageName);
-                    if (thumbRes != 0) {
+                    if (thumbRes != 0)
                         mThumbs.add(thumbRes);
-                    }
                 }
             }
         }
 
     }
 
-    public int ConvertToPixel (int dp) {
+    private int convertToPixel(int dp) {
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
                 getActivity().getResources().getDisplayMetrics());
-        return (int)px;
+        return (int) px;
     }
 
     private String convertText(String name) {
-
         String partialConvertedText = name.replaceAll("_", " ");
-
         String[] text = partialConvertedText.split("\\s+");
         StringBuilder sb = new StringBuilder();
-
-        if (text[0].length() > 0){
-            sb.append(Character.toUpperCase(text[0].charAt(0)) + text[0].subSequence(1,text[0].length()).toString().toLowerCase());
-
-            for (int i = 1; i < text.length; i++){
+        if (text[0].length() > 0) {
+            sb.append(Character.toUpperCase(text[0].charAt(0))).append(text[0].subSequence(1, text[0].length()).toString().toLowerCase());
+            for (int i = 1; i < text.length; i++) {
                 sb.append(" ");
-
-                sb.append(Character.toUpperCase(text[i].charAt(0)) + text[i].subSequence(1, text[i].length()).toString().toLowerCase());
-
+                sb.append(Character.toUpperCase(text[i].charAt(0))).append(text[i].subSequence(1, text[i].length()).toString().toLowerCase());
             }
-
         }
-
-        String fullConvertedText = sb.toString();
-
-        return fullConvertedText;
+        return sb.toString();
     }
-
-
 }

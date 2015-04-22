@@ -1,14 +1,11 @@
 package com.jahirfiquitiva.paperboard.fragments;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,38 +29,29 @@ import java.util.List;
 
 import jahirfiquitiva.paperboard.sample.R;
 
-/**
- * Created by Jahir on 28/02/2015.
- */
 public class Request extends Fragment {
 
     // Request Manager
     private PkRequestManager mRequestManager;
 
     // App List
-    private List<AppInfo> mApps = new LinkedList<AppInfo>();
+    private List<AppInfo> mApps = new LinkedList<>();
 
     // List & Adapter
     private ListView mList;
     private ListAdapter mAdapter;
     private ProgressBar mProgress;
     private FloatingActionButton fab;
-    private int mPreviousVisibleItem;
-    private Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.section_icon_request, null);
-
-        context = getActivity();
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.section_icon_request, container, false);
 
         showNewAdviceDialog();
 
-        ActionBar toolbar = ((AppCompatActivity) context).getSupportActionBar();
-        toolbar.setTitle(R.string.section_five);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
-        }
+        ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (toolbar != null)
+            toolbar.setTitle(R.string.section_five);
 
         // Populate your ListView with your apps
         mList = (ListView) root.findViewById(R.id.appList);
@@ -89,10 +77,8 @@ public class Request extends Fragment {
         });
 
         //Show a toast
-        if (mList.getVisibility() == View.GONE){
-            Toast.makeText(context, getResources().getString(R.string.request_toast), Toast.LENGTH_LONG).show();
-        }
-
+        if (mList.getVisibility() == View.GONE)
+            Toast.makeText(getActivity(), getResources().getString(R.string.request_toast), Toast.LENGTH_LONG).show();
 
         fab = (FloatingActionButton) root.findViewById(R.id.send_btn);
         fab.hide(true);
@@ -102,13 +88,10 @@ public class Request extends Fragment {
             @Override
             public void onClick(View v) {
                 mRequestManager.setActivity(getActivity());
-
-                if (mRequestManager.getNumSelected() < 1) {
+                if (mRequestManager.getNumSelected() < 1)
                     mRequestManager.sendRequest(true, false);
-                } else {
+                else
                     mRequestManager.sendRequestAsync();
-                }
-
                 Toast.makeText(getActivity(), getString(R.string.building_request), Toast.LENGTH_LONG).show();
             }
         });
@@ -117,50 +100,42 @@ public class Request extends Fragment {
     }
 
     private class GrabApplicationsTask extends AsyncTask<String, Void, String> {
+
         @Override
         protected String doInBackground(String... urls) {
             try {
-
-                mRequestManager = PkRequestManager.getInstance(context);
+                mRequestManager = PkRequestManager.getInstance(getActivity());
                 mRequestManager.setDebugging(false);
                 mRequestManager.loadAppsIfEmpty();
-
                 // Get the list of apps
                 mApps.addAll(mRequestManager.getApps());
             } catch (Exception ex) {
                 //could happen that the activity detaches :D
             }
-
             return "";
         }
 
         @Override
         protected void onPostExecute(String result) {
-            mAdapter = new ListAdapter(getActivity(), mApps);
+            mAdapter = new ListAdapter(mApps);
             mList.setAdapter(mAdapter);
-
-            if (mAdapter != null) {
+            if (mAdapter != null)
                 mAdapter.notifyDataSetChanged();
-            }
-            if (mList != null) {
+            if (mList != null)
                 mList.setVisibility(View.VISIBLE);
-            }
-            if (fab != null) {
+            if (fab != null)
                 fab.show(true);
-            }
-            if (mProgress != null) {
+            if (mProgress != null)
                 mProgress.setVisibility(View.GONE);
-            }
         }
     }
 
     // You should probably put this in a separate .java file
     private class ListAdapter extends BaseAdapter {
-        private Context mContext;
+
         private List<AppInfo> mApps;
 
-        public ListAdapter(Context context, List<AppInfo> apps) {
-            this.mContext = context;
+        public ListAdapter(List<AppInfo> apps) {
             this.mApps = apps;
         }
 
@@ -185,7 +160,7 @@ public class Request extends Fragment {
             AppInfo mApp = mApps.get(position);
 
             if (convertView == null) {
-                LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
                 convertView = inflater.inflate(R.layout.request_item, null);
 
                 holder = new ViewHolder();

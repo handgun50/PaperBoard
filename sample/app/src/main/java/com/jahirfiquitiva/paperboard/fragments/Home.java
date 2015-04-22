@@ -1,41 +1,26 @@
 package com.jahirfiquitiva.paperboard.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jahirfiquitiva.paperboard.activities.Main;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ObservableScrollView;
 
-import java.util.Observable;
-
 import jahirfiquitiva.paperboard.sample.R;
 
-/**
- * Created by Jahir on 28/02/2015.
- */
 public class Home extends Fragment {
 
-    private Context context;
-    private FloatingActionButton fab;
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
 
     private String PlayStoreDevAccount, PlayStoreListing, AppOnePackage, AppTwoPackage, AppThreePackage;
@@ -44,19 +29,15 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.section_home, null);
 
-        context = getActivity();
-
         PlayStoreDevAccount = getResources().getString(R.string.play_store_dev_link);
-        PlayStoreListing = context.getPackageName();
+        PlayStoreListing = getActivity().getPackageName();
         AppOnePackage = getResources().getString(R.string.app_one_package);
         AppTwoPackage = getResources().getString(R.string.app_two_package);
         AppThreePackage = getResources().getString(R.string.app_three_package);
 
-        ActionBar toolbar = ((AppCompatActivity)context).getSupportActionBar();
-        toolbar.setTitle(R.string.app_name);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
-        }
+        ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (toolbar != null)
+            toolbar.setTitle(R.string.app_name);
 
         ObservableScrollView content = (ObservableScrollView) root.findViewById(R.id.HomeContent);
 
@@ -64,10 +45,10 @@ public class Home extends Fragment {
         CardView cardone = (CardView) root.findViewById(R.id.cardOne);
         CardView cardtwo = (CardView) root.findViewById(R.id.cardTwo);
         CardView cardthree = (CardView) root.findViewById(R.id.cardThree);
-        if (AppIsInstalled(AppOnePackage)){
+        if (AppIsInstalled(AppOnePackage)) {
             cardone.setVisibility((cardone.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE));
         }
-        if (AppIsInstalled(AppTwoPackage)){
+        if (AppIsInstalled(AppTwoPackage)) {
             cardtwo.setVisibility((cardtwo.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE));
         }
         if (AppIsInstalled(AppThreePackage)) {
@@ -120,7 +101,7 @@ public class Home extends Fragment {
             }
         });
 
-        fab = (FloatingActionButton) root.findViewById(R.id.apply_btn);
+        FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.apply_btn);
         fab.setColorNormal(getResources().getColor(R.color.accent));
         fab.setColorPressed(getResources().getColor(R.color.accent_pressed));
         fab.setColorRipple(getResources().getColor(R.color.semitransparent_white));
@@ -130,8 +111,8 @@ public class Home extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((Main)getActivity()).result.setSelectionByIdentifier(3);
-                ((Main)getActivity()).switchFragment(3, getResources().getString(R.string.section_three), "Apply");
+                ((Main) getActivity()).result.setSelectionByIdentifier(3);
+                ((Main) getActivity()).switchFragment(3, getResources().getString(R.string.section_three), "Apply");
             }
         });
 
@@ -139,7 +120,7 @@ public class Home extends Fragment {
     }
 
     private boolean AppIsInstalled(String packageName) {
-        PackageManager pm = context.getPackageManager();
+        final PackageManager pm = getActivity().getPackageManager();
         boolean installed;
         try {
             pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);

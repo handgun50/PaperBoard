@@ -1,44 +1,33 @@
 package com.jahirfiquitiva.paperboard.fragments;
 
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-
-import jahirfiquitiva.paperboard.sample.R;
 
 import com.jahirfiquitiva.paperboard.views.SlidingTabLayout;
 
-/**
- * Created by Jahir on 28/02/2015.
- */
-public class Previews extends Fragment {
+import jahirfiquitiva.paperboard.sample.R;
 
-    private ViewPager mPager;
-    private SlidingTabLayout mTabs;
-    private Context context;
+public class Previews extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.section_all_icons, null);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.section_all_icons, container, false);
 
-        context = getActivity();
+        ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (toolbar != null)
+            toolbar.setTitle(R.string.section_two);
 
-        ActionBar toolbar = ((AppCompatActivity)context).getSupportActionBar();
-        toolbar.setTitle(R.string.section_two);
-
-        mPager = (ViewPager) root.findViewById(R.id.pager);
+        ViewPager mPager = (ViewPager) root.findViewById(R.id.pager);
         mPager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager()));
-        mTabs = (SlidingTabLayout) root.findViewById(R.id.tabs);
+
+        SlidingTabLayout mTabs = (SlidingTabLayout) root.findViewById(R.id.tabs);
         mTabs.setViewPager(mPager);
         mTabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
@@ -46,17 +35,13 @@ public class Previews extends Fragment {
                 return getResources().getColor(R.color.accent);
             }
         });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.setElevation(0);
-            mTabs.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
-        }
 
         return root;
     }
 
     class MyPagerAdapter extends FragmentPagerAdapter {
 
-        String[] tabs;
+        final String[] tabs;
 
         public MyPagerAdapter(android.support.v4.app.FragmentManager fm) {
             super(fm);
@@ -99,5 +84,4 @@ public class Previews extends Fragment {
             return tabs.length;
         }
     }
-
 }

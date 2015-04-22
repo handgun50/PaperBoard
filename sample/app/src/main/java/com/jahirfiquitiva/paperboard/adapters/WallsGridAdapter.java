@@ -59,7 +59,6 @@ public class WallsGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View wallitem = convertView;
         Animation anim = AnimationUtils.loadAnimation(context, R.anim.fade_in);
         HashMap<String, String> jsondata = data.get(position);
 
@@ -71,13 +70,13 @@ public class WallsGridAdapter extends BaseAdapter {
         int imageWidth = (width / numColumns);
 
         final WallsHolder holder;
-        if (wallitem == null) {
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            wallitem = inflater.inflate(R.layout.wallpaper_item, parent, false);
-            holder = new WallsHolder(wallitem);
-            wallitem.setTag(holder);
+            convertView = inflater.inflate(R.layout.wallpaper_item, parent, false);
+            holder = new WallsHolder(convertView);
+            convertView.setTag(holder);
         } else {
-            holder = (WallsHolder) wallitem.getTag();
+            holder = (WallsHolder) convertView.getTag();
 
         }
 
@@ -113,15 +112,16 @@ public class WallsGridAdapter extends BaseAdapter {
                             }
                         });
 
-        return wallitem;
+        return convertView;
     }
 
     class WallsHolder {
-        ImageView wall;
-        TextView name;
-        ProgressBar progressBar;
-        LinearLayout titleBg;
-        MaterialRippleLayout content;
+
+        final ImageView wall;
+        final TextView name;
+        final ProgressBar progressBar;
+        final LinearLayout titleBg;
+        final MaterialRippleLayout content;
 
         WallsHolder(View v) {
             wall = (ImageView) v.findViewById(R.id.wall);
