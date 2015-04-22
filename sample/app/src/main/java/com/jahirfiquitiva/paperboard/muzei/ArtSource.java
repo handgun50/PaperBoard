@@ -7,37 +7,27 @@ import android.util.Log;
 import com.google.android.apps.muzei.api.Artwork;
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
 import com.google.android.apps.muzei.api.UserCommand;
-import jahirfiquitiva.paperboard.sample.R;
-import com.jahirfiquitiva.paperboard.utilities.JSONParser;
 import com.jahirfiquitiva.paperboard.utilities.Preferences;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
+import org.apache.http.client.fluent.Request;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+
+import jahirfiquitiva.paperboard.sample.R;
 
 public class ArtSource extends RemoteMuzeiArtSource {
 
     private WallsDatabase wdb;
-    ArrayList<WallpaperInfo> wallslist;
-    private static final String ARTSOURCE_NAME = "Fimbo - Icon Pack";
-    JSONObject jsonobject;
+    private ArrayList<WallpaperInfo> wallslist;
+    private Preferences mPrefs;
 
+    private static final String ARTSOURCE_NAME = "Fimbo - Icon Pack";
     private static final String JSON_URL = "https://raw.githubusercontent.com/jahirfiquitiva/MinDesigns-Wallpapers/master/JSON-Files/walls_test.json";
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
-
     public static final int COMMAND_ID_SHARE = 1337;
-
-    private Preferences mPrefs;
 
     public ArtSource() {
         super(ARTSOURCE_NAME);
@@ -46,7 +36,7 @@ public class ArtSource extends RemoteMuzeiArtSource {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String command = intent.getExtras().getString("service");
-        if (command!=null) {
+        if (command != null) {
             try {
                 onTryUpdate(UPDATE_REASON_USER_NEXT);
             } catch (RetryException e) {
@@ -61,7 +51,7 @@ public class ArtSource extends RemoteMuzeiArtSource {
         super.onCreate();
 
         wdb = new WallsDatabase(getApplicationContext());
-        wallslist = new ArrayList<WallpaperInfo>();
+        wallslist = new ArrayList<>();
 
         mPrefs = new Preferences(ArtSource.this);
 
@@ -74,15 +64,13 @@ public class ArtSource extends RemoteMuzeiArtSource {
     }
 
     @Override
-    public void onCustomCommand(int id){
+    public void onCustomCommand(int id) {
         super.onCustomCommand(id);
-
-        if (id == COMMAND_ID_SHARE){
+        if (id == COMMAND_ID_SHARE) {
             Artwork currentArtwork = getCurrentArtwork();
-            Intent shareWall = new Intent (Intent.ACTION_SEND);
+            Intent shareWall = new Intent(Intent.ACTION_SEND);
             shareWall.setType("text/plain");
 
-            Uri artUrl = currentArtwork.getImageUri();
             String wallName = currentArtwork.getTitle();
             String authorName = currentArtwork.getByline();
             String storeUrl = MARKET_URL + getResources().getString(R.string.package_name);
@@ -92,29 +80,20 @@ public class ArtSource extends RemoteMuzeiArtSource {
                     getString(R.string.partone) + wallName +
                             getString(R.string.parttwo) + authorName +
                             getString(R.string.partthree) + iconPackName +
-                            getString(R.string.partfour) + storeUrl );
+                            getString(R.string.partfour) + storeUrl);
 
             shareWall = Intent.createChooser(shareWall, getString(R.string.share_title));
             shareWall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(shareWall);
-
         }
-
     }
 
     @Override
     protected void onTryUpdate(int reason) throws RetryException {
-
         if (mPrefs.isFeaturesEnabled()) {
-
-            String currentToken = (getCurrentArtwork() != null) ? getCurrentArtwork().getToken() : null;
-
-            if (wallslist.size() == 0) {
+            if (wallslist.size() == 0)
                 getWallpaperURL(JSON_URL);
-            }
-
             int i = getRandomInt();
-
             String token = wallslist.get(i).getWallURL();
             publishArtwork(new Artwork.Builder()
                     .title(wallslist.get(i).getWallName())
@@ -123,59 +102,44 @@ public class ArtSource extends RemoteMuzeiArtSource {
                     .token(token)
                     .viewIntent(new Intent(Intent.ACTION_VIEW, Uri.parse(wallslist.get(i).getWallURL())))
                     .build());
-
             scheduleUpdate(System.currentTimeMillis() + mPrefs.getRotateTime());
         }
-
     }
 
     private int getRandomInt() {
-        Random random = new Random();
-        return random.nextInt(wallslist.size());
+        return new Random().nextInt(wallslist.size());
     }
 
-    private void getWallpaperURL(String URL) {
-
+    private void getWallpaperURL(String url) {
         wallslist.clear();
         wallslist = wdb.getAllWalls();
+
         if (wallslist.size() == 0) {
             try {
-                HttpGet httppost = new HttpGet(URL);
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpResponse response = httpclient.execute(httppost);
+                final String data = Request.Get(url)
+                        .execute()
+                        .returnContent()
+                        .asString();
 
-                int status = response.getStatusLine().getStatusCode();
-
-                if (status == 200) {
-                    HttpEntity entity = response.getEntity();
-                    String data = EntityUtils.toString(entity);
-
-                    jsonobject = JSONParser
-                            .getJSONfromURL(getResources().getString(R.string.json_file_url));
-
+                if (data != null) {
                     JSONObject jsonobject = new JSONObject(data);
                     JSONArray jsonarray = jsonobject.getJSONArray("wallpapers");
-
                     wallslist.clear();
                     wdb.deleteAllWallpapers();
                     for (int i = 0; i < jsonarray.length(); i++) {
-                        jsonobject  = jsonarray.getJSONObject(i);
-
+                        jsonobject = jsonarray.getJSONObject(i);
                         WallpaperInfo jsondata = new WallpaperInfo(
                                 jsonobject.getString("name"),
                                 jsonobject.getString("author"),
                                 jsonobject.getString("url")
-
                         );
                         wdb.addWallpaper(jsondata);
                         wallslist.add(jsondata);
-
                     }
                 }
-            } catch (IOException | JSONException e) {
+            } catch (Exception e) {
                 Log.d("Wallpapers", Log.getStackTraceString(e));
             }
         }
     }
-
 }

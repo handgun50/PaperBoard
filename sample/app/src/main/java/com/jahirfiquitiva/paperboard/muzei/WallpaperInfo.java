@@ -2,7 +2,7 @@ package com.jahirfiquitiva.paperboard.muzei;
 
 public class WallpaperInfo {
 
-    String wall_name, wall_author, wall_url;
+    final String wall_name, wall_author, wall_url;
 
     public WallpaperInfo(String wall_name, String wall_author, String wall_url) {
         this.wall_name = wall_name;
