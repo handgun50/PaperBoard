@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/accent</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="material_drawer_selected_text">@color/accent</item>
     </style>
 
     <style name="MyActionBarTheme" parent="ThemeOverlay.AppCompat.Dark">
