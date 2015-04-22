@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-	<!-- List Of Drawer Sections -->
+    <!-- List Of Drawer Sections -->
     <string name="section_one">Home</string>
     <string name="section_two">Icons</string>
     <string name="section_three">Apply</string>
@@ -11,9 +11,9 @@
     <!-- Wallpapers Activity -->
     <string name="title_activity_detailed_wallpaper">Detailed Wallpaper</string>
     <string name="title_ab_detailed_wallpaper">""</string>
-	
-	<!-- Muzei Stuff -->
-	<string name="muzeisets_title">"Refresh Source every:"</string>
+
+    <!-- Muzei Stuff -->
+    <string name="muzeisets_title">"Refresh Source every:"</string>
     <string name="minutes">Minutes</string>
     <string name="hours">Hours</string>
     <string name="muzei_info">"Note: This Settings may affect the update time of the Wallpapers info."</string>

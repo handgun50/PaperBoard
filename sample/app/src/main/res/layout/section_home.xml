@@ -1,6 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:fab="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_bg">
@@ -39,7 +38,7 @@
                         android:id="@+id/iconsbanner"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icons_banner"/>
+                        android:src="@drawable/icons_banner" />
 
                     <LinearLayout
                         android:id="@+id/description"

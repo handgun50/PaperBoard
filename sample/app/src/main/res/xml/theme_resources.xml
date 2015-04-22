@@ -9,8 +9,14 @@
     <DockMenuAppIcon selector="all_apps_button_icon" />
 
     <!-- Themed Apps -->
-    <AppIcon name="com.lge.clock/com.lge.clock.AlarmClockActivity" image="andy" />
-    <AppIcon name="com.android.contacts/com.android.contacts.DialtactsContactsEntryActivity" image="andy" />
-    <AppIcon name="com.google.android.dialer/com.google.android.dialer.extensions.GoogleDialtactsActivity" image="andy" />
+    <AppIcon
+        name="com.lge.clock/com.lge.clock.AlarmClockActivity"
+        image="andy" />
+    <AppIcon
+        name="com.android.contacts/com.android.contacts.DialtactsContactsEntryActivity"
+        image="andy" />
+    <AppIcon
+        name="com.google.android.dialer/com.google.android.dialer.extensions.GoogleDialtactsActivity"
+        image="andy" />
 
 </Theme>
