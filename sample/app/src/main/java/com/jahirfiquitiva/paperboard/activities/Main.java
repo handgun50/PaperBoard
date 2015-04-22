@@ -39,6 +39,9 @@ import jahirfiquitiva.paperboard.sample.R;
 
 public class Main extends AppCompatActivity {
 
+    private static final boolean WITH_LICENSE_CHECKER = false;
+    private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
+
     public Drawer.Result result = null;
     public AccountHeader.Result headerResult = null;
     public String thaApp, thaHome, thaPreviews, thaApply, thaWalls, thaRequest, thaCredits;
@@ -46,8 +49,6 @@ public class Main extends AppCompatActivity {
     public int currentItem;
     private boolean firstrun, enable_features;
     private Preferences mPrefs;
-    private boolean withLicenseChecker = false;
-    private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,13 +148,10 @@ public class Main extends AppCompatActivity {
                 .build();
 
         result.getListView().setVerticalScrollBarEnabled(false);
-
         runLicenseChecker();
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null)
             result.setSelectionByIdentifier(currentItem);
-        }
-
     }
 
     public void switchFragment(int itemId, String title, String fragment) {
@@ -250,7 +248,7 @@ public class Main extends AppCompatActivity {
 
     private void runLicenseChecker() {
         if (firstrun) {
-            if (withLicenseChecker) {
+            if (WITH_LICENSE_CHECKER) {
                 checkLicense();
             } else {
                 mPrefs.setFeaturesEnabled(true);
@@ -258,7 +256,7 @@ public class Main extends AppCompatActivity {
                 showChangelogDialog();
             }
         } else {
-            if (withLicenseChecker) {
+            if (WITH_LICENSE_CHECKER) {
                 if (!enable_features) {
                     showNotLicensedDialog();
                 } else {
@@ -372,8 +370,7 @@ public class Main extends AppCompatActivity {
                     public void onDismiss(DialogInterface dialog) {
                         finish();
                     }
-                })
-                .show();
+                }).show();
     }
 
 }

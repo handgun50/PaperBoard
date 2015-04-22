@@ -39,6 +39,7 @@ public class DetailedWallpaper extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //noinspection ConstantConditions
         getSupportActionBar().setTitle(R.string.title_ab_detailed_wallpaper);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -52,12 +53,9 @@ public class DetailedWallpaper extends AppCompatActivity {
                 .getBoolean("isfirstrun", true);
 
         if (isFirstRun) {
-
             File folder = new File(saveWallLocation);
-            if (!folder.exists()) {
+            if (!folder.exists())
                 folder.mkdirs();
-            }
-
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                     .putBoolean("isfirstrun", false).commit();
 
@@ -74,7 +72,6 @@ public class DetailedWallpaper extends AppCompatActivity {
                             }
                         }
                 );
-
     }
 
     @Override
@@ -113,12 +110,8 @@ public class DetailedWallpaper extends AppCompatActivity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-
                     File file = new File(saveWallLocation, picName + convertWallName(wall) + ".png");
-                    if (file.exists()) {
-                        file.delete();
-                    }
-
+                    file.delete();
                     try {
                         file.createNewFile();
                         FileOutputStream ostream = new FileOutputStream(file);
@@ -128,8 +121,7 @@ public class DetailedWallpaper extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-            })
-                    .start();
+            }).start();
         }
 
         @Override
@@ -351,20 +343,15 @@ public class DetailedWallpaper extends AppCompatActivity {
     public Uri getLocalBitmapUri(ImageView imageView) {
         Drawable drawable = imageView.getDrawable();
         Bitmap bmp;
-
-        if (drawable instanceof BitmapDrawable) {
+        if (drawable instanceof BitmapDrawable)
             bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-        } else {
+        else
             return null;
-        }
-
         Uri bmpUri = null;
         try {
             File file = new File(saveWallLocation, picName + convertWallName(wall) + ".png");
             file.getParentFile().mkdirs();
-            if (file.exists()) {
-                file.delete();
-            }
+            file.delete();
             FileOutputStream out = new FileOutputStream(file);
             bmp.compress(Bitmap.CompressFormat.PNG, 100, out);
             out.close();
@@ -374,5 +361,4 @@ public class DetailedWallpaper extends AppCompatActivity {
         }
         return bmpUri;
     }
-
 }
