@@ -72,7 +72,7 @@ public class WallsGridAdapter extends BaseAdapter {
         final WallsHolder holder;
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.wallpaper_item, parent, false);
+            convertView = inflater.inflate(R.layout.item_wallpaper, parent, false);
             holder = new WallsHolder(convertView);
             convertView.setTag(holder);
         } else {

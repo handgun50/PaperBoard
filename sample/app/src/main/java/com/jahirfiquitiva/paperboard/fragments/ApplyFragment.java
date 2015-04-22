@@ -153,7 +153,7 @@ public class ApplyFragment extends Fragment {
         final List<Launcher> launchers;
 
         LaunchersAdapter(List<Launcher> launchers) {
-            super(getActivity(), R.layout.launcher_item, R.id.launchername, launchers);
+            super(getActivity(), R.layout.item_launcher, R.id.launchername, launchers);
             this.launchers = launchers;
         }
 
@@ -165,7 +165,7 @@ public class ApplyFragment extends Fragment {
 
             if (item == null) {
                 LayoutInflater inflater = LayoutInflater.from(getActivity());
-                item = inflater.inflate(R.layout.launcher_item, parent, false);
+                item = inflater.inflate(R.layout.item_launcher, parent, false);
                 holder = new LauncherHolder(item);
                 item.setTag(holder);
             } else {

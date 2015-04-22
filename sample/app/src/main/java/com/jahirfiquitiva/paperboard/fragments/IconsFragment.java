@@ -72,7 +72,7 @@ public class IconsFragment extends Fragment {
 
             if (convertView == null) {
                 LayoutInflater inflater = LayoutInflater.from(getActivity());
-                convertView = inflater.inflate(R.layout.icon, parent, false);
+                convertView = inflater.inflate(R.layout.item_icon, parent, false);
                 holder = new IconsHolder(convertView);
                 convertView.setTag(holder);
             } else {
