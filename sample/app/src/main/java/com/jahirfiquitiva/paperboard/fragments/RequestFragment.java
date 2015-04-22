@@ -15,7 +15,6 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +39,7 @@ public class RequestFragment extends Fragment {
     // List & Adapter
     private ListView mList;
     private ListAdapter mAdapter;
-    private ProgressBar mProgress;
+    private View mProgress;
     private FloatingActionButton fab;
 
     @Override
@@ -58,7 +57,7 @@ public class RequestFragment extends Fragment {
         mList.setVisibility(View.GONE);
 
         // Progress
-        mProgress = (ProgressBar) root.findViewById(R.id.progress);
+        mProgress = root.findViewById(R.id.progress);
 
         new GrabApplicationsTask().execute();
 
@@ -78,7 +77,7 @@ public class RequestFragment extends Fragment {
 
         //Show a toast
         if (mList.getVisibility() == View.GONE)
-            Toast.makeText(getActivity(), getResources().getString(R.string.request_toast), Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), getResources().getString(R.string.loading_unthemed_apps), Toast.LENGTH_LONG).show();
 
         fab = (FloatingActionButton) root.findViewById(R.id.send_btn);
         fab.hide(true);
