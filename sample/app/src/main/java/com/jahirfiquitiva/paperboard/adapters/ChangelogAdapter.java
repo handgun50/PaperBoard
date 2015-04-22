@@ -12,8 +12,8 @@ import jahirfiquitiva.paperboard.sample.R;
 
 public class ChangelogAdapter extends BaseAdapter {
 
-    private Context mContext;
-    private String[][] mChangelog;
+    private final Context mContext;
+    private final String[][] mChangelog;
 
     public ChangelogAdapter(Context context, int rootArray) {
 
@@ -49,11 +49,10 @@ public class ChangelogAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View view = convertView;
         if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.changelog_content, null);
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            view = inflater.inflate(R.layout.changelog_content, parent, false);
         }
 
         TextView versionName = (TextView) view.findViewById(R.id.changelog_versionname);
