@@ -75,10 +75,6 @@ public class RequestFragment extends Fragment {
             }
         });
 
-        //Show a toast
-        if (mList.getVisibility() == View.GONE)
-            Toast.makeText(getActivity(), getResources().getString(R.string.loading_unthemed_apps), Toast.LENGTH_LONG).show();
-
         fab = (FloatingActionButton) root.findViewById(R.id.send_btn);
         fab.hide(true);
         fab.attachToListView(mList);
