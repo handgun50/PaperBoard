@@ -23,10 +23,8 @@
             android:id="@+id/icon_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="4dp"
             android:paddingLeft="@dimen/margin_medium_sm"
             android:paddingRight="@dimen/margin_medium_sm"
-            android:paddingTop="4dp"
             tools:ignore="ContentDescription" />
 
     </com.balysv.materialripple.MaterialRippleLayout>

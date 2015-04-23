@@ -86,7 +86,7 @@
 
     <!-- Requests -->
     <string name="loading_unthemed_apps">Loading unthemed apps. This may take a while…</string>
-    <string name="building_request">Building request…</string>
+    <string name="building_request">Building Request</string>
     <string name="request_advice">If you do not select any app for the icon request, it will be automatically generated with all your apps.</string>
     <!-- Content in Request mails before the unthemed apps info -->
     <string name="request_precontent">These apps are not themed. Thanks in advance.\n\n</string>

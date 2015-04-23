@@ -1,6 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_bg">
@@ -36,8 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@color/transparent"
-        android:fitsSystemWindows="true"
-        tools:visibility="gone" />
+        android:fitsSystemWindows="true" />
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/send_btn"

@@ -33,6 +33,7 @@ public class WallsGridAdapter extends BaseAdapter {
     private final ArrayList<HashMap<String, String>> data;
     private final Context context;
     private final int numColumns;
+    private boolean usePalette = true;
 
     public WallsGridAdapter(Context context, ArrayList<HashMap<String, String>> arraylist, int numColumns) {
         super();
@@ -96,13 +97,15 @@ public class WallsGridAdapter extends BaseAdapter {
                             @Override
                             public void onSuccess(Palette palette) {
                                 holder.progressBar.setVisibility(View.GONE);
-                                if (palette != null) {
-                                    Palette.Swatch wallSwatch = palette.getVibrantSwatch();
-                                    if (wallSwatch != null) {
-                                        holder.titleBg.setBackgroundColor(wallSwatch.getRgb());
-                                        holder.titleBg.setAlpha(1);
-                                        holder.name.setTextColor(wallSwatch.getTitleTextColor());
-                                        holder.name.setAlpha(1);
+                                if (usePalette) {
+                                    if (palette != null) {
+                                        Palette.Swatch wallSwatch = palette.getVibrantSwatch();
+                                        if (wallSwatch != null) {
+                                            holder.titleBg.setBackgroundColor(wallSwatch.getRgb());
+                                            holder.titleBg.setAlpha(1);
+                                            holder.name.setTextColor(wallSwatch.getTitleTextColor());
+                                            holder.name.setAlpha(1);
+                                        }
                                     }
                                 }
                             }

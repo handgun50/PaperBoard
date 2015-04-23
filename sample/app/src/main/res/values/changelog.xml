@@ -2,9 +2,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string-array name="fullchangelog">
+        <item>@array/important</item>
         <item>@array/newstuff</item>
         <item>@array/improvements</item>
         <item>@array/fixes</item>
+    </string-array>
+
+    <string-array name="important">
+        <item>"The most important:"</item>
+        <item>Massive cleanup, re-organization, updates, and repairs.</item>
+        <item>Big code, layouts and performance improvements.</item>
+        <item>All these things made by Aidan Follestad. Big thanks to him.</item>
     </string-array>
 
     <string-array name="newstuff">

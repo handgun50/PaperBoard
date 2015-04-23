@@ -115,5 +115,6 @@
     <string name="authorLink">@string/dev_link</string>
     <string name="theme_info">@string/theme_description</string>
     <string name="theme_ad_msg">@string/theme_description</string>
+    <string name="title_activity_home">HomeActivity</string>
 
 </resources>
