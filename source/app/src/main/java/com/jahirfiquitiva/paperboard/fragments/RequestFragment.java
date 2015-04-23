@@ -40,7 +40,7 @@ public class RequestFragment extends Fragment {
     // List & Adapter
     private ListView mList;
     private ListAdapter mAdapter;
-    private ProgressBar mProgress;
+    private View mProgress;
     private FloatingActionButton fab;
 
     @Override
@@ -58,7 +58,7 @@ public class RequestFragment extends Fragment {
         mList.setVisibility(View.GONE);
 
         // Progress
-        mProgress = (ProgressBar) root.findViewById(R.id.progress);
+        mProgress = root.findViewById(R.id.progress);
 
         new GrabApplicationsTask().execute();
 
@@ -75,10 +75,6 @@ public class RequestFragment extends Fragment {
                 mAdapter.notifyDataSetChanged();
             }
         });
-
-        //Show a toast
-        if (mList.getVisibility() == View.GONE)
-            Toast.makeText(getActivity(), getResources().getString(R.string.request_toast), Toast.LENGTH_LONG).show();
 
         fab = (FloatingActionButton) root.findViewById(R.id.send_btn);
         fab.hide(true);

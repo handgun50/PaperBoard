@@ -7,7 +7,7 @@ repositories {
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "jahirfiquitiva.paperboard.sample"
@@ -19,12 +19,12 @@ android {
     buildTypes {
         debug {
             minifyEnabled true
-            shrinkResources true
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled true
-            shrinkResources true
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -38,7 +38,7 @@ dependencies {
     compile 'com.android.support:palette-v7:22.1.0@aar'
     compile 'com.android.support:recyclerview-v7:22.1.0@aar'
 
-    compile 'com.afollestad:material-dialogs:0.7.2.6'
+    compile 'com.afollestad:material-dialogs:0.7.2.7'
     compile('com.mikepenz.materialdrawer:library:2.8.1@aar') {
         transitive = true
     }

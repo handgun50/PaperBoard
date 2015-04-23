@@ -77,9 +77,9 @@ public class ApplyFragment extends Fragment {
         return installed;
     }
 
-    // Reflection is ugly, I know! Please don't kill me :(
+
     private void openLauncher(String name) {
-        // Turns Launcher name "Something Pro" to "com.jahirfiquitiva.paperboard.launchers.SomethingproLauncher"
+
         final String className = "com.jahirfiquitiva.paperboard" + ".launchers."
                 + Character.toUpperCase(name.charAt(0))
                 + name.substring(1).toLowerCase().replace(" ", "").replace("launcher", "")
