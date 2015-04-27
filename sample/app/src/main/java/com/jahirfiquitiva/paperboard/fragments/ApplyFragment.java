@@ -35,22 +35,20 @@ public class ApplyFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.section_apply, container, false);
+        final ListView root = (ListView) inflater.inflate(R.layout.section_apply, container, false);
 
-        // Splits all launcher arrays by the | delimiter {name}|{package}
-        String[] launcherArray = getResources().getStringArray(R.array.launchers);
+        // Splits all launcher  arrays by the | delimiter {name}|{package}
+        final String[] launcherArray = getResources().getStringArray(R.array.launchers);
         for (String launcher : launcherArray)
             launchers.add(new Launcher(launcher.split("\\|")));
 
-        ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        final ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (toolbar != null)
             toolbar.setTitle(R.string.section_three);
 
-        ListView launcherslist = (ListView) root.findViewById(R.id.launcherslist);
-
-        LaunchersAdapter adapter = new LaunchersAdapter(launchers);
-        launcherslist.setAdapter(adapter);
-        launcherslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final LaunchersAdapter adapter = new LaunchersAdapter(launchers);
+        root.setAdapter(adapter);
+        root.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (launchers.get(position).name.equals("Google Now Launcher"))
