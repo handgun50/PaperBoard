@@ -6,7 +6,7 @@
     <string name="section_three">Apply</string>
     <string name="section_four">Wallpapers</string>
     <string name="section_five">Icon Request</string>
-    <string name="section_six">About The App</string>
+    <string name="section_six">About the App</string>
 
     <!-- Wallpapers Activity -->
     <string name="title_activity_detailed_wallpaper">Detailed Wallpaper</string>
@@ -20,12 +20,12 @@
     <string name="justshare">Share</string>
 
     <!-- Strings for Dropdown Menu & Requests -->
-    <string name="share">Share theme</string>
+    <string name="share">Share Theme</string>
     <string name="share_title">Share via</string>
     <string name="send_title">Send via</string>
-    <string name="rate">Rate theme</string>
-    <string name="sendemail">Email developer</string>
-    <string name="changelog">See changelog</string>
+    <string name="rate">Rate Theme</string>
+    <string name="sendemail">Email Developer</string>
+    <string name="changelog">See Changelog</string>
 
     <!-- Sharing theme -->
     <string name="share_one">Check out this awesome icon pack by </string>
@@ -47,7 +47,7 @@
 
     <!-- Changelog Dialog Content -->
     <string name="changelog_dialog_title">Changelog</string>
-    <string name="nice">great</string>
+    <string name="great">Great</string>
 
     <!-- Wallpapers Stuff -->
     <string name="no_conn_title">No Connection Found</string>

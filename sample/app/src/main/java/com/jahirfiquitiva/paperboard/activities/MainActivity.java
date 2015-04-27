@@ -274,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
         new MaterialDialog.Builder(this)
                 .title(R.string.changelog_dialog_title)
                 .adapter(new ChangelogAdapter(this, R.array.fullchangelog), null)
-                .positiveText(R.string.nice)
+                .positiveText(R.string.great)
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
