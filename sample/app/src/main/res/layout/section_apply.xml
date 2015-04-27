@@ -2,6 +2,5 @@
     android:scrollbars="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:divider="@null"
     android:clipToPadding="false"
     android:fitsSystemWindows="true" />

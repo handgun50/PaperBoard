@@ -7,15 +7,13 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +36,8 @@ public class RequestFragment extends Fragment {
     private final List<AppInfo> mApps = new LinkedList<>();
 
     // List & Adapter
-    private ListView mList;
-    private ListAdapter mAdapter;
+    private RecyclerView mList;
+    private RequestAdapter mAdapter;
     private View mProgress;
     private FloatingActionButton fab;
 
@@ -53,19 +51,14 @@ public class RequestFragment extends Fragment {
         if (toolbar != null)
             toolbar.setTitle(R.string.section_five);
 
-        // Populate your ListView with your apps
-        mList = (ListView) root.findViewById(R.id.appList);
+        // Populate your RecyclerView with your apps
+        mList = (RecyclerView) root.findViewById(R.id.appList);
         mList.setVisibility(View.GONE);
 
-        // Progress
-        mProgress = root.findViewById(R.id.progress);
-
-        new GrabApplicationsTask().execute();
-
-        // Set basic listener to your ListView
-        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // Setup RecyclerView and adapter
+        mAdapter = new RequestAdapter(mApps, new ClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onClick(int position) {
                 // Mark the app as selected
                 AppInfo mApp = mApps.get(position);
                 mApp.setSelected(!mApp.isSelected());
@@ -75,10 +68,17 @@ public class RequestFragment extends Fragment {
                 mAdapter.notifyDataSetChanged();
             }
         });
+        mList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mList.setAdapter(mAdapter);
+
+        // Progress
+        mProgress = root.findViewById(R.id.progress);
+
+        new GrabApplicationsTask().execute();
 
         fab = (FloatingActionButton) root.findViewById(R.id.send_btn);
         fab.hide(true);
-        fab.attachToListView(mList);
+        fab.attachToRecyclerView(mList);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,8 +113,6 @@ public class RequestFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-            mAdapter = new ListAdapter(mApps);
-            mList.setAdapter(mAdapter);
             if (mAdapter != null)
                 mAdapter.notifyDataSetChanged();
             if (mList != null)
@@ -126,60 +124,65 @@ public class RequestFragment extends Fragment {
         }
     }
 
-    // You should probably put this in a separate .java file
-    private class ListAdapter extends BaseAdapter {
+    public interface ClickListener {
+        void onClick(int index);
+    }
+
+    private class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHolder> implements View.OnClickListener {
 
         private final List<AppInfo> mApps;
+        private final ClickListener mCallback;
 
-        public ListAdapter(List<AppInfo> apps) {
+        public RequestAdapter(List<AppInfo> apps, ClickListener callback) {
             this.mApps = apps;
+            this.mCallback = callback;
         }
 
         @Override
-        public int getCount() {
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+            return new ViewHolder(inflater.inflate(R.layout.request_item, parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            AppInfo app = mApps.get(position);
+            holder.txtName.setText(app.getName());
+            holder.imgIcon.setImageDrawable(app.getImage());
+            holder.chkSelected.setChecked(app.isSelected());
+
+            holder.view.setTag(position);
+            holder.view.setOnClickListener(this);
+        }
+
+        @Override
+        public int getItemCount() {
             return mApps.size();
         }
 
         @Override
-        public AppInfo getItem(int position) {
-            return mApps.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
-            AppInfo mApp = mApps.get(position);
-
-            if (convertView == null) {
-                LayoutInflater inflater = LayoutInflater.from(getActivity());
-                convertView = inflater.inflate(R.layout.request_item, parent, false);
-
-                holder = new ViewHolder();
-                holder.imgIcon = (ImageView) convertView.findViewById(R.id.imgIcon);
-                holder.txtName = (TextView) convertView.findViewById(R.id.txtName);
-                holder.chkSelected = (CheckBox) convertView.findViewById(R.id.chkSelected);
-
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
+        public void onClick(View v) {
+            if (v.getTag() != null) {
+                int index = (Integer) v.getTag();
+                if (mCallback != null)
+                    mCallback.onClick(index);
             }
-
-            holder.txtName.setText(mApp.getName());
-            holder.imgIcon.setImageDrawable(mApp.getImage());
-            holder.chkSelected.setChecked(mApp.isSelected());
-
-            return convertView;
         }
 
-        private class ViewHolder {
-            public ImageView imgIcon;
-            public TextView txtName;
-            public CheckBox chkSelected;
+        class ViewHolder extends RecyclerView.ViewHolder {
+
+            final View view;
+            final ImageView imgIcon;
+            final TextView txtName;
+            final CheckBox chkSelected;
+
+            public ViewHolder(View v) {
+                super(v);
+                view = v;
+                imgIcon = (ImageView) v.findViewById(R.id.imgIcon);
+                txtName = (TextView) v.findViewById(R.id.txtName);
+                chkSelected = (CheckBox) v.findViewById(R.id.chkSelected);
+            }
         }
     }
 
