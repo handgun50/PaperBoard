@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    
     <!-- List Of Drawer Sections -->
     <string name="section_one">Home</string>
     <string name="section_two">Icons</string>
@@ -16,7 +17,7 @@
     <string name="muzeisets_title">Refresh Source every:</string>
     <string name="minutes">Minutes</string>
     <string name="hours">Hours</string>
-    <string name="muzei_info">Note: This Settings may affect the update time of the Wallpapers info.</string>
+    <string name="muzei_info">Note: This Settings may affect the update time of wallpapers info.</string>
     <string name="justshare">Share</string>
 
     <!-- Strings for Dropdown Menu & Requests -->
@@ -33,14 +34,14 @@
 
     <!-- LauncherNotInstalled Dialog -->
     <string name="lni_title"> Not Installed</string>
-    <string name="lni_content"> is currently not installed in your device.\nWould you like to install it from Google Play Store?</string>
-    <string name="cm_dialog_content"> is part of CyanogenMod (based) roms.\nWould you like to install it in your device?</string>
+    <string name="lni_content"> is currently not installed in your device.\nWould you like to install it from the Google Play Store?</string>
+    <string name="cm_dialog_content"> is part of CyanogenMod (based) roms.\nWould you like to install it on your device?</string>
     <string name="gnl_title">Google Now Launcher Not Compatible</string>
     <string name="gnl_content">Google Now Launcher is NOT compatible with ANY Icon Packs. Please don\'t rate the icon pack badly for this reason. There\'s a workaround that you can try by yourself, but it requires the use of an external app. Would you like to download it?</string>
     <string name="extraapp">com.momocode.shortcuts</string>
     <string name="lni_yes">Yes</string>
     <string name="lni_no">No</string>
-    <string name="updateninelauncher">Please update Nine Launcher to latest version</string>
+    <string name="updateninelauncher">Please update Nine Launcher to the latest version.</string>
 
     <string name="installed">Installed</string>
     <string name="noninstalled">Not Installed</string>
@@ -51,9 +52,9 @@
 
     <!-- Wallpapers Stuff -->
     <string name="no_conn_title">No Connection Found</string>
-    <string name="no_conn_content">Wallpapers are stored on Cloud Server. Please connect to Internet and try again.</string>
+    <string name="no_conn_content">Wallpapers are stored on a cloud server. Please connect to the internet and try again.</string>
     <string name="download">DOWNLOAD</string>
-    <string name="download_done">Download completed successfully. Picture is located in </string>
+    <string name="download_done">Download completed successfully. Wallpaper is located in </string>
     <string name="apply">Apply</string>
     <string name="set_as">Crop picture and set as…</string>
     <string name="set_wall_title">Wallpaper set</string>
