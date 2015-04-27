@@ -33,8 +33,8 @@
     <string name="share_two">.\nGet it now at </string>
 
     <!-- LauncherNotInstalled Dialog -->
-    <string name="lni_title"> Not Installed</string>
-    <string name="lni_content"> is currently not installed in your device.\nWould you like to install it from the Google Play Store?</string>
+    <string name="lni_title">&#160;Not Installed</string>
+    <string name="lni_content">&#160;is currently not installed in your device.\nWould you like to install it from the Google Play Store?</string>
     <string name="cm_dialog_content"> is part of CyanogenMod (based) roms.\nWould you like to install it on your device?</string>
     <string name="gnl_title">Google Now Launcher Not Compatible</string>
     <string name="gnl_content">Google Now Launcher is NOT compatible with ANY Icon Packs. Please don\'t rate the icon pack badly for this reason. There\'s a workaround that you can try by yourself, but it requires the use of an external app. Would you like to download it?</string>

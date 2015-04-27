@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.jahirfiquitiva.paperboard.utilities.Util;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -51,7 +52,7 @@ public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder>
                 String name = iconNames[position].toLowerCase(Locale.getDefault());
                 MaterialDialog dialog = new MaterialDialog.Builder(mContext)
                         .customView(R.layout.dialog_icon, false)
-                        .title(makeTextReadable(name))
+                        .title(Util.makeTextReadable(name))
                         .positiveText(R.string.close)
                         .build();
                 if (dialog.getCustomView() != null) {
@@ -61,20 +62,6 @@ public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder>
                 dialog.show();
             }
         });
-    }
-
-    private String makeTextReadable(String name) {
-        String partialConvertedText = name.replaceAll("_", " ");
-        String[] text = partialConvertedText.split("\\s+");
-        StringBuilder sb = new StringBuilder();
-        if (text[0].length() > 0) {
-            sb.append(Character.toUpperCase(text[0].charAt(0))).append(text[0].subSequence(1, text[0].length()).toString().toLowerCase());
-            for (int i = 1; i < text.length; i++) {
-                sb.append(" ");
-                sb.append(Character.toUpperCase(text[i].charAt(0))).append(text[i].subSequence(1, text[i].length()).toString().toLowerCase());
-            }
-        }
-        return sb.toString();
     }
 
     @Override

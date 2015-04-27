@@ -27,4 +27,6 @@
     <color name="transparent">#00ffffff</color>
     <color name="divider_grey">#d4d4d4</color>
 
+    <color name="viewer_overlay">#40000000</color>
+
 </resources>
