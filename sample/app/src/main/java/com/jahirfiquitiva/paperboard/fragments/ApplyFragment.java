@@ -16,10 +16,12 @@ import android.view.ViewGroup;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.jahirfiquitiva.paperboard.adapters.LaunchersAdapter;
+import com.jahirfiquitiva.paperboard.sort.InstalledLauncherComparator;
 import com.jahirfiquitiva.paperboard.utilities.Util;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import jahirfiquitiva.paperboard.sample.R;
@@ -39,6 +41,7 @@ public class ApplyFragment extends Fragment {
         final String[] launcherArray = getResources().getStringArray(R.array.launchers);
         for (String launcher : launcherArray)
             launchers.add(new Launcher(launcher.split("\\|")));
+        Collections.sort(launchers, new InstalledLauncherComparator(getActivity()));
 
         final ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (toolbar != null)
@@ -124,10 +127,18 @@ public class ApplyFragment extends Fragment {
 
         public final String name;
         public final String packageName;
+        private int isInstalled = -1;
 
         public Launcher(String[] values) {
             name = values[0];
             packageName = values[1];
+        }
+
+        public boolean isInstalled(Context context) {
+            if (isInstalled == -1)
+                isInstalled = Util.launcherIsInstalled(context, packageName) ? 1 : 0;
+            // Caches this value, checking if a launcher is installed is intensive on processing
+            return isInstalled == 1;
         }
     }
 

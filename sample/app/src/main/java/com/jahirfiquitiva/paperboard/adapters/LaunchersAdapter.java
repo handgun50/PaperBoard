@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jahirfiquitiva.paperboard.fragments.ApplyFragment;
-import com.jahirfiquitiva.paperboard.utilities.Util;
 
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class LaunchersAdapter extends RecyclerView.Adapter<LaunchersAdapter.Laun
         holder.icon.setImageResource(iconResource);
         holder.launchername.setText(launchers.get(position).name);
 
-        if (Util.launcherIsInstalled(mContext, launchers.get(position).packageName)) {
+        if (launchers.get(position).isInstalled(mContext)) {
             holder.isInstalled.setText(R.string.installed);
             holder.isInstalled.setTextColor(mContext.getResources().getColor(R.color.green));
         } else {
