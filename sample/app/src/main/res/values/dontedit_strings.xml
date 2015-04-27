@@ -62,9 +62,8 @@
     <string name="set_it">Set it now!</string>
     <string name="save">Save</string>
     <string name="done">Done!</string>
-    <string name="progress_dialog_title">Downloading wallpaper</string>
-    <string name="setting_wall_title">Setting pic as wallpaper</string>
-    <string name="please_wait">Please wait…</string>
+    <string name="progress_dialog_title">Downloading this wallpaper…</string>
+    <string name="setting_wall_title">Setting this picture as your wallpaper…</string>
     <string name="set_as_wall_done">Picture set as wallpaper successfully Go to Home screen and check it.</string>
     <string name="error">Error</string>
     <string name="wall_error">Sorry, previous action wasn\'t actually applied, because it seems there\'s no picture. Check your Internet connection and try again.</string>

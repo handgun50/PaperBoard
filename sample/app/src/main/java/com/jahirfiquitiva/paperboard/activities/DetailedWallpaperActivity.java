@@ -218,14 +218,12 @@ public class DetailedWallpaperActivity extends AppCompatActivity {
     public void showDownloadDialog(boolean indeterminate) {
         if (indeterminate) {
             new MaterialDialog.Builder(this)
-                    .title(R.string.progress_dialog_title)
-                    .content(R.string.please_wait)
+                    .content(R.string.progress_dialog_title)
                     .progress(true, 0)
                     .show();
         } else {
             new MaterialDialog.Builder(this)
-                    .title(R.string.progress_dialog_title)
-                    .content(R.string.please_wait)
+                    .content(R.string.progress_dialog_title)
                     .progress(false, 120)
                     .showListener(new DialogInterface.OnShowListener() {
                         @Override
@@ -292,14 +290,12 @@ public class DetailedWallpaperActivity extends AppCompatActivity {
     public void showSettingWallDialog(boolean indeterminate) {
         if (indeterminate) {
             new MaterialDialog.Builder(this)
-                    .title(R.string.setting_wall_title)
-                    .content(R.string.please_wait)
+                    .content(R.string.setting_wall_title)
                     .progress(true, 0)
                     .show();
         } else {
             new MaterialDialog.Builder(this)
-                    .title(R.string.setting_wall_title)
-                    .content(R.string.please_wait)
+                    .content(R.string.setting_wall_title)
                     .progress(false, 60)
                     .showListener(new DialogInterface.OnShowListener() {
                         @Override
