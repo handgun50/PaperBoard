@@ -2,7 +2,6 @@ package com.jahirfiquitiva.paperboard.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,10 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.jahirfiquitiva.paperboard.adapters.LaunchersAdapter;
+import com.jahirfiquitiva.paperboard.utilities.Util;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -45,38 +44,25 @@ public class ApplyFragment extends Fragment {
         if (toolbar != null)
             toolbar.setTitle(R.string.section_three);
 
-        final LaunchersAdapter adapter = new LaunchersAdapter(launchers, new ClickListener() {
-            @Override
-            public void onClick(int position) {
-                if (launchers.get(position).name.equals("Google Now Launcher"))
-                    gnlDialog();
-                else if (LauncherIsInstalled(launchers.get(position).packageName))
-                    openLauncher(launchers.get(position).name);
-                else
-                    openInPlayStore(launchers.get(position));
-            }
-        });
+        final LaunchersAdapter adapter = new LaunchersAdapter(getActivity(), launchers,
+                new LaunchersAdapter.ClickListener() {
+                    @Override
+                    public void onClick(int position) {
+                        if (launchers.get(position).name.equals("Google Now Launcher"))
+                            gnlDialog();
+                        else if (Util.launcherIsInstalled(getActivity(), launchers.get(position).packageName))
+                            openLauncher(launchers.get(position).name);
+                        else
+                            openInPlayStore(launchers.get(position));
+                    }
+                });
         root.setLayoutManager(new LinearLayoutManager(getActivity()));
         root.setAdapter(adapter);
 
         return root;
     }
 
-    private boolean LauncherIsInstalled(String packageName) {
-        final PackageManager pm = getActivity().getPackageManager();
-        boolean installed;
-        try {
-            pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
-            installed = true;
-        } catch (PackageManager.NameNotFoundException e) {
-            installed = false;
-        }
-        return installed;
-    }
-
-
     private void openLauncher(String name) {
-
         final String className = "com.jahirfiquitiva.paperboard" + ".launchers."
                 + Character.toUpperCase(name.charAt(0))
                 + name.substring(1).toLowerCase().replace(" ", "").replace("launcher", "")
@@ -142,81 +128,6 @@ public class ApplyFragment extends Fragment {
         public Launcher(String[] values) {
             name = values[0];
             packageName = values[1];
-        }
-    }
-
-    public interface ClickListener {
-        void onClick(int index);
-    }
-
-    class LaunchersAdapter extends RecyclerView.Adapter<LaunchersAdapter.LauncherHolder> implements View.OnClickListener {
-
-        final List<Launcher> launchers;
-        final ClickListener mCallback;
-
-        LaunchersAdapter(List<Launcher> launchers, ClickListener callback) {
-            this.launchers = launchers;
-            this.mCallback = callback;
-        }
-
-        @Override
-        public LauncherHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            return new LauncherHolder(inflater.inflate(R.layout.item_launcher, parent, false));
-        }
-
-        @Override
-        public void onBindViewHolder(LauncherHolder holder, int position) {
-            // Turns Launcher name "Something Pro" to "l_something_pro"
-            int iconResource = getActivity().getResources().getIdentifier(
-                    "ic_" + launchers.get(position).name.toLowerCase().replace(" ", "_"),
-                    "drawable",
-                    getActivity().getPackageName()
-            );
-
-            holder.icon.setImageResource(iconResource);
-            holder.launchername.setText(launchers.get(position).name);
-
-            if (LauncherIsInstalled(launchers.get(position).packageName)) {
-                holder.isInstalled.setText(R.string.installed);
-                holder.isInstalled.setTextColor(getResources().getColor(R.color.green));
-            } else {
-                holder.isInstalled.setText(R.string.noninstalled);
-                holder.isInstalled.setTextColor(getResources().getColor(R.color.red));
-            }
-
-            holder.view.setTag(position);
-            holder.view.setOnClickListener(this);
-        }
-
-        @Override
-        public int getItemCount() {
-            return launchers.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (v.getTag() != null) {
-                int index = (Integer) v.getTag();
-                if (mCallback != null)
-                    mCallback.onClick(index);
-            }
-        }
-
-        class LauncherHolder extends RecyclerView.ViewHolder {
-
-            final View view;
-            final ImageView icon;
-            final TextView launchername;
-            final TextView isInstalled;
-
-            LauncherHolder(View v) {
-                super(v);
-                view = v;
-                icon = (ImageView) v.findViewById(R.id.launchericon);
-                launchername = (TextView) v.findViewById(R.id.launchername);
-                isInstalled = (TextView) v.findViewById(R.id.launcherinstalled);
-            }
         }
     }
 
