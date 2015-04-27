@@ -8,14 +8,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -35,7 +34,7 @@ public class ApplyFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final ListView root = (ListView) inflater.inflate(R.layout.section_apply, container, false);
+        final RecyclerView root = (RecyclerView) inflater.inflate(R.layout.section_apply, container, false);
 
         // Splits all launcher  arrays by the | delimiter {name}|{package}
         final String[] launcherArray = getResources().getStringArray(R.array.launchers);
@@ -46,11 +45,9 @@ public class ApplyFragment extends Fragment {
         if (toolbar != null)
             toolbar.setTitle(R.string.section_three);
 
-        final LaunchersAdapter adapter = new LaunchersAdapter(launchers);
-        root.setAdapter(adapter);
-        root.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final LaunchersAdapter adapter = new LaunchersAdapter(launchers, new ClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onClick(int position) {
                 if (launchers.get(position).name.equals("Google Now Launcher"))
                     gnlDialog();
                 else if (LauncherIsInstalled(launchers.get(position).packageName))
@@ -59,6 +56,8 @@ public class ApplyFragment extends Fragment {
                     openInPlayStore(launchers.get(position));
             }
         });
+        root.setLayoutManager(new LinearLayoutManager(getActivity()));
+        root.setAdapter(adapter);
 
         return root;
     }
@@ -146,30 +145,28 @@ public class ApplyFragment extends Fragment {
         }
     }
 
-    class LaunchersAdapter extends ArrayAdapter<Launcher> {
+    public interface ClickListener {
+        void onClick(int index);
+    }
+
+    class LaunchersAdapter extends RecyclerView.Adapter<LaunchersAdapter.LauncherHolder> implements View.OnClickListener {
 
         final List<Launcher> launchers;
+        final ClickListener mCallback;
 
-        LaunchersAdapter(List<Launcher> launchers) {
-            super(getActivity(), R.layout.item_launcher, R.id.launchername, launchers);
+        LaunchersAdapter(List<Launcher> launchers, ClickListener callback) {
             this.launchers = launchers;
+            this.mCallback = callback;
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public LauncherHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+            return new LauncherHolder(inflater.inflate(R.layout.item_launcher, parent, false));
+        }
 
-            View item = convertView;
-            LauncherHolder holder;
-
-            if (item == null) {
-                LayoutInflater inflater = LayoutInflater.from(getActivity());
-                item = inflater.inflate(R.layout.item_launcher, parent, false);
-                holder = new LauncherHolder(item);
-                item.setTag(holder);
-            } else {
-                holder = (LauncherHolder) item.getTag();
-
-            }
+        @Override
+        public void onBindViewHolder(LauncherHolder holder, int position) {
             // Turns Launcher name "Something Pro" to "l_something_pro"
             int iconResource = getActivity().getResources().getIdentifier(
                     "ic_" + launchers.get(position).name.toLowerCase().replace(" ", "_"),
@@ -188,16 +185,34 @@ public class ApplyFragment extends Fragment {
                 holder.isInstalled.setTextColor(getResources().getColor(R.color.red));
             }
 
-            return item;
+            holder.view.setTag(position);
+            holder.view.setOnClickListener(this);
         }
 
-        class LauncherHolder {
+        @Override
+        public int getItemCount() {
+            return launchers.size();
+        }
 
+        @Override
+        public void onClick(View v) {
+            if (v.getTag() != null) {
+                int index = (Integer) v.getTag();
+                if (mCallback != null)
+                    mCallback.onClick(index);
+            }
+        }
+
+        class LauncherHolder extends RecyclerView.ViewHolder {
+
+            final View view;
             final ImageView icon;
             final TextView launchername;
             final TextView isInstalled;
 
             LauncherHolder(View v) {
+                super(v);
+                view = v;
                 icon = (ImageView) v.findViewById(R.id.launchericon);
                 launchername = (TextView) v.findViewById(R.id.launchername);
                 isInstalled = (TextView) v.findViewById(R.id.launcherinstalled);
