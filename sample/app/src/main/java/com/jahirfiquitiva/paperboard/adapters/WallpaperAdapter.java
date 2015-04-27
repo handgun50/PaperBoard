@@ -1,16 +1,13 @@
 package com.jahirfiquitiva.paperboard.adapters;
 
 import android.content.Context;
-import android.graphics.Point;
 import android.support.v7.graphics.Palette;
-import android.view.Display;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -28,58 +25,42 @@ import jahirfiquitiva.paperboard.sample.R;
 
 import static com.jahirfiquitiva.paperboard.utilities.PaletteTransformation.PaletteCallback;
 
-public class WallsGridAdapter extends BaseAdapter {
+public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.WallsHolder> implements View.OnClickListener {
+
+    @Override
+    public void onClick(View v) {
+        if (v.getTag() != null) {
+            int index = (Integer) v.getTag();
+            if (mCallback != null)
+                mCallback.onClick(index);
+        }
+    }
+
+    public interface ClickListener {
+        void onClick(int index);
+    }
 
     private final ArrayList<HashMap<String, String>> data;
     private final Context context;
-    private final int numColumns;
     private boolean usePalette = true;
+    private final ClickListener mCallback;
 
-    public WallsGridAdapter(Context context, ArrayList<HashMap<String, String>> arraylist, int numColumns) {
-        super();
+    public WallpaperAdapter(Context context, ArrayList<HashMap<String, String>> data, ClickListener callback) {
         this.context = context;
-        this.numColumns = numColumns;
-        data = arraylist;
-
+        this.data = data;
+        this.mCallback = callback;
     }
 
     @Override
-    public int getCount() {
-        return data.size();
+    public WallsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        return new WallsHolder(inflater.inflate(R.layout.item_wallpaper, parent, false));
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public void onBindViewHolder(final WallsHolder holder, int position) {
         Animation anim = AnimationUtils.loadAnimation(context, R.anim.fade_in);
         HashMap<String, String> jsondata = data.get(position);
-
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int imageWidth = (width / numColumns);
-
-        final WallsHolder holder;
-        if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.item_wallpaper, parent, false);
-            holder = new WallsHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (WallsHolder) convertView.getTag();
-
-        }
 
         holder.name.setText(jsondata.get(WallpapersFragment.NAME));
         final String wallurl = jsondata.get(WallpapersFragment.WALL);
@@ -88,7 +69,6 @@ public class WallsGridAdapter extends BaseAdapter {
         //noinspection SuspiciousNameCombination
         Picasso.with(context)
                 .load(wallurl)
-                .resize(imageWidth, imageWidth)
                 .centerCrop()
                 .noFade()
                 .transform(PaletteTransformation.instance())
@@ -115,11 +95,18 @@ public class WallsGridAdapter extends BaseAdapter {
                             }
                         });
 
-        return convertView;
+        holder.view.setTag(position);
+        holder.view.setOnClickListener(this);
     }
 
-    class WallsHolder {
+    @Override
+    public int getItemCount() {
+        return data.size();
+    }
 
+    class WallsHolder extends RecyclerView.ViewHolder {
+
+        final View view;
         final ImageView wall;
         final TextView name;
         final ProgressBar progressBar;
@@ -127,6 +114,8 @@ public class WallsGridAdapter extends BaseAdapter {
         final MaterialRippleLayout content;
 
         WallsHolder(View v) {
+            super(v);
+            view = v;
             wall = (ImageView) v.findViewById(R.id.wall);
             name = (TextView) v.findViewById(R.id.name);
             progressBar = (ProgressBar) v.findViewById(R.id.progress);

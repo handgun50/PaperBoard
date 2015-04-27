@@ -1,22 +1,21 @@
 package com.jahirfiquitiva.paperboard.fragments;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.jahirfiquitiva.paperboard.activities.DetailedWallpaperActivity;
-import com.jahirfiquitiva.paperboard.adapters.WallsGridAdapter;
+import com.jahirfiquitiva.paperboard.adapters.WallpaperAdapter;
 import com.jahirfiquitiva.paperboard.utilities.JSONParser;
 
 import org.json.JSONArray;
@@ -30,16 +29,12 @@ import jahirfiquitiva.paperboard.sample.R;
 
 public class WallpapersFragment extends Fragment {
 
-    private static final int DEFAULT_COLUMNS_PORTRAIT = 2;
-    private static final int DEFAULT_COLUMNS_LANDSCAPE = 3;
     public static final String NAME = "name";
     public static final String WALL = "wall";
 
     private ArrayList<HashMap<String, String>> arraylist;
     private ViewGroup root;
     private ProgressBar mProgress;
-    private int mColumnCount;
-    private int numColumns = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,21 +45,8 @@ public class WallpapersFragment extends Fragment {
         if (toolbar != null)
             toolbar.setTitle(R.string.section_four);
 
-        final boolean isLandscape = isLandscape();
-        int mColumnCountPortrait = DEFAULT_COLUMNS_PORTRAIT;
-        int mColumnCountLandscape = DEFAULT_COLUMNS_LANDSCAPE;
-        int newColumnCount = isLandscape ? mColumnCountLandscape : mColumnCountPortrait;
-        if (mColumnCount != newColumnCount) {
-            mColumnCount = newColumnCount;
-            numColumns = mColumnCount;
-        }
-
         new DownloadJSON().execute();
         return root;
-    }
-
-    private boolean isLandscape() {
-        return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
     // DownloadJSON AsyncTask
@@ -104,23 +86,23 @@ public class WallpapersFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void args) {
-            final GridView gridView = (GridView) root.findViewById(R.id.gridView);
-            gridView.setNumColumns(numColumns);
-            final WallsGridAdapter mGridAdapter = new WallsGridAdapter(getActivity(), arraylist, numColumns);
+            final RecyclerView gridView = (RecyclerView) root.findViewById(R.id.gridView);
+            final WallpaperAdapter mGridAdapter = new WallpaperAdapter(getActivity(), arraylist,
+                    new WallpaperAdapter.ClickListener() {
+                        @Override
+                        public void onClick(int position) {
+                            final HashMap<String, String> data = arraylist.get(position);
+                            final String wallurl = data.get((WallpapersFragment.WALL));
+                            final Intent intent = new Intent(getActivity(), DetailedWallpaperActivity.class)
+                                    .putExtra("wall", wallurl);
+                            startActivity(intent);
+                        }
+                    });
+            gridView.setLayoutManager(new GridLayoutManager(getActivity(),
+                    getResources().getInteger(R.integer.wallpaper_grid_width)));
             gridView.setAdapter(mGridAdapter);
             if (mProgress != null)
                 mProgress.setVisibility(View.GONE);
-
-            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    final HashMap<String, String> data = arraylist.get(position);
-                    final String wallurl = data.get((WallpapersFragment.WALL));
-                    final Intent intent = new Intent(getActivity(), DetailedWallpaperActivity.class)
-                            .putExtra("wall", wallurl);
-                    startActivity(intent);
-                }
-            });
         }
     }
 }
