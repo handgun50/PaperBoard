@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    
+
     <!-- List Of Drawer Sections -->
     <string name="section_one">Home</string>
     <string name="section_two">Icons</string>
@@ -24,9 +24,9 @@
     <string name="share">Share Theme</string>
     <string name="share_title">Share via</string>
     <string name="send_title">Send via</string>
-    <string name="rate">Rate Theme</string>
-    <string name="sendemail">Email Developer</string>
-    <string name="changelog">See Changelog</string>
+    <string name="rate">Rate this Theme</string>
+    <string name="sendemail">Email the Developer</string>
+    <string name="changelog">View the Changelog</string>
 
     <!-- Sharing theme -->
     <string name="share_one">Check out this awesome icon pack by </string>
