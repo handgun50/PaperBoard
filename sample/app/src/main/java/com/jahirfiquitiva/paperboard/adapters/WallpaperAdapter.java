@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.balysv.materialripple.MaterialRippleLayout;
 import com.jahirfiquitiva.paperboard.fragments.WallpapersFragment;
 import com.jahirfiquitiva.paperboard.utilities.PaletteTransformation;
 import com.squareup.picasso.Picasso;
@@ -40,15 +39,20 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
         void onClick(int index);
     }
 
-    private final ArrayList<HashMap<String, String>> data;
+    private ArrayList<HashMap<String, String>> data;
     private final Context context;
     private boolean usePalette = true;
     private final ClickListener mCallback;
 
-    public WallpaperAdapter(Context context, ArrayList<HashMap<String, String>> data, ClickListener callback) {
+    public WallpaperAdapter(Context context, ClickListener callback) {
         this.context = context;
-        this.data = data;
+        this.data = new ArrayList<>();
         this.mCallback = callback;
+    }
+
+    public void setData(ArrayList<HashMap<String, String>> data) {
+        this.data = data;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -69,7 +73,6 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
         //noinspection SuspiciousNameCombination
         Picasso.with(context)
                 .load(wallurl)
-                .centerCrop()
                 .noFade()
                 .transform(PaletteTransformation.instance())
                 .into(holder.wall,
@@ -111,7 +114,6 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
         final TextView name;
         final ProgressBar progressBar;
         final LinearLayout titleBg;
-        final MaterialRippleLayout content;
 
         WallsHolder(View v) {
             super(v);
@@ -120,7 +122,6 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
             name = (TextView) v.findViewById(R.id.name);
             progressBar = (ProgressBar) v.findViewById(R.id.progress);
             titleBg = (LinearLayout) v.findViewById(R.id.titlebg);
-            content = (MaterialRippleLayout) v.findViewById(R.id.walls_ripple);
         }
     }
 }

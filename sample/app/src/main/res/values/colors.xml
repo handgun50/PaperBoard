@@ -5,8 +5,8 @@
     <color name="primary_dark">#1565c0</color>
     <color name="primary_pressed">#039be5</color>
     <color name="accent">#e91e63</color>
-    <color name="ripple_accent">#80e91e63</color>
-    <color name="accent_pressed">#ec407a</color>
+    <color name="accent_lighter">#F06292</color>
+    <color name="accent_pressed">#C2185B</color>
     <color name="accent_secondary">@color/accent</color>
     <color name="secondary">#009688</color>
     <color name="secondary_pressed">#26a69a</color>
@@ -14,7 +14,7 @@
     <color name="cardsbg">#ffffff</color>
     <!-- Color for texts in Dialogs -->
     <color name="dialogcontent">#6d6d6d</color>
-    <!-- Color for some ripples -->
+
     <color name="semitransparent_white">#80ffffff</color>
     <!-- Color for texts -->
     <color name="dark_grey">#4d4d4d</color>

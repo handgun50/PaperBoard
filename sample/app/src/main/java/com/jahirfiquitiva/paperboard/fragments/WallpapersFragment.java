@@ -32,14 +32,30 @@ public class WallpapersFragment extends Fragment {
     public static final String NAME = "name";
     public static final String WALL = "wall";
 
-    private ArrayList<HashMap<String, String>> arraylist;
-    private ViewGroup root;
+    private ArrayList<HashMap<String, String>> data;
     private ProgressBar mProgress;
+    private WallpaperAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = (ViewGroup) inflater.inflate(R.layout.section_wallpapers, container, false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.section_wallpapers, container, false);
         mProgress = (ProgressBar) root.findViewById(R.id.progress);
+        RecyclerView mRecyclerView = (RecyclerView) root.findViewById(R.id.gridView);
+
+        mAdapter = new WallpaperAdapter(getActivity(),
+                new WallpaperAdapter.ClickListener() {
+                    @Override
+                    public void onClick(int position) {
+                        final HashMap<String, String> data = WallpapersFragment.this.data.get(position);
+                        final String wallurl = data.get((WallpapersFragment.WALL));
+                        final Intent intent = new Intent(getActivity(), DetailedWallpaperActivity.class)
+                                .putExtra("wall", wallurl);
+                        startActivity(intent);
+                    }
+                });
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),
+                getResources().getInteger(R.integer.wallpaper_grid_width)));
+        mRecyclerView.setAdapter(mAdapter);
 
         final ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (toolbar != null)
@@ -55,7 +71,7 @@ public class WallpapersFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             // Create an array
-            arraylist = new ArrayList<>();
+            data = new ArrayList<>();
             // Retrieve JSON Objects from the given URL address
             JSONObject json = JSONParser
                     .getJSONfromURL(getResources().getString(R.string.json_file_url));
@@ -72,7 +88,7 @@ public class WallpapersFragment extends Fragment {
                         map.put("author", json.getString("author"));
                         map.put("wall", json.getString("url"));
                         // Set the JSON Objects into the array
-                        arraylist.add(map);
+                        data.add(map);
                     }
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), getString(R.string.json_error_toast), Toast.LENGTH_LONG).show();
@@ -86,21 +102,7 @@ public class WallpapersFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void args) {
-            final RecyclerView gridView = (RecyclerView) root.findViewById(R.id.gridView);
-            final WallpaperAdapter mGridAdapter = new WallpaperAdapter(getActivity(), arraylist,
-                    new WallpaperAdapter.ClickListener() {
-                        @Override
-                        public void onClick(int position) {
-                            final HashMap<String, String> data = arraylist.get(position);
-                            final String wallurl = data.get((WallpapersFragment.WALL));
-                            final Intent intent = new Intent(getActivity(), DetailedWallpaperActivity.class)
-                                    .putExtra("wall", wallurl);
-                            startActivity(intent);
-                        }
-                    });
-            gridView.setLayoutManager(new GridLayoutManager(getActivity(),
-                    getResources().getInteger(R.integer.wallpaper_grid_width)));
-            gridView.setAdapter(mGridAdapter);
+            mAdapter.setData(data);
             if (mProgress != null)
                 mProgress.setVisibility(View.GONE);
         }

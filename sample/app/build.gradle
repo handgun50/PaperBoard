@@ -42,7 +42,6 @@ dependencies {
         transitive = true
     }
     compile 'com.melnykov:floatingactionbutton:1.3.0'
-    compile 'com.balysv:material-ripple:1.0.1'
 
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp:okhttp:2.3.0'

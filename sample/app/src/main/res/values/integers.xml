@@ -2,6 +2,6 @@
 <resources>
 
     <integer name="wallpaper_grid_width">2</integer>
-    <integer name="icon_grid_width">8</integer>
+    <integer name="icon_grid_width">5</integer>
 
 </resources>

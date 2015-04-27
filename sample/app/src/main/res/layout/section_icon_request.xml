@@ -49,6 +49,6 @@
         android:src="@drawable/ic_send"
         fab:fab_colorNormal="@color/accent"
         fab:fab_colorPressed="@color/accent_pressed"
-        fab:fab_colorRipple="@color/semitransparent_white" />
+        fab:fab_colorRipple="@color/accent_lighter" />
 
 </RelativeLayout>

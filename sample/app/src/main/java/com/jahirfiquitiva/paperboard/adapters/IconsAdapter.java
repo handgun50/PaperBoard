@@ -11,7 +11,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.balysv.materialripple.MaterialRippleLayout;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -44,8 +43,8 @@ public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder>
         holder.icon.startAnimation(anim);
         holder.icon.setImageResource(mThumbs.get(position));
 
-        holder.content.setTag(position);
-        holder.content.setOnClickListener(new View.OnClickListener() {
+        holder.view.setTag(position);
+        holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = (Integer) v.getTag();
@@ -87,13 +86,11 @@ public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder>
 
         final View view;
         final ImageView icon;
-        final MaterialRippleLayout content;
 
         IconsHolder(View v) {
             super(v);
             view = v;
             icon = (ImageView) v.findViewById(R.id.icon_img);
-            content = (MaterialRippleLayout) v.findViewById(R.id.icons_ripple);
         }
     }
 
