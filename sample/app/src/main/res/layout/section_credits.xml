@@ -237,7 +237,7 @@
 
                         <TextView
                             android:id="@+id/libtwo_title"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
                             android:ellipsize="end"
@@ -249,7 +249,7 @@
 
                         <TextView
                             android:id="@+id/libtwo_author"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"
@@ -315,7 +315,7 @@
 
                         <TextView
                             android:id="@+id/libthree_title"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
                             android:ellipsize="end"
@@ -327,7 +327,7 @@
 
                         <TextView
                             android:id="@+id/libthree_author"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"
@@ -393,7 +393,7 @@
 
                         <TextView
                             android:id="@+id/libfour_title"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
                             android:ellipsize="end"
@@ -405,7 +405,7 @@
 
                         <TextView
                             android:id="@+id/libfour_author"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"
@@ -471,7 +471,7 @@
 
                         <TextView
                             android:id="@+id/libnine_title"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
                             android:ellipsize="end"
@@ -483,7 +483,7 @@
 
                         <TextView
                             android:id="@+id/libnine_author"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"
@@ -549,7 +549,7 @@
 
                         <TextView
                             android:id="@+id/libfive_title"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
                             android:ellipsize="end"
@@ -561,7 +561,7 @@
 
                         <TextView
                             android:id="@+id/libfive_author"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"
@@ -627,7 +627,7 @@
 
                         <TextView
                             android:id="@+id/libseven_title"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
                             android:ellipsize="end"
@@ -639,7 +639,7 @@
 
                         <TextView
                             android:id="@+id/libseven_author"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"
@@ -705,7 +705,7 @@
 
                         <TextView
                             android:id="@+id/libeight_title"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
                             android:ellipsize="end"
@@ -717,7 +717,7 @@
 
                         <TextView
                             android:id="@+id/libeight_author"
-                            android:layout_width="@dimen/no_width"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/mini_margin"
                             android:layout_weight="2"

@@ -7,10 +7,6 @@
     <!-- Elevation of toolbar. Play with values until you find the one you want -->
     <dimen name="toolbar_elevation">6dp</dimen>
 
-    <!-- 0 values -->
-    <dimen name="no_width">0dp</dimen>
-    <dimen name="no_height">0dp</dimen>
-
     <!-- Some Margins -->
     <dimen name="margin_medium_sm">8dp</dimen>
     <dimen name="margin_medium">10dp</dimen>

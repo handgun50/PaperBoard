@@ -5,8 +5,8 @@
     android:id="@+id/icon"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/no_height"
-    android:paddingTop="@dimen/no_height">
+    android:paddingBottom="0dp"
+    android:paddingTop="0dp">
 
     <com.balysv.materialripple.MaterialRippleLayout
         android:id="@+id/icons_ripple"
