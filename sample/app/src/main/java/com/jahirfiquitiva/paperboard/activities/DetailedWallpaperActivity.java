@@ -210,8 +210,7 @@ public class DetailedWallpaperActivity extends AppCompatActivity {
                 .replaceAll(getResources().getString(R.string.replace_three), "")
                 .replaceAll(getResources().getString(R.string.replace_four), "")
                 .replaceAll(getResources().getString(R.string.replace_five), "")
-                .replaceAll(getResources().getString(R.string.replace_six), "")
-                .replaceAll(getResources().getString(R.string.replace_seven), "");
+                .replaceAll(getResources().getString(R.string.replace_six), "");
 
     }
 

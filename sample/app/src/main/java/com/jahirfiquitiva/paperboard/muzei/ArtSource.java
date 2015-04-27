@@ -77,7 +77,7 @@ public class ArtSource extends RemoteMuzeiArtSource {
 
             String wallName = currentArtwork.getTitle();
             String authorName = currentArtwork.getByline();
-            String storeUrl = MARKET_URL + getResources().getString(R.string.package_name);
+            String storeUrl = MARKET_URL + getPackageName();
             String iconPackName = getString(R.string.app_name);
 
             shareWall.putExtra(Intent.EXTRA_TEXT,
