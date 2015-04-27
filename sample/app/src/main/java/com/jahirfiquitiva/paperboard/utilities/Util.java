@@ -36,4 +36,10 @@ public class Util {
         }
         return installed;
     }
+
+//    public static int convertToPixel(Context context, int dp) {
+//        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+//                context.getResources().getDisplayMetrics());
+//        return (int) px;
+//    }
 }
