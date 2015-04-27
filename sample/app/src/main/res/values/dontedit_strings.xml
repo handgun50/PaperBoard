@@ -36,7 +36,7 @@
     <string name="lni_content"> is currently not installed in your device.\nWould you like to install it from Google Play Store?</string>
     <string name="cm_dialog_content"> is part of CyanogenMod (based) roms.\nWould you like to install it in your device?</string>
     <string name="gnl_title">Google Now Launcher Not Compatible</string>
-    <string name="gnl_content">Google Now Launcher is NOT compatible with ANY Icon Packs. Please don\'t low rate the pack for this reason. There\'s a workaround that you can try by yourself, and it\'s the use of an external app that will help you apply the icons. Would you like to download it?</string>
+    <string name="gnl_content">Google Now Launcher is NOT compatible with ANY Icon Packs. Please don\'t rate the icon pack badly for this reason. There\'s a workaround that you can try by yourself, but it requires the use of an external app. Would you like to download it?</string>
     <string name="extraapp">com.momocode.shortcuts</string>
     <string name="lni_yes">Yes</string>
     <string name="lni_no">No</string>
@@ -64,9 +64,9 @@
     <string name="done">Done!</string>
     <string name="progress_dialog_title">Downloading this wallpaper…</string>
     <string name="setting_wall_title">Setting this picture as your wallpaper…</string>
-    <string name="set_as_wall_done">Picture set as wallpaper successfully Go to Home screen and check it.</string>
+    <string name="set_as_wall_done">Picture set as wallpaper successfully.</string>
     <string name="error">Error</string>
-    <string name="wall_error">Sorry, previous action wasn\'t actually applied, because it seems there\'s no picture. Check your Internet connection and try again.</string>
+    <string name="wall_error">Sorry, previous action wasn\'t successful. It seems there\'s no picture! Check your internet connection and try again.</string>
     <string name="json_error_toast">Error while downloading wallpapers info. Try again later.</string>
 
     <!-- License Check Dialog -->
@@ -86,7 +86,7 @@
     <!-- Requests -->
     <string name="loading_unthemed_apps">Loading unthemed apps. This may take a while…</string>
     <string name="building_request">Building Request…</string>
-    <string name="request_advice">If you do not select any app for the icon request, it will be automatically generated with all your apps.</string>
+    <string name="request_advice">If you do not select any app for the icon request, it will be automatically generated with all of your apps.</string>
     <!-- Content in Request mails before the unthemed apps info -->
     <string name="request_precontent">These apps are not themed. Thanks in advance.\n\n</string>
 
