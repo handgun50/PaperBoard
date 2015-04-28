@@ -3,7 +3,6 @@ package com.jahirfiquitiva.paperboard.adapters;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +47,6 @@ public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder>
                 if (name.toLowerCase(Locale.getDefault())
                         .contains(s.toString().toLowerCase(Locale.getDefault()))) {
                     mFiltered.add(mThumbs.get(i));
-                    Log.v("FILTER", "match: " + name);
                 }
             }
             notifyDataSetChanged();
