@@ -3,7 +3,7 @@
 PaperBoard is an Icon Pack template which implements the Material Design guidelines in many of its components.
 This dashboard works only on API 15+ and has set API 22 as Target SDK.
 
-<size="2><b>So Material. Such Design. Much wow.</b></size>
+<size="2"><b>So Material. Such Design. Much wow.</b></size>
 
 
 Try out the sample app [here](https://play.google.com/store/apps/details?id=jahirfiquitiva.paperboard.sample).
@@ -17,7 +17,7 @@ I
 - Clickable icons in Previews section, showing icon and app name in a dialog.
 - Apply section with 16 supported launcher.
 - Cloud based (only) wallpapers.
-- Wallpapers can be applied, cropped-and-applied, or downloaded.
+- Wallpapers can be applied or downloaded.
 - Muzei Support
 - In-App Icon Request tool.
 - Credits section.
