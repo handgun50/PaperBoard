@@ -34,7 +34,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new ViewHolder(inflater.inflate(R.layout.request_item, parent, false));
+        return new ViewHolder(inflater.inflate(R.layout.item_request, parent, false));
     }
 
     @Override

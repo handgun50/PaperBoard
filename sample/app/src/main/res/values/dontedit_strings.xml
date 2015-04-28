@@ -78,7 +78,7 @@
     <string name="ratebtn">RATE</string>
 
     <!-- Requests -->
-    <string name="loading_unthemed_apps">Loading unthemed apps. This may take a while…</string>
+    <string name="loading_unthemed_apps">Loading unthemed apps.\nThis may take a while…</string>
     <string name="building_request">Building Request…</string>
     <string name="request_advice">If you do not select any app for the icon request, it will be automatically generated with all of your apps.</string>
     <!-- Content in Request mails before the unthemed apps info -->
