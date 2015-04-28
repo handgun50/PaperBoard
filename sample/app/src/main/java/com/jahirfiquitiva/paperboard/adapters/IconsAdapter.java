@@ -45,7 +45,7 @@ public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder>
             for (int i = 0; i < iconNames.length; i++) {
                 final String name = iconNames[i];
                 if (name.toLowerCase(Locale.getDefault())
-                        .contains(s.toString().toLowerCase(Locale.getDefault()))) {
+                        .startsWith(s.toString().toLowerCase(Locale.getDefault()))) {
                     mFiltered.add(mThumbs.get(i));
                 }
             }
