@@ -185,7 +185,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/list_item_height_mini"
                 android:layout_marginTop="@dimen/list_margin"
-                android:background="@color/transparent"
+                android:background="@android:color/transparent"
                 android:orientation="horizontal">
 
                 <ImageView

@@ -25,6 +25,8 @@ import android.widget.FrameLayout;
 
 import com.jahirfiquitiva.paperboard.utilities.Util;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
@@ -42,7 +44,7 @@ public class ViewerActivity extends AppCompatActivity {
     public static final String EXTRA_CURRENT_ITEM_POSITION = "extra_current_item_position";
     public static final String EXTRA_OLD_ITEM_POSITION = "extra_old_item_position";
 
-    private List<Integer> mEntries;
+    private ArrayList<HashMap<String, String>> mData;
     private ViewerPageAdapter mAdapter;
     public Toolbar mToolbar;
     private Timer mTimer;
@@ -246,10 +248,11 @@ public class ViewerActivity extends AppCompatActivity {
         }
 
         if (getIntent() != null) {
-            mEntries = getIntent().getIntegerArrayListExtra("res_ids");
+            //noinspection unchecked
+            mData = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("wallData");
         }
 
-        mAdapter = new ViewerPageAdapter(this, mEntries,
+        mAdapter = new ViewerPageAdapter(this, mData,
                 getIntent() != null ? getIntent().getStringExtra("bitmapInfo") : null, mCurrentPosition);
         final ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setOffscreenPageLimit(1);

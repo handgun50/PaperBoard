@@ -5,27 +5,24 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 
-import java.util.List;
-
-import nexbit.icons.moonshine.R;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Aidan Follestad (afollestad)
  */
 public class ViewerPageAdapter extends FragmentStatePagerAdapter {
 
-    private final List<Integer> mMedia;
+    private final ArrayList<HashMap<String, String>> mMedia;
     private String mInfo;
     public int mCurrentPage;
     private ViewerPageFragment mCurrentFragment;
-    private final String[] mTitles;
 
-    public ViewerPageAdapter(AppCompatActivity context, List<Integer> media, String info, int initialOffset) {
+    public ViewerPageAdapter(AppCompatActivity context, ArrayList<HashMap<String, String>> media, String info, int initialOffset) {
         super(context.getSupportFragmentManager());
         mMedia = media;
         mInfo = info;
         mCurrentPage = initialOffset;
-        mTitles = context.getResources().getStringArray(R.array.wallpaper_names);
     }
 
     @Override
@@ -35,7 +32,7 @@ public class ViewerPageAdapter extends FragmentStatePagerAdapter {
             info = mInfo;
             mInfo = null;
         }
-        return ViewerPageFragment.create(mMedia.get(position), mTitles[position], position, info)
+        return ViewerPageFragment.create(position, mMedia.get(position), info)
                 .setIsActive(mCurrentPage == position);
     }
 

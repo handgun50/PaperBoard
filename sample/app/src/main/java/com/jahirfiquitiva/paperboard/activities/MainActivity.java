@@ -11,14 +11,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.jahirfiquitiva.paperboard.activities.base.BaseActivity;
 import com.jahirfiquitiva.paperboard.adapters.ChangelogAdapter;
 import com.jahirfiquitiva.paperboard.utilities.Preferences;
 import com.jahirfiquitiva.paperboard.utilities.Util;
@@ -34,13 +33,11 @@ import com.pkmmte.requestmanager.RequestSettings;
 
 import jahirfiquitiva.paperboard.sample.R;
 
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static final boolean WITH_LICENSE_CHECKER = false;
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
 
-    public Drawer.Result result = null;
     private String thaApp;
     private String thaPreviews;
     private String thaApply;
@@ -55,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         // Grab a reference to the manager and store it in a variable. This helps make code shorter.
         PkRequestManager mRequestManager = PkRequestManager.getInstance(this);
@@ -70,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
 
         mPrefs = new Preferences(MainActivity.this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -94,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         enable_features = mPrefs.isFeaturesEnabled();
         firstrun = mPrefs.isFirstRun();
 
-        result = new Drawer()
+        drawer = new Drawer()
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withAccountHeader(headerResult)
@@ -139,12 +134,12 @@ public class MainActivity extends AppCompatActivity {
                 .withSavedInstance(savedInstanceState)
                 .build();
 
-        result.getListView().setVerticalScrollBarEnabled(false);
+        drawer.getListView().setVerticalScrollBarEnabled(false);
         runLicenseChecker();
 
         if (savedInstanceState == null) {
             currentItem = -1;
-            result.setSelectionByIdentifier(1);
+            drawer.setSelectionByIdentifier(1);
         }
     }
 
@@ -165,17 +160,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState = result.saveInstanceState(outState);
+        if (drawer != null)
+            outState = drawer.saveInstanceState(outState);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onBackPressed() {
-        if (result != null && result.isDrawerOpen()) {
-            result.closeDrawer();
-        } else if (result != null && currentItem != 1) {
-            result.setSelection(0);
-        } else if (result != null) {
+        if (drawer != null && drawer.isDrawerOpen()) {
+            drawer.closeDrawer();
+        } else if (drawer != null && currentItem != 1) {
+            drawer.setSelection(0);
+        } else if (drawer != null) {
             super.onBackPressed();
         } else {
             super.onBackPressed();
@@ -241,8 +237,8 @@ public class MainActivity extends AppCompatActivity {
         IDrawerItem walls = new PrimaryDrawerItem().withName(thaWalls).withIcon(GoogleMaterial.Icon.gmd_landscape).withIdentifier(4);
         IDrawerItem request = new PrimaryDrawerItem().withName(thaRequest).withIcon(GoogleMaterial.Icon.gmd_forum).withIdentifier(5);
         if (enable_features) {
-            result.addItem(walls, 3);
-            result.addItem(request, 4);
+            drawer.addItem(walls, 3);
+            drawer.addItem(request, 4);
         }
     }
 
@@ -305,8 +301,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                         int nSelection = currentItem - 1;
-                        if (result != null)
-                            result.setSelection(nSelection);
+                        if (drawer != null)
+                            drawer.setSelection(nSelection);
                     }
                 }).show();
     }

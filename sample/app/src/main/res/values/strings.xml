@@ -74,9 +74,12 @@
     </string-array>
 
     <!-- Strings for Wallpapers and Requests -->
-    <string name="request_save_location">/PaperBoard/Requests/</string>
-    <string name="walls_save_location">/PaperBoard/Wallpapers/</string>
+    <string name="request_save_location">%1$s/PaperBoard/Requests/</string>
+    <string name="walls_save_location">%1$s/PaperBoard/Wallpapers/</string>
     <string name="walls_prefix_name">PaperBoard_</string>
+    <string name="save_to_device">Save to Device</string>
+    <string name="wallpaper">Wallpaper</string>
+    <string name="saving_wallpaper">Saving wallpaper…</string>
 
     <!-- Messages shown when using LicenseChecker -->
     <string name="license_failed">You are not downloading PaperBoard from Google Play Store. You have two options only:</string>
@@ -114,6 +117,10 @@
     <string name="theme_info">@string/theme_description</string>
     <string name="theme_ad_msg">@string/theme_description</string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name="save_to_device">Save to Device</string>
+
+    <string-array name="wallpaper_options" translatable="false">
+        <item>@string/apply</item>
+        <item>@string/save_to_device</item>
+    </string-array>
 
 </resources>

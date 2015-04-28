@@ -2,10 +2,21 @@
 
     <style name="AppTheme" parent="AppTheme.Base" />
 
+    <style name="ViewerTheme" parent="AppTheme.Base" />
+
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
+        <item name="material_drawer_selected_text">@color/accent</item>
+    </style>
+
+    <style name="AppTheme.BaseDark" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+
+        <item name="android:windowBackground">@android:color/black</item>
     </style>
 
     <style name="MyActionBarTheme" parent="ThemeOverlay.AppCompat.Dark">

@@ -15,7 +15,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.jahirfiquitiva.paperboard.utilities.Util;
+import com.jahirfiquitiva.paperboard.fragments.WallpapersFragment;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.bitmap.BitmapInfo;
+
+import java.util.HashMap;
 
 import jahirfiquitiva.paperboard.sample.R;
 
@@ -24,8 +29,7 @@ import jahirfiquitiva.paperboard.sample.R;
  */
 public class ViewerPageFragment extends Fragment {
 
-    private int mResId;
-    private String mTitle;
+    private HashMap<String, String> mData;
     private boolean isActive;
     private String mBitmapInfo;
     private int mIndex;
@@ -33,16 +37,20 @@ public class ViewerPageFragment extends Fragment {
     private ImageView mPhoto;
 
     public String getTitle() {
-        return mTitle;
+        return mData.get(WallpapersFragment.NAME);
     }
 
-    public static ViewerPageFragment create(int resId, int index, String info) {
+    public String getUrl() {
+        return mData.get(WallpapersFragment.WALL);
+    }
+
+    public static ViewerPageFragment create(int index, HashMap<String, String> data, String info) {
         ViewerPageFragment frag = new ViewerPageFragment();
-        frag.mResId = resId;
+        frag.mData = data;
         Bundle args = new Bundle();
-        args.putInt("id", resId);
         args.putInt("index", index);
         args.putString("bitmapInfo", info);
+        args.putSerializable("data", data);
         frag.setArguments(args);
         return frag;
     }
@@ -50,17 +58,15 @@ public class ViewerPageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mResId = getArguments().getInt("id");
-
-        mBitmapInfo = getArguments().getString("bitmapInfo");
         mIndex = getArguments().getInt("index");
-
-        mTitle = Util.makeTextReadable(getResources().getResourceEntryName(mResId));
+        mBitmapInfo = getArguments().getString("bitmapInfo");
+        // noinspection unchecked
+        mData = (HashMap<String, String>) getArguments().getSerializable("data");
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        TODO WallpapersFragment.performOption(getActivity(), item.getItemId() == R.id.apply ? 0 : 1, mResId);
+        WallpapersFragment.performOption(getActivity(), item.getItemId() == R.id.apply ? 0 : 1, mData);
         return super.onOptionsItemSelected(item);
     }
 
@@ -155,7 +161,7 @@ public class ViewerPageFragment extends Fragment {
         // Load the full size image into the view from the file
         Ion.with(mPhoto)
                 .crossfade(true)
-                .load("android.resource://nexbit.icons.moonshine/" + mResId)
+                .load(getUrl())
                 .setCallback(new FutureCallback<ImageView>() {
                     @Override
                     public void onCompleted(Exception e, ImageView result) {

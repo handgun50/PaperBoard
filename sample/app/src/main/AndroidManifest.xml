@@ -208,13 +208,9 @@
 
         <!-- Wallpapers Activity -->
         <activity
-            android:name="com.jahirfiquitiva.paperboard.activities.DetailedWallpaperActivity"
+            android:name="com.jahirfiquitiva.paperboard.activities.viewer.ViewerActivity"
             android:label="@string/title_activity_detailed_wallpaper"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jahirfiquitiva.paperboard.activities.DetailedWallpaperActivity" />
-        </activity>
+            android:theme="@style/ViewerTheme" />
 
         <service
             android:name="com.jahirfiquitiva.paperboard.muzei.ArtSource"

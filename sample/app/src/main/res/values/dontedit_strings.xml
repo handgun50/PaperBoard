@@ -10,8 +10,7 @@
     <string name="section_six">About the App</string>
 
     <!-- Wallpapers Activity -->
-    <string name="title_activity_detailed_wallpaper">Detailed Wallpaper</string>
-    <string name="title_ab_detailed_wallpaper" />
+    <string name="title_activity_detailed_wallpaper">Wallpaper Viewer</string>
 
     <!-- Muzei Stuff -->
     <string name="muzeisets_title">Refresh Source every:</string>
@@ -53,22 +52,18 @@
     <!-- Wallpapers Stuff -->
     <string name="no_conn_title">No Connection Found</string>
     <string name="no_conn_content">Wallpapers are stored on a cloud server. Please connect to the internet and try again.</string>
-    <string name="download">DOWNLOAD</string>
-    <string name="download_done">Download completed successfully. Wallpaper is located in </string>
+    <string name="download">Download</string>
+    <string name="wallpaper_downloaded">Wallpaper was downloaded to: %1$s</string>
     <string name="apply">Apply</string>
-    <string name="set_as">Crop picture and set as…</string>
-    <string name="set_wall_title">Wallpaper set</string>
-    <string name="set_wall_content">Please, choose an option. Would you like to crop the picture? Or do you prefer to set it in its actual size?</string>
-    <string name="crop_wall">Crop Wall</string>
-    <string name="set_it">Set it now!</string>
     <string name="save">Save</string>
     <string name="done">Done!</string>
-    <string name="progress_dialog_title">Downloading this wallpaper…</string>
-    <string name="setting_wall_title">Setting this picture as your wallpaper…</string>
-    <string name="set_as_wall_done">Picture set as wallpaper successfully.</string>
+    <string name="downloading_wallpaper">Downloading this wallpaper…</string>
+    <string name="setting_wall_title">Setting this wallpaper to your homescreen…</string>
+    <string name="set_as_wall_done">Wallpaper set!</string>
     <string name="error">Error</string>
-    <string name="wall_error">Sorry, previous action wasn\'t successful. It seems there\'s no picture! Check your internet connection and try again.</string>
-    <string name="json_error_toast">Error while downloading wallpapers info. Try again later.</string>
+    <string name="json_error_toast">Error while downloading wallpaper info. Try again later.</string>
+    <string name="confirm_apply">Are you sure you want to apply this wallpaper to your homescreen?</string>
+    <string name="yes">Yes</string>
 
     <!-- License Check Dialog -->
     <string name="license_failed_title">License Check Failed</string>
