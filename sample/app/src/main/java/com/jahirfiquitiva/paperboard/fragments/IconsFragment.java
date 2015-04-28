@@ -3,6 +3,7 @@ package com.jahirfiquitiva.paperboard.fragments;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -28,7 +29,7 @@ public class IconsFragment extends Fragment implements SearchView.OnQueryTextLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         RecyclerView grid = (RecyclerView) inflater.inflate(R.layout.icons_grid, container, false);
-        mAdapter = new IconsAdapter(getActivity(), getArguments().getInt("iconsArrayId", 0));
+        mAdapter = new IconsAdapter((AppCompatActivity) getActivity(), getArguments().getInt("iconsArrayId", 0));
         grid.setLayoutManager(new GridLayoutManager(getActivity(),
                 getResources().getInteger(R.integer.icon_grid_width)));
         grid.setAdapter(mAdapter);
