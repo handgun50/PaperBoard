@@ -69,7 +69,7 @@ While sample folder includes all the project files from the sample app.
 <b>Links to the implemented libraries:</b>
 * Material Dialogs: https://github.com/afollestad/material-dialogs
 * Material Drawer: https://github.com/mikepenz/MaterialDrawer
-* Picasso: https://github.com/square/picasso
+* Ion: https://github.com/koush/ion
 * OkHttp: https://github.com/square/okhttp
 * Muzei: https://github.com/romannurik/muzei/
 * FAB: https://github.com/makovkastar/floatingactionbutton/
