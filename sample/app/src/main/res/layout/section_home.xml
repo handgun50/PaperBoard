@@ -125,7 +125,8 @@
                         android:contentDescription="@null"
                         android:minWidth="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/ic_playstore_logo" />
+                        android:src="@drawable/ic_playstore_logo"
+                        android:layout_marginBottom="32dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -214,7 +215,8 @@
                         android:contentDescription="@null"
                         android:minWidth="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/ic_appone_logo" />
+                        android:src="@drawable/ic_appone_logo"
+                        android:layout_marginBottom="32dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -299,7 +301,8 @@
                         android:contentDescription="@null"
                         android:minWidth="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/ic_apptwo_logo" />
+                        android:src="@drawable/ic_apptwo_logo"
+                        android:layout_marginBottom="32dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -385,7 +388,8 @@
                         android:contentDescription="@null"
                         android:minWidth="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/ic_appthree_logo" />
+                        android:src="@drawable/ic_appthree_logo"
+                        android:layout_marginBottom="32dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -49,9 +49,6 @@ public class CreditsFragment extends Fragment {
         TextView okhttplib = (TextView) root.findViewById(R.id.libeight_content);
         okhttplib.setText(Html.fromHtml(getString(R.string.okhttp_desc)));
 
-        TextView rippleslib = (TextView) root.findViewById(R.id.libnine_content);
-        rippleslib.setText(Html.fromHtml(getString(R.string.materialripples_desc)));
-
         CardView libtwocard = (CardView) root.findViewById(R.id.libtwocard);
         libtwocard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,15 +100,6 @@ public class CreditsFragment extends Fragment {
             public void onClick(View v) {
                 Intent libeightweb = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.okhttp_web)));
                 startActivity(libeightweb);
-            }
-        });
-
-        CardView libninecard = (CardView) root.findViewById(R.id.libninecard);
-        libninecard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent libnineweb = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.materialripples_web)));
-                startActivity(libnineweb);
             }
         });
 
