@@ -4,7 +4,6 @@
     android:id="@+id/icon_img"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/margin_medium_sm"
-    android:paddingRight="@dimen/margin_medium_sm"
+    android:padding="@dimen/margin_medium_sm"
     tools:ignore="ContentDescription"
     android:background="?selectableItemBackground" />

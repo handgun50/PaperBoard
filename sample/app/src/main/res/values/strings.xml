@@ -12,10 +12,7 @@
     <string name="muzei_settings">Muzei Settings</string>
     <string name="json_file_url">https://raw.githubusercontent.com/jahirfiquitiva/MinDesigns-Wallpapers/master/JSON-Files/walls_test.json</string>
     <!-- Sharing wallpaper from Muzei -->
-    <string name="partone">My wallpaper for today is&#160;</string>
-    <string name="parttwo">&#160;by&#160;</string>
-    <string name="partthree">&#160;from&#160;</string>
-    <string name="partfour">.\nGet it now at&#160;</string>
+    <string name="share_text">My wallpaper for today is %1$s by %2$s, from %3$s.\nGet it now at %4$s.</string>
 
     <!-- Developer Account Link -->
     <string name="play_store_dev_link">https://play.google.com/store/apps/developer?id=Jahir+Fiquitiva</string>
@@ -82,8 +79,8 @@
     <string name="saving_wallpaper">Saving wallpaper…</string>
 
     <!-- Messages shown when using LicenseChecker -->
-    <string name="license_failed">You are not downloading PaperBoard from Google Play Store. You have two options only:</string>
-    <string name="license_success">Thank you for downloading my Icon Pack Dashboard Sample. If you like it, don\'t forget to rate and write a review at Google Play Store.</string>
+    <string name="license_failed">You did not download PaperBoard from the Google Play Store. You have two options:</string>
+    <string name="license_success">Thank you for downloading my dashboard sample. If you like it, don\'t forget to rate it and write a review in the Google Play Store.</string>
 
     <!-- Texts you don't want to get when user downloads that wallpapers -->
     <!-- Examples: the url of the wall, and prefixes, etc. -->

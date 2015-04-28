@@ -41,13 +41,13 @@
         <b>PkRequestManager</b> is a helpful, yet simple, tool which makes it easy to load and send application icon requests for Android.
         ]]></string>
 
-    <string name="picasso_author">Square</string>
-    <string name="picasso_name">Picasso</string>
-    <string name="picasso_desc">
+    <string name="ion_author">Koush Dutta</string>
+    <string name="ion_name">Ion</string>
+    <string name="ion_desc">
         <![CDATA[
-        <b>Picasso</b> is a powerful image downloading and caching library for Android.
+        <b>Ion</b> is a powerful image downloading and caching library for Android.
         ]]></string>
-    <string name="picasso_web">http://square.github.io/picasso/</string>
+    <string name="ion_web">http://github.com/koush/ion</string>
 
     <string name="okhttp_author">Square</string>
     <string name="okhttp_name">OkHttp</string>

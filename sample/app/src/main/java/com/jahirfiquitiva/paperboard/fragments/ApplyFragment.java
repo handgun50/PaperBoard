@@ -101,17 +101,17 @@ public class ApplyFragment extends Fragment {
         String dialogContent;
 
         if (LauncherName.equals(cmName)) {
-            dialogContent = launcher.name + getResources().getString(R.string.cm_dialog_content);
+            dialogContent = getResources().getString(R.string.cm_dialog_content, launcher.name);
             intentString = "http://download.cyanogenmod.org/";
         } else {
-            dialogContent = launcher.name + getResources().getString(R.string.lni_content);
+            dialogContent = getResources().getString(R.string.lni_content, launcher.name);
             intentString = MARKET_URL + launcher.packageName;
         }
 
         new MaterialDialog.Builder(getActivity())
-                .title(launcher.name + getResources().getString(R.string.lni_title))
+                .title(launcher.name)
                 .content(dialogContent)
-                .positiveText(R.string.lni_yes)
+                .positiveText(R.string.yes)
                 .negativeText(R.string.lni_no)
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
@@ -147,7 +147,7 @@ public class ApplyFragment extends Fragment {
         new MaterialDialog.Builder(getActivity())
                 .title(R.string.gnl_title)
                 .content(R.string.gnl_content)
-                .positiveText(R.string.lni_yes)
+                .positiveText(R.string.yes)
                 .negativeText(R.string.lni_no)
                 .callback(new MaterialDialog.ButtonCallback() {
                               @Override

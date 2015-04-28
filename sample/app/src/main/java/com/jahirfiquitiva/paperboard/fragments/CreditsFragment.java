@@ -41,7 +41,7 @@ public class CreditsFragment extends Fragment {
         materialdrawerlib.setText(Html.fromHtml(getString(R.string.materialdrawer_desc)));
 
         TextView picassolib = (TextView) root.findViewById(R.id.libfive_content);
-        picassolib.setText(Html.fromHtml(getString(R.string.picasso_desc)));
+        picassolib.setText(Html.fromHtml(getString(R.string.ion_desc)));
 
         TextView pkiconrequestlib = (TextView) root.findViewById(R.id.libseven_content);
         pkiconrequestlib.setText(Html.fromHtml(getString(R.string.pkrequestmanager_desc)));
@@ -83,7 +83,7 @@ public class CreditsFragment extends Fragment {
         libfivecard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent libfiveweb = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.picasso_web)));
+                Intent libfiveweb = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.ion_web)));
                 startActivity(libfiveweb);
             }
         });

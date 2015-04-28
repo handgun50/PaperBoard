@@ -553,7 +553,7 @@
                             android:layout_weight="5"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="@string/picasso_name"
+                            android:text="@string/ion_name"
                             android:textColor="@color/primary"
                             android:textSize="@dimen/text_big"
                             android:textStyle="normal" />
@@ -566,7 +566,7 @@
                             android:layout_weight="2"
                             android:gravity="end"
                             android:maxLines="2"
-                            android:text="@string/picasso_author"
+                            android:text="@string/ion_author"
                             android:textColor="@color/dark_grey"
                             android:textSize="@dimen/text_ultrasmall"
                             android:textStyle="normal" />
