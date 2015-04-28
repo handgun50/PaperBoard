@@ -8,7 +8,7 @@ This dashboard works only on API 15+ and has set API 22 as Target SDK.
 
 Try out the sample app [here](https://play.google.com/store/apps/details?id=jahirfiquitiva.paperboard.sample).
 
-
+I
 #Features:
 - Material Design inspired/based dashboard.
 - License Checker.
@@ -25,12 +25,11 @@ Try out the sample app [here](https://play.google.com/store/apps/details?id=jahi
 - Requires API15+ or Android 4.0.3+
 
 <b>Future features (No ETA):</b>
-- Replace GridView and ListView with RecyclerView to improve performance.
+- Searchable icons and launchers to apply pack.
 - Themeable UI.
 - Option to delete cache directly inside the app.
 - Option to choose downloads folder (for wallpapers).
 - In-App-Purchases for Premium Icon Requests.
-- Searchable icons and launchers to apply pack.
 
 
 #Preview
