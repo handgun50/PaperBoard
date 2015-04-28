@@ -1,8 +1,9 @@
 package com.jahirfiquitiva.paperboard.adapters;
 
-import android.content.Context;
 import android.content.res.Resources;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.jahirfiquitiva.paperboard.utilities.Util;
+import com.jahirfiquitiva.paperboard.dialogs.IconDialog;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -21,14 +21,14 @@ import jahirfiquitiva.paperboard.sample.R;
 /**
  * @author Aidan Follestad (afollestad)
  */
-public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder> {
+public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder> implements View.OnClickListener {
 
-    private final Context mContext;
+    private final AppCompatActivity mContext;
     private ArrayList<Integer> mThumbs;
     private String[] iconNames;
     private ArrayList<Integer> mFiltered;
 
-    public IconsAdapter(Context context, int iconArrayId) {
+    public IconsAdapter(AppCompatActivity context, int iconArrayId) {
         this.mContext = context;
         loadIcon(iconArrayId);
     }
@@ -48,6 +48,7 @@ public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder>
                 if (name.toLowerCase(Locale.getDefault())
                         .contains(s.toString().toLowerCase(Locale.getDefault()))) {
                     mFiltered.add(mThumbs.get(i));
+                    Log.v("FILTER", "match: " + name);
                 }
             }
             notifyDataSetChanged();
@@ -68,28 +69,20 @@ public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder>
                 mFiltered.get(position) : mThumbs.get(position));
 
         holder.view.setTag(position);
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = (Integer) v.getTag();
-                String name = iconNames[position].toLowerCase(Locale.getDefault());
-                MaterialDialog dialog = new MaterialDialog.Builder(mContext)
-                        .customView(R.layout.dialog_icon, false)
-                        .title(Util.makeTextReadable(name))
-                        .positiveText(R.string.close)
-                        .build();
-                if (dialog.getCustomView() != null) {
-                    ImageView dialogIcon = (ImageView) dialog.getCustomView().findViewById(R.id.dialogicon);
-                    dialogIcon.setImageResource(mThumbs.get(position));
-                }
-                dialog.show();
-            }
-        });
+        holder.view.setOnClickListener(this);
     }
 
     @Override
     public int getItemCount() {
         return mFiltered != null ? mFiltered.size() : mThumbs.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+        int position = (Integer) v.getTag();
+        String name = iconNames[position].toLowerCase(Locale.getDefault());
+        int resId = mThumbs.get(position);
+        IconDialog.create(resId, name).show(mContext.getSupportFragmentManager(), "ICON_VIEWER");
     }
 
     class IconsHolder extends RecyclerView.ViewHolder {
