@@ -37,7 +37,7 @@ dependencies {
     compile 'com.android.support:palette-v7:22.1.1@aar'
     compile 'com.android.support:recyclerview-v7:22.1.1@aar'
 
-    compile 'com.afollestad:material-dialogs:0.7.2.8'
+    compile 'com.afollestad:material-dialogs:0.7.3.0'
     compile('com.mikepenz.materialdrawer:library:2.+@aar') {
         transitive = true
     }
