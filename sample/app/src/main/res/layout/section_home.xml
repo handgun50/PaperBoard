@@ -21,7 +21,7 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/infocard"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/cards_margin"
                 android:clickable="false"
@@ -38,7 +38,7 @@
 
                     <ImageView
                         android:id="@+id/iconsbanner"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@drawable/icons_banner"
                         tools:ignore="ContentDescription" />
@@ -102,7 +102,7 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/infocard"
                 android:layout_margin="@dimen/cards_margin"
@@ -111,7 +111,7 @@
                 card_view:cardElevation="@dimen/cards_elevation">
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/cards_margin"
@@ -128,13 +128,13 @@
                         android:src="@drawable/ic_playstore_logo" />
 
                     <LinearLayout
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/titleTextView"
-                            android:layout_width="fill_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingBottom="8dp"
                             android:paddingLeft="16dp"
@@ -146,7 +146,7 @@
 
                         <TextView
                             android:id="@+id/descriptionTextView"
-                            android:layout_width="fill_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:lineSpacingMultiplier="1.2"
                             android:paddingBottom="@dimen/cards_padding"
@@ -158,13 +158,13 @@
 
                         <View
                             android:id="@+id/cardDivider"
-                            android:layout_width="fill_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="1px"
                             android:background="@color/divider_grey"
                             android:visibility="invisible" />
 
                         <LinearLayout
-                            android:layout_width="fill_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:gravity="end"
@@ -193,7 +193,7 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardOne"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cardView"
                 android:layout_margin="@dimen/cards_margin"
@@ -202,7 +202,7 @@
                 card_view:cardElevation="@dimen/cards_elevation">
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/cards_margin"
@@ -217,12 +217,12 @@
                         android:src="@drawable/ic_appone_logo" />
 
                     <LinearLayout
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="fill_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingBottom="8dp"
                             android:paddingLeft="16dp"
@@ -233,7 +233,7 @@
                             android:textSize="@dimen/text_big" />
 
                         <TextView
-                            android:layout_width="fill_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:lineSpacingMultiplier="1.2"
                             android:paddingBottom="@dimen/cards_padding"
@@ -244,14 +244,14 @@
                             android:textSize="@dimen/text_small" />
 
                         <View
-                            android:layout_width="fill_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="1px"
                             android:background="@color/divider_grey"
                             android:visibility="invisible" />
 
                         <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_gravity="end"
                             android:gravity="end"
                             android:orientation="horizontal">
@@ -278,7 +278,7 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardTwo"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cardOne"
                 android:layout_margin="@dimen/cards_margin"
@@ -287,7 +287,7 @@
                 card_view:cardElevation="@dimen/cards_elevation">
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/cards_margin"
@@ -302,12 +302,12 @@
                         android:src="@drawable/ic_apptwo_logo" />
 
                     <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="fill_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingBottom="8dp"
                             android:paddingLeft="16dp"
@@ -318,7 +318,7 @@
                             android:textSize="@dimen/text_big" />
 
                         <TextView
-                            android:layout_width="fill_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:lineSpacingMultiplier="1.2"
                             android:paddingBottom="@dimen/cards_padding"
@@ -329,14 +329,14 @@
                             android:textSize="@dimen/text_small" />
 
                         <View
-                            android:layout_width="fill_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="1px"
                             android:background="@color/divider_grey"
                             android:visibility="invisible" />
 
                         <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_gravity="end"
                             android:gravity="end"
                             android:orientation="horizontal">
@@ -364,7 +364,7 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardThree"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cardTwo"
                 android:layout_margin="@dimen/cards_margin"
@@ -373,7 +373,7 @@
                 card_view:cardElevation="@dimen/cards_elevation">
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/cards_margin"
@@ -388,12 +388,12 @@
                         android:src="@drawable/ic_appthree_logo" />
 
                     <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="fill_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingBottom="8dp"
                             android:paddingLeft="16dp"
@@ -404,7 +404,7 @@
                             android:textSize="@dimen/text_big" />
 
                         <TextView
-                            android:layout_width="fill_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:lineSpacingMultiplier="1.2"
                             android:paddingBottom="@dimen/cards_padding"
@@ -415,14 +415,14 @@
                             android:textSize="@dimen/text_small" />
 
                         <View
-                            android:layout_width="fill_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="1px"
                             android:background="@color/divider_grey"
                             android:visibility="invisible" />
 
                         <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_gravity="end"
                             android:gravity="end"
                             android:orientation="horizontal">
