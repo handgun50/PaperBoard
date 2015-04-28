@@ -26,10 +26,32 @@ public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder>
     private final Context mContext;
     private ArrayList<Integer> mThumbs;
     private String[] iconNames;
+    private ArrayList<Integer> mFiltered;
 
     public IconsAdapter(Context context, int iconArrayId) {
         this.mContext = context;
         loadIcon(iconArrayId);
+    }
+
+    public synchronized void filter(CharSequence s) {
+        if (s == null || s.toString().trim().isEmpty()) {
+            if (mFiltered != null) {
+                mFiltered = null;
+                notifyDataSetChanged();
+            }
+        } else {
+            if (mFiltered != null)
+                mFiltered.clear();
+            mFiltered = new ArrayList<>();
+            for (int i = 0; i < iconNames.length; i++) {
+                final String name = iconNames[i];
+                if (name.toLowerCase(Locale.getDefault())
+                        .contains(s.toString().toLowerCase(Locale.getDefault()))) {
+                    mFiltered.add(mThumbs.get(i));
+                }
+            }
+            notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -42,7 +64,8 @@ public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder>
     public void onBindViewHolder(IconsHolder holder, int position) {
         Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.fade_in);
         holder.icon.startAnimation(anim);
-        holder.icon.setImageResource(mThumbs.get(position));
+        holder.icon.setImageResource(mFiltered != null ?
+                mFiltered.get(position) : mThumbs.get(position));
 
         holder.view.setTag(position);
         holder.view.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +89,7 @@ public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder>
 
     @Override
     public int getItemCount() {
-        return mThumbs.size();
+        return mFiltered != null ? mFiltered.size() : mThumbs.size();
     }
 
     class IconsHolder extends RecyclerView.ViewHolder {

@@ -16,6 +16,7 @@
 
 package com.jahirfiquitiva.paperboard.activities.viewer;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -52,6 +53,7 @@ public abstract class FragmentStatePagerAdapter extends PagerAdapter {
     public void startUpdate(ViewGroup container) {
     }
 
+    @SuppressLint("CommitTransaction")
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         // If we already have this item instantiated, there is nothing

@@ -84,4 +84,8 @@
     <!-- Content in Request mails before the unthemed apps info -->
     <string name="request_precontent">These apps are not themed. Thanks in advance.\n\n</string>
 
+    <!-- Icon search -->
+    <string name="search_icons">Search icons…</string>
+    <string name="search_x">Search %1$s…</string>
+
 </resources>

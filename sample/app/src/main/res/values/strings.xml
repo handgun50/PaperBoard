@@ -62,12 +62,12 @@
 
     <!-- Tabs Names list -->
     <string-array name="tabs">
-        <item>LATEST</item>
-        <item>SYSTEM</item>
-        <item>GOOGLE APPS</item>
-        <item>GAMES</item>
-        <item>ALL</item>
-        <item>DRAWERS</item>
+        <item>Latest</item>
+        <item>System</item>
+        <item>Google Apps</item>
+        <item>Games </item>
+        <item>All</item>
+        <item>Drawers</item>
     </string-array>
 
     <!-- Strings for Wallpapers and Requests -->
