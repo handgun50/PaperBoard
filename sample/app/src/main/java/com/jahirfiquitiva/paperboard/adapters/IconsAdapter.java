@@ -83,20 +83,18 @@ public class IconsAdapter extends RecyclerView.Adapter<IconsAdapter.IconsHolder>
 
     private void loadIcon(int iconArrayid) {
         mThumbs = new ArrayList<>();
-        final String packageName = mContext.getPackageName();
-        addIcon(mContext.getResources(), packageName, iconArrayid);
-    }
 
-    private void addIcon(Resources resources, String packageName, int list) {
-        iconNames = resources.getStringArray(list);
+        final Resources r = mContext.getResources();
+        final String p = mContext.getPackageName();
+
+        iconNames = r.getStringArray(iconArrayid);
         for (String extra : iconNames) {
-            int res = resources.getIdentifier(extra, "drawable", packageName);
+            int res = r.getIdentifier(extra, "drawable", p);
             if (res != 0) {
-                final int thumbRes = resources.getIdentifier(extra, "drawable", packageName);
+                final int thumbRes = r.getIdentifier(extra, "drawable", p);
                 if (thumbRes != 0)
                     mThumbs.add(thumbRes);
             }
         }
     }
-
 }
