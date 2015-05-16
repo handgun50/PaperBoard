@@ -315,8 +315,8 @@ public class MainActivity extends AppCompatActivity {
         String installer = getPackageManager().getInstallerPackageName(getPackageName());
         try {
             if (installer.equals("com.google.android.feedback")
-            || installer.equals("com.android.vending" 
-            || installer.equals("com.amazon.venezia)")) {
+            || installer.equals("com.android.vending")
+            || installer.equals("com.amazon.venezia") ) {
                 new MaterialDialog.Builder(this)
                         .title(R.string.license_success_title)
                         .content(R.string.license_success)
