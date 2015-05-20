@@ -88,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 .withHeaderBackground(R.drawable.header)
                 .withSelectionFirstLine(getResources().getString(R.string.app_long_name))
                 .withSelectionSecondLine("v" + Util.getAppVersion(this))
+                .withProfileImagesClickable(false)
+                .withSelectionListEnabled(false)
+                .withSelectionListEnabledForSingleProfile(false)
                 .withSavedInstance(savedInstanceState)
                 .build();
 
