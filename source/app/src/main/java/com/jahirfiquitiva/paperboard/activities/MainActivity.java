@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.jahirfiquitiva.paperboard.adapters.ChangelogAdapter;
@@ -24,11 +25,14 @@ import com.jahirfiquitiva.paperboard.utilities.Preferences;
 import com.jahirfiquitiva.paperboard.utilities.Util;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
+import com.mikepenz.materialdrawer.accountswitcher.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.pkmmte.requestmanager.PkRequestManager;
 import com.pkmmte.requestmanager.RequestSettings;
 
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private static final boolean WITH_LICENSE_CHECKER = false;
     private static final String MARKET_URL = "https://play.google.com/store/apps/details?id=";
 
-    public Drawer.Result result = null;
+    public Drawer result = null;
     private String thaApp;
     private String thaPreviews;
     private String thaApply;
@@ -49,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private String thaCredits;
     public String version;
     private int currentItem = -1;
-    private boolean firstrun, enable_features;
+    private boolean firstrun, enable_features, a;
     private Preferences mPrefs;
 
     @Override
@@ -67,13 +71,12 @@ public class MainActivity extends AppCompatActivity {
                 .emailPrecontent(getResources().getString(R.string.request_precontent))
                 .saveLocation(Environment.getExternalStorageDirectory().getAbsolutePath() + getResources().getString(R.string.request_save_location))
                 .build());
+        mRequestManager.loadAppsIfEmptyAsync();
 
         mPrefs = new Preferences(MainActivity.this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //noinspection ConstantConditions
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         thaApp = getResources().getString(R.string.app_name);
         String thaHome = getResources().getString(R.string.section_one);
@@ -83,21 +86,18 @@ public class MainActivity extends AppCompatActivity {
         thaRequest = getResources().getString(R.string.section_five);
         thaCredits = getResources().getString(R.string.section_six);
 
-        AccountHeader.Result headerResult = new AccountHeader()
+        AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
                 .withSelectionFirstLine(getResources().getString(R.string.app_long_name))
                 .withSelectionSecondLine("v" + Util.getAppVersion(this))
-                .withProfileImagesClickable(false)
-                .withSelectionListEnabled(false)
-                .withSelectionListEnabledForSingleProfile(false)
                 .withSavedInstance(savedInstanceState)
                 .build();
 
         enable_features = mPrefs.isFeaturesEnabled();
         firstrun = mPrefs.isFirstRun();
 
-        result = new Drawer()
+        result = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withAccountHeader(headerResult)
@@ -110,8 +110,10 @@ public class MainActivity extends AppCompatActivity {
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
+                    public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
+
                         if (drawerItem != null) {
+                            a = true;
                             switch (drawerItem.getIdentifier()) {
                                 case 1:
                                     switchFragment(1, thaApp, "Home");
@@ -136,8 +138,13 @@ public class MainActivity extends AppCompatActivity {
                                     switchFragment(6, thaCredits, "Credits");
                                     break;
                             }
+
+                        } else {
+                            a = false;
                         }
+                        return a;
                     }
+
                 })
                 .withSavedInstance(savedInstanceState)
                 .build();
@@ -159,11 +166,17 @@ public class MainActivity extends AppCompatActivity {
         currentItem = itemId;
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle(title);
+
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 .replace(R.id.main, Fragment.instantiate(MainActivity.this,
                         "com.jahirfiquitiva.paperboard.fragments." + fragment + "Fragment"))
                 .commit();
+
+        if (result.isDrawerOpen()) {
+            result.closeDrawer();
+        }
+
     }
 
     @Override

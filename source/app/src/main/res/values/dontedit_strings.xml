@@ -28,13 +28,13 @@
     <string name="changelog">See changelog</string>
 
     <!-- Sharing theme -->
-    <string name="share_one">Check out this awesome icon pack by </string>
+    <string name="share_one">"Check out this awesome icon pack by "</string>
     <string name="share_two">.\nGet it now at </string>
 
     <!-- LauncherNotInstalled Dialog -->
-    <string name="lni_title"> Not Installed</string>
-    <string name="lni_content"> is currently not installed in your device.\nWould you like to install it from Google Play Store?</string>
-    <string name="cm_dialog_content"> is part of CyanogenMod (based) roms.\nWould you like to install it in your device?</string>
+    <string name="lni_title">" Not Installed"</string>
+    <string name="lni_content">" is currently not installed in your device.\nWould you like to install it from Google Play Store?"</string>
+    <string name="cm_dialog_content">" is part of CyanogenMod (based) roms.\nWould you like to install it in your device?"</string>
     <string name="gnl_title">Google Now Launcher Not Compatible</string>
     <string name="gnl_content">Google Now Launcher is NOT compatible with ANY Icon Packs. Please don\'t low rate the pack for this reason. There\'s a workaround that you can try by yourself, and it\'s the use of an external app that will help you apply the icons. Would you like to download it?</string>
     <string name="extraapp">com.momocode.shortcuts</string>

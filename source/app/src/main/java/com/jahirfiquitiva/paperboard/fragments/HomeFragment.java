@@ -2,6 +2,7 @@ package com.jahirfiquitiva.paperboard.fragments;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -36,8 +37,9 @@ public class HomeFragment extends Fragment {
         AppThreePackage = getResources().getString(R.string.app_three_package);
 
         ActionBar toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (toolbar != null)
+        if (toolbar != null) {
             toolbar.setTitle(R.string.app_name);
+        }
 
         ObservableScrollView content = (ObservableScrollView) root.findViewById(R.id.HomeContent);
 

@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -59,7 +60,7 @@ public class PreviewsFragment extends Fragment {
         }
     }
 
-    class MyPagerAdapter extends FragmentPagerAdapter {
+    class MyPagerAdapter extends FragmentStatePagerAdapter {
 
         final String[] tabs;
 
@@ -75,7 +76,7 @@ public class PreviewsFragment extends Fragment {
                 case 0:
                     f = IconsFragment.newInstance(R.array.latest);
                     break;
-                case 1:
+				case 1:
                     f = IconsFragment.newInstance(R.array.system);
                     break;
                 case 2:

@@ -24,13 +24,14 @@ import jahirfiquitiva.paperboard.sample.R;
 public class IconsFragment extends Fragment {
 
     private String[] iconsnames;
+    public IconAdapter icAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        icAdapter = new IconAdapter();
         View view = inflater.inflate(R.layout.icons_grid, container, false);
         GridView gridview = (GridView) view.findViewById(R.id.icons_grid);
         gridview.setColumnWidth(convertToPixel(72) + convertToPixel(4));
-        final IconAdapter icAdapter = new IconAdapter();
         gridview.setAdapter(icAdapter);
         return view;
     }
