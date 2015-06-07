@@ -1,6 +1,6 @@
 Just replace the old files with the new ones.
 
-Don't forget to re-write your package name in build.gradle
+Don't forget to re-write your package name in build.gradle and in the java files.
 
 Changed files:
 
