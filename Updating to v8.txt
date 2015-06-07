@@ -10,6 +10,7 @@ Changed files:
 - source\app\src\main\java\com\jahirfiquitiva\paperboard\fragments\IconsFragment.java
 - source\app\src\main\java\com\jahirfiquitiva\paperboard\fragments\PreviewsFragment.java
 - source\app\src\main\res\layout\section_home.xml
+- source\app\src\main\res\layout\section_credits.xml
 - source\app\src\main\res\values\dontedit_strings.xml
 - source\app\src\main\res\values\styles.xml
 - source\app\src\main\res\values-v21\styles.xml
