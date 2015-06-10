@@ -3,15 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="jahirfiquitiva.paperboard.sample">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
-    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
 
     <supports-screens
         android:anyDensity="true"
@@ -122,8 +118,12 @@
             </intent-filter>
             <!-- Next Launcher -->
             <intent-filter>
-                <action android:name="com.gtp.nextlauncher.theme" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.gtp.nextlauncher.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.gtp.nextlauncher.trial.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
             <!-- TSF Shell -->
             <intent-filter>
