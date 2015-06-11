@@ -12,7 +12,8 @@
         <Image id="dock_4_sms" img="messaging" />
         <Image id="dock_5_browser" img="browser" />
 
-        <Image id="dock_appdraw_part_1" img="dock_appdraw_part_1" />
+        <!-- ONLY USE IF YOU USE JAHIR'S NEXT LAUNCHER ACTIVITY INTENT. Otherwise, delete this. -->
+		<Image id="dock_appdraw_part_1" img="dock_appdraw_part_1" />
         <Image id="dock_appdraw_part_2" img="dock_appdraw_part_2" />
         <Image id="dock_appdraw_part_3" img="dock_appdraw_part_3" />
         <Image id="dock_appdraw_part_4" img="dock_appdraw_part_4" />
