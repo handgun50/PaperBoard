@@ -69,7 +69,7 @@ While sample folder includes all the project files from the sample app.
 # Developed By
 
 * Jahir Fiquitiva
-* Web: https://jahirfiquitiva.github.io/me 
+* Web: http://www.jahirfiquitiva.net/
 * Mail: jahir.fiquitiva@gmail.com
 * Google+: https://plus.google.com/+JahirFiquitivaJDev/posts
     
