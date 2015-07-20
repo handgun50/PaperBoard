@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 repositories {
     jcenter()
-    maven { url 'https://dl.bintray.com/drummer-aidan/maven' }
+	maven { url 'https://dl.bintray.com/drummer-aidan/maven' }
 }
 
 android {
@@ -10,11 +10,11 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "jahirfiquitiva.paperboard.sample"
+        applicationId "com.package.name"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 10
-        versionName "10.0"
+        versionCode 1
+        versionName "1.0"
     }
     buildTypes {
         debug {
@@ -37,14 +37,12 @@ dependencies {
     compile 'com.android.support:cardview-v7:22.2.0@aar'
     compile 'com.android.support:palette-v7:22.2.0@aar'
     compile 'com.android.support:recyclerview-v7:22.2.0@aar'
-
-    compile 'com.afollestad:material-dialogs:0.7.6.0'
+    compile 'com.afollestad:material-dialogs:0.7.5.2'
     compile('com.mikepenz:materialdrawer:3.0.5@aar') {
         transitive = true
     }
     compile 'com.melnykov:floatingactionbutton:1.3.0'
     compile 'com.balysv:material-ripple:1.0.2'
-
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp:okhttp:2.3.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.3.0'
