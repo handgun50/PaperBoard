@@ -23,11 +23,6 @@ Try out the sample app [here](https://play.google.com/store/apps/details?id=jahi
 - Docks support.
 - Requires API 15+ (Android 4.0.3+).
 
-<b>Future features (No ETA):</b>
-- Themeable UI.
-- Option to delete cache directly inside the app.
-- Option to choose downloads folder (for wallpapers).
-- In-app purchases for premium icon requests.
 
 # Preview
 
@@ -46,9 +41,8 @@ Give a look at the screenshots [here](https://github.com/jahirfiquitiva/PaperBoa
 - Delete everything in the project folder.
 - Add the new ones from Repository.
 - Make the changes again.
-I will try to make this easier in future updates. Sorry.
 
-This time is needed because of the many changes and new things added.
+This time is needed because of the many changes and new things added. Sorry.
 
 ## Changelog
 
@@ -66,7 +60,7 @@ While sample folder includes all the project files from the sample app.
 <b>Links to the implemented libraries:</b>
 * Material Dialogs: https://github.com/afollestad/material-dialogs
 * Material Drawer: https://github.com/mikepenz/MaterialDrawer
-* Ion: https://github.com/koush/ion
+* Picasso: https://github.com/square/picasso
 * OkHttp: https://github.com/square/okhttp
 * Muzei: https://github.com/romannurik/muzei/
 * FAB: https://github.com/makovkastar/floatingactionbutton/
@@ -80,39 +74,20 @@ While sample folder includes all the project files from the sample app.
 * Google+: https://plus.google.com/+JahirFiquitivaJDev/posts
     
 <b>Special Thanks</b>
+- Aidan Follestad
 - Joaquin Cuitiño
 - Dani Mahardhika
 - Mike Penz
-- Aidan Follestad
 - Danish Shah
 - Allan W.
 - Tim Bremer
     
 # License
 
-Details and more info in PDF or website.
-
-	The MIT License (MIT)
+This source is shared under the No-License license.
+Details and more info in PDF or website. http://choosealicense.com/licenses/no-license/
 
 	Copyright (c) 2015 Jahir Fiquitiva
-
-	Permission is hereby granted, free of charge, to any person obtaining a copy
-	of this software and associated documentation files (the "Software"), to deal
-	in the Software without restriction, including without limitation the rights
-	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	copies of the Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
-
-	The above copyright notice and this permission notice shall be included in all
-	copies or substantial portions of the Software.
-
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-	SOFTWARE.
 
 # Extra Info:
 
