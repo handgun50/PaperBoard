@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.jahirfiquitiva.paperboard.adapters.ChangelogAdapter;
 import com.jahirfiquitiva.paperboard.utilities.Preferences;
 import com.jahirfiquitiva.paperboard.utilities.Util;
@@ -60,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTheme(R.style.CustomTheme);
+
+        // Uncomment this for custom themeing
+        // setTheme(R.style.CustomTheme);
 
         // Grab a reference to the manager and store it in a variable. This helps make code shorter.
         PkRequestManager mRequestManager = PkRequestManager.getInstance(this);
